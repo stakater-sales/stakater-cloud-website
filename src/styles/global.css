@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply font-sans bg-bg-main text-purple;
+  }
+  h1 { @apply text-[56px] font-bold leading-[1.05] tracking-[-1.5px]; }
+  h2 { @apply text-[48px] font-bold leading-[1.1] tracking-[-1px]; }
+  h3 { @apply text-[32px] font-bold leading-[1.2] tracking-[-0.5px]; }
+  h4 { @apply text-[24px] font-semibold leading-[1.3]; }
+  h5 { @apply text-[20px] font-semibold; }
+  h6 { @apply text-[18px] font-semibold; }
+
+  @media (max-width: 768px) {
+    h1 { @apply text-[32px] tracking-tight; }
+    h2 { @apply text-[28px]; }
+    h3 { @apply text-[22px]; }
+    h4 { @apply text-[20px]; }
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply max-w-[1200px] mx-auto px-[120px];
+  }
+  @media (max-width: 1024px) {
+    .container-site { @apply px-10; }
+  }
+  @media (max-width: 640px) {
+    .container-site { @apply px-4; }
+  }
+
+  .section-pad {
+    @apply py-[144px];
+  }
+  @media (max-width: 640px) {
+    .section-pad { @apply py-[72px]; }
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-orange text-white font-semibold text-[16px]
+           px-7 py-3.5 rounded-[10px] no-underline transition-all duration-150
+           hover:bg-orange-dark hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 bg-transparent text-purple font-semibold text-[16px]
+           px-7 py-3.5 rounded-[10px] border-2 border-purple no-underline transition-all duration-150
+           hover:bg-purple hover:text-white;
+  }
+  .btn-ghost-white {
+    @apply inline-flex items-center gap-2 bg-transparent text-white font-semibold text-[16px]
+           px-7 py-3.5 rounded-[10px] border-2 border-white/40 no-underline transition-all duration-150
+           hover:border-white hover:bg-white/10;
+  }
+  .btn-white {
+    @apply inline-flex items-center gap-2 bg-white text-orange-dark font-bold text-[16px]
+           px-8 py-3.5 rounded-[10px] no-underline transition-all duration-150
+           hover:-translate-y-0.5;
+  }
+  .btn-nav {
+    @apply inline-flex items-center gap-1.5 bg-orange text-white font-semibold text-[14px]
+           px-[22px] py-2.5 rounded-lg no-underline transition-all duration-150
+           hover:bg-orange-dark whitespace-nowrap;
+  }
+
+  .card {
+    @apply bg-white rounded-[20px] border border-border transition-all duration-200;
+  }
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(26,13,50,0.1)];
+  }
+
+  .section-label {
+    @apply text-[12px] font-bold tracking-[2px] uppercase text-orange mb-4 block;
+  }
+
+  .check-item {
+    @apply flex items-start gap-3 text-[15px] text-black font-medium;
+  }
+  .check-dot {
+    @apply w-5 h-5 rounded-full bg-orange/10 flex-shrink-0 mt-0.5
+           flex items-center justify-center;
+  }
+
+  .animate-on-scroll {
+    @apply opacity-0;
+  }
+  .animate-on-scroll.visible {
+    @apply animate-fade-up;
+  }
+}

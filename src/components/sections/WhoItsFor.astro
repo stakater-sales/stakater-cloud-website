@@ -1,0 +1,45 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+
+const segments = [
+  {
+    icon: '🏢',
+    title: 'MSPs & ISVs',
+    desc: 'Deliver managed software services on top of a fully managed OpenShift platform — without operating the infrastructure yourself. Focus on your product, not the platform underneath it.',
+    example: 'Example: Managed IBM Maximo delivered on Stakater Cloud',
+    href: '/solutions/msps-isvs',
+  },
+  {
+    icon: '⚡',
+    title: 'SaaS Companies',
+    desc: 'Stop spending engineering cycles managing Kubernetes. Get a production-ready OpenShift platform your developers can use from day one — and ship product faster.',
+    example: 'Example: SaaS platform moving away from AWS to EU-hosted OpenShift',
+    href: '/solutions/saas',
+  },
+  {
+    icon: '🏛️',
+    title: 'Regulated Enterprises',
+    desc: 'EU data residency, GDPR, DORA and NIS2 compliance out of the box. Your infrastructure meets regulatory requirements from day one — no compliance guesswork.',
+    example: 'Example: Financial services company requiring EU data sovereignty',
+    href: '/solutions/regulated',
+  },
+];
+---
+<section class="section-pad bg-purple-dark" id="who">
+  <div class="container-site">
+    <SectionLabel center white>Who We Serve</SectionLabel>
+    <h2 class="text-white text-center mb-4">Built for European organisations<br />running on Kubernetes</h2>
+    <p class="text-white/55 text-[18px] text-center mb-[72px]">We focus on three customer types so we can serve them exceptionally well.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {segments.map(s => (
+        <a href={s.href} class="group block bg-white/5 border border-white/10 rounded-2xl p-9 no-underline hover:bg-white/8 hover:border-orange transition-all duration-200 animate-on-scroll">
+          <div class="w-[52px] h-[52px] bg-orange/15 rounded-[14px] flex items-center justify-center text-[24px] mb-5">{s.icon}</div>
+          <h5 class="text-white text-[18px] mb-2.5 group-hover:text-orange transition-colors duration-200">{s.title}</h5>
+          <p class="text-white/55 text-[15px] leading-relaxed mb-5">{s.desc}</p>
+          <div class="pt-4 border-t border-white/10 text-[13px] text-orange font-semibold">{s.example}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

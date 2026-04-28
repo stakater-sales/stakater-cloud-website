@@ -1,0 +1,101 @@
+---
+import Button from '../ui/Button.astro';
+import CheckItem from '../ui/CheckItem.astro';
+import SectionLabel from '../ui/SectionLabel.astro';
+
+const products = [
+  {
+    name: 'Managed OpenShift',
+    href: '/products/managed-openshift',
+    tagline: 'Your dedicated OpenShift cluster, hosted on our European infrastructure. We handle everything. You use it.',
+    desc: 'A fully dedicated OpenShift cluster provisioned in our Netherlands data center. Stakater manages all upgrades, lifecycle operations, and platform health — so your team never has to.',
+    features: [
+      'Dedicated single-tenant OpenShift cluster',
+      'Full lifecycle management by Stakater SRE',
+      'Automated upgrades & patch management',
+      'Multi-AZ high availability',
+      '100% EU data residency (Netherlands)',
+      'GDPR, DORA & NIS2 compliant infrastructure',
+      'Premium & Standard support tiers',
+    ],
+    price: '€888',
+    cta: 'Learn More',
+    featured: false,
+    ctaVariant: 'ghost' as const,
+  },
+  {
+    name: 'SAAP',
+    href: '/products/saap',
+    tagline: 'Managed OpenShift plus a complete, pre-wired developer platform. Everything your team needs to ship — managed by us.',
+    desc: 'Everything in Managed OpenShift, plus GitOps, CI/CD, secrets management, multi-tenancy, monitoring, logging, backup and a developer portal. All pre-integrated, all managed.',
+    features: [
+      'Everything in Managed OpenShift',
+      'GitOps with managed ArgoCD',
+      'CI/CD with Tekton + pipeline catalog',
+      'Secrets management with HashiCorp Vault',
+      'Multi-tenancy with Stakater MTO',
+      'Observability: Prometheus, Grafana, Loki',
+      'Backup & restore with Velero',
+      'Developer portal with Backstage',
+      'Artifact store with Nexus OSS',
+    ],
+    price: '€1,500',
+    cta: 'Learn More',
+    featured: true,
+    ctaVariant: 'primary' as const,
+  },
+];
+---
+<section class="section-pad bg-bg-main" id="products">
+  <div class="container-site">
+    <!-- Header -->
+    <div class="text-center max-w-[680px] mx-auto mb-[72px]">
+      <SectionLabel center>Our Products</SectionLabel>
+      <h2 class="mb-4">Two ways to get a<br />production-ready OpenShift</h2>
+      <p class="text-[17px] text-muted">Start with managed infrastructure. Add the full developer platform when you're ready. No assembly required either way.</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {products.map(p => (
+        <div class={`card card-hover overflow-hidden relative ${p.featured ? 'border-orange border-2' : ''}`}>
+          {p.featured && (
+            <div class="absolute top-6 right-6 bg-orange text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-[0.5px]">
+              Full Platform
+            </div>
+          )}
+          <!-- Card header -->
+          <div class="bg-gradient-to-br from-purple to-purple-dark p-10 pb-8">
+            <div class="w-12 h-12 rounded-xl bg-orange/20 flex items-center justify-center mb-5">
+              <svg class="w-6 h-6 text-orange fill-orange" viewBox="0 0 24 24">
+                {p.featured
+                  ? <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                  : <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                }
+              </svg>
+            </div>
+            <h3 class="text-white text-[28px] mb-2.5">{p.name}</h3>
+            <p class="text-white/65 text-[15px] leading-relaxed">{p.tagline}</p>
+          </div>
+          <!-- Card body -->
+          <div class="p-10 pt-8 flex flex-col flex-1">
+            <p class="text-[16px] text-muted leading-relaxed mb-7">{p.desc}</p>
+            <ul class="list-none m-0 p-0 flex flex-col gap-3 mb-8">
+              {p.features.map(f => <CheckItem>{f}</CheckItem>)}
+            </ul>
+            <div class="mt-auto">
+              <div class="flex items-baseline gap-1.5 pt-6 border-t border-border mb-5">
+                <span class="text-[13px] text-muted">From</span>
+                <span class="text-[32px] font-bold text-purple tracking-[-1px]">{p.price}</span>
+                <span class="text-[14px] text-muted">/ month</span>
+              </div>
+              <Button href={p.href} variant={p.ctaVariant} class="w-full justify-center">
+                {p.cta} →
+              </Button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

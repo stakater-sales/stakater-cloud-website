@@ -1,0 +1,96 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ComparisonTable from '../../components/sections/ComparisonTable.astro';
+import CTA from '../../components/sections/CTA.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'rosa-alternative' },
+      props: {
+        competitor: 'ROSA',
+        fullName: 'Red Hat OpenShift Service on AWS (ROSA)',
+        description: 'Comparing Stakater Cloud vs ROSA — managed OpenShift in Europe vs managed OpenShift on AWS.',
+        diff: "ROSA ties you to AWS infrastructure and US-region defaults. Stakater Cloud hosts your dedicated cluster in the Netherlands, meets EU data residency requirements out of the box, and includes a complete developer platform with SAAP. No hyperscaler dependency.",
+        whatIs: "ROSA is Red Hat's managed OpenShift offering running on AWS infrastructure. It handles the OpenShift control plane — but data leaves the EU by default, the platform tooling above OpenShift is not included, and you are locked into AWS pricing and regions.",
+      },
+    },
+    {
+      params: { slug: 'eks-alternative' },
+      props: {
+        competitor: 'EKS',
+        fullName: 'Amazon Elastic Kubernetes Service (EKS)',
+        description: 'Comparing Stakater Cloud vs Amazon EKS for European organisations running OpenShift or Kubernetes.',
+        diff: "EKS gives you raw Kubernetes on AWS infrastructure — you still need to install, configure and operate everything above it. Stakater Cloud gives you a complete, managed OpenShift platform starting at the PaaS layer. No platform team needed.",
+        whatIs: "EKS is Amazon's managed Kubernetes service. It manages the control plane, but leaves everything else — GitOps, CI/CD, secrets, monitoring, multi-tenancy, upgrades, security hardening — entirely to you. EKS is infrastructure, not a platform.",
+      },
+    },
+    {
+      params: { slug: 'aks-alternative' },
+      props: {
+        competitor: 'AKS',
+        fullName: 'Azure Kubernetes Service (AKS)',
+        description: 'Comparing Stakater Cloud vs Azure AKS for European organisations running OpenShift or Kubernetes.',
+        diff: "AKS gives you managed Kubernetes on Microsoft Azure — but OpenShift, GitOps, CI/CD, secrets management, multi-tenancy and observability are still entirely up to you. Stakater Cloud includes all of that, hosted in the EU, managed by OpenShift experts.",
+        whatIs: "AKS is Microsoft's managed Kubernetes offering. It handles cluster provisioning and patching on Azure, but the entire platform layer — developer tooling, GitOps, observability, security — is left for your team to build and operate.",
+      },
+    },
+    {
+      params: { slug: 'gke-alternative' },
+      props: {
+        competitor: 'GKE',
+        fullName: 'Google Kubernetes Engine (GKE)',
+        description: 'Comparing Stakater Cloud vs Google GKE for European organisations running OpenShift or Kubernetes.',
+        diff: "GKE is Google's managed Kubernetes — it handles the control plane but everything above it is your responsibility. Stakater Cloud delivers a complete managed OpenShift platform in the EU with GitOps, CI/CD, observability and more — pre-wired and managed for you.",
+        whatIs: "GKE is Google Cloud's managed Kubernetes service. Autopilot mode removes some node management, but the application platform layer — secrets, GitOps, CI/CD, multi-tenancy, compliance tooling — is still your team's problem to solve.",
+      },
+    },
+  ];
+}
+
+const { competitor, fullName, description, diff, whatIs } = Astro.props;
+---
+
+<BaseLayout
+  title={`Stakater Cloud vs ${competitor}`}
+  description={description}
+>
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site max-w-[720px]">
+      <SectionLabel white>Comparison</SectionLabel>
+      <h1 class="text-white mb-6">
+        Stakater Cloud<br />vs {competitor}
+      </h1>
+      <p class="text-white/70 text-[20px] leading-relaxed">
+        {diff}
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad bg-bg-main">
+    <div class="container-site max-w-[700px] mx-auto">
+      <div class="card p-8 mb-8 animate-on-scroll">
+        <h4 class="text-purple mb-4">What is {fullName}?</h4>
+        <p class="text-muted text-[15px] leading-relaxed">
+          {whatIs}
+        </p>
+      </div>
+      <div class="card p-8 border-2 border-orange animate-on-scroll" style="transition-delay: 80ms">
+        <h4 class="text-purple mb-4">What is Stakater Cloud?</h4>
+        <p class="text-muted text-[15px] leading-relaxed">
+          Stakater Cloud is a fully managed OpenShift platform hosted in the Netherlands. We start at the PaaS layer — your cluster arrives pre-configured, pre-integrated, and with optional full developer platform (SAAP) on top. EU data residency, GDPR/DORA/NIS2 compliant, managed by Red Hat Premier Partner engineers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ComparisonTable competitorLabel={competitor} />
+
+  <CTA
+    heading={`Ready to move away from ${competitor}?`}
+    subheading={`Book a call and let's talk about your workloads. We'll show you how Stakater Cloud compares to ${competitor} for your specific situation.`}
+  />
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { formatDate, readingTime } from '../lib/utils';
+interface Props {
+  title: string;
+  description: string;
+  publishedAt: Date;
+  author: string;
+  tags: string[];
+  image?: string;
+  rawContent?: string;
+}
+const { title, description, publishedAt, author, tags, image, rawContent } = Astro.props;
+const time = rawContent ? readingTime(rawContent) : '5 min read';
+---
+<BaseLayout title={title} description={description} image={image}>
+  <article class="container-site py-20 max-w-[760px]">
+    <div class="flex items-center gap-3 mb-6 flex-wrap">
+      {tags.map(tag => (
+        <span class="inline-block bg-bg-alt text-muted text-[12px] font-semibold px-3 py-1 rounded-full border border-border">{tag}</span>
+      ))}
+    </div>
+    <h1 class="mb-6">{title}</h1>
+    <div class="flex items-center gap-4 text-[14px] text-muted mb-12 pb-12 border-b border-border">
+      <span>{author}</span>
+      <span>·</span>
+      <time datetime={publishedAt.toISOString()}>{formatDate(publishedAt)}</time>
+      <span>·</span>
+      <span>{time}</span>
+    </div>
+    <div class="prose prose-lg prose-purple max-w-none">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import TrustBar from '../components/sections/TrustBar.astro';
+import Products from '../components/sections/Products.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import WhyUs from '../components/sections/WhyUs.astro';
+import Comparison from '../components/sections/Comparison.astro';
+import WhoItsFor from '../components/sections/WhoItsFor.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import ComplianceBar from '../components/sections/ComplianceBar.astro';
+import CTA from '../components/sections/CTA.astro';
+---
+<BaseLayout
+  title="Managed OpenShift, Hosted in Europe"
+  description="Production-ready OpenShift in under 15 minutes. Dedicated clusters hosted in the Netherlands. Managed by Red Hat Premier Partners. GDPR, DORA & NIS2 compliant."
+>
+  <Hero />
+  <TrustBar />
+  <Products />
+  <HowItWorks />
+  <WhyUs />
+  <Comparison />
+  <WhoItsFor />
+  <Testimonials />
+  <ComplianceBar />
+  <CTA />
+</BaseLayout>

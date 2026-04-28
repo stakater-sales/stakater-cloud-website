@@ -1,0 +1,104 @@
+---
+export const prerender = true;
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import Button from '../../components/ui/Button.astro';
+import CTA from '../../components/sections/CTA.astro';
+
+export async function getStaticPaths() {
+  const studies = await getCollection('case-studies');
+  return studies.map(study => ({ params: { slug: study.slug }, props: { study } }));
+}
+
+const { study } = Astro.props;
+const { Content } = await study.render();
+---
+
+<BaseLayout
+  title={`${study.data.company} — Case Study`}
+  description={study.data.challenge}
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site">
+      <SectionLabel white>Case Study</SectionLabel>
+      <div class="flex items-start gap-4 mb-6 flex-wrap">
+        <span class="inline-block bg-orange/20 border border-orange/40 text-orange-light text-[12px] font-bold px-3 py-1 rounded-full tracking-wide uppercase">
+          {study.data.industry}
+        </span>
+      </div>
+      <h1 class="text-white max-w-[800px] mb-6">{study.data.company}</h1>
+      <p class="text-[20px] text-white/70 max-w-[640px]">{study.data.challenge}</p>
+    </div>
+  </section>
+
+  <!-- Metrics bar -->
+  {study.data.metrics.length > 0 && (
+    <section class="bg-white border-b border-border">
+      <div class="container-site py-12">
+        <div class="flex gap-16 flex-wrap">
+          {study.data.metrics.map(m => (
+            <div>
+              <div class="text-[40px] font-bold text-purple tracking-tight leading-none mb-2">{m.value}</div>
+              <div class="text-[13px] text-muted">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Body + sidebar -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-16 items-start">
+        <article class="prose prose-lg max-w-none
+          prose-headings:text-purple prose-headings:font-bold
+          prose-p:text-muted prose-p:leading-relaxed
+          prose-a:text-orange prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-purple
+          prose-li:text-muted">
+          <Content />
+        </article>
+
+        <aside class="sticky top-[100px]">
+          <div class="card p-8">
+            <h6 class="text-[15px] font-bold text-purple mb-6">About this case study</h6>
+            <div class="flex flex-col gap-5 text-[14px]">
+              <div>
+                <div class="text-muted mb-1">Industry</div>
+                <div class="font-semibold text-purple">{study.data.industry}</div>
+              </div>
+              <div>
+                <div class="text-muted mb-1">Outcome</div>
+                <div class="font-semibold text-purple leading-snug">{study.data.outcome}</div>
+              </div>
+              {study.data.services.length > 0 && (
+                <div>
+                  <div class="text-muted mb-2">Services Used</div>
+                  <div class="flex flex-col gap-2">
+                    {study.data.services.map(s => (
+                      <span class="inline-block w-fit bg-orange/10 text-orange border border-orange/20 text-[12px] font-semibold px-3 py-1 rounded-full">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            <div class="mt-8 pt-8 border-t border-border">
+              <Button href="/contact" variant="primary" class="w-full justify-center">Book a Call →</Button>
+            </div>
+          </div>
+
+          <a href="/case-studies" class="flex items-center gap-2 text-[14px] text-muted hover:text-orange transition-colors mt-6 no-underline">
+            ← All case studies
+          </a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>

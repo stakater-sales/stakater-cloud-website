@@ -1,0 +1,41 @@
+---
+import { siteConfig, buildTitle, buildCanonical } from '../../lib/seo';
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+const {
+  title,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  canonical,
+  noindex = false,
+} = Astro.props;
+const pageTitle = buildTitle(title ?? '');
+const pageCanonical = canonical ?? buildCanonical(Astro.url.pathname);
+const ogImage = image.startsWith('http') ? image : `${siteConfig.url}${image}`;
+---
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<link rel="canonical" href={pageCanonical} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={pageCanonical} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={siteConfig.twitter} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": siteConfig.name,
+  "url": siteConfig.url,
+  "description": siteConfig.description,
+})} />

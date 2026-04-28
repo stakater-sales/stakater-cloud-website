@@ -1,0 +1,140 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import CheckItem from '../components/ui/CheckItem.astro';
+import CTA from '../components/sections/CTA.astro';
+---
+<BaseLayout
+  title="Why Stakater Cloud"
+  description="EU data residency, Red Hat Premier Partnership, ISO certifications, and expert day-2 operations. Here is why European organisations choose Stakater Cloud."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site">
+      <SectionLabel white>Why Stakater Cloud</SectionLabel>
+      <h1 class="text-white max-w-[760px] mb-6">The OpenShift experts<br />in Europe.</h1>
+      <p class="text-[20px] text-white/70 max-w-[560px]">
+        AWS, Azure and GCP start at raw infrastructure. We start at the platform. Here is what that difference means for your team.
+      </p>
+    </div>
+  </section>
+
+  <!-- EU Data Residency -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <SectionLabel>Data Sovereignty</SectionLabel>
+          <h2 class="mb-6">Your data stays in Europe.<br />Full stop.</h2>
+          <p class="text-[17px] text-muted mb-6">Every Stakater Cloud cluster is hosted exclusively in our Netherlands data center. Your data never transits through US jurisdiction, never touches a US hyperscaler, and is never subject to US government data requests.</p>
+          <p class="text-[17px] text-muted mb-8">This is not a region selection inside AWS. This is infrastructure we own and operate, in the EU, with full European legal accountability.</p>
+          <ul class="list-none m-0 p-0 flex flex-col gap-3">
+            {['GDPR compliant by design', 'DORA ready for financial services', 'NIS2 aligned for critical infrastructure', 'No US-jurisdiction data transfer', 'Netherlands data center — AMS-IX connected'].map(f => <CheckItem>{f}</CheckItem>)}
+          </ul>
+        </div>
+        <div class="card p-10">
+          <div class="text-[64px] mb-6 text-center">🇳🇱</div>
+          <h4 class="text-center mb-6">Netherlands Data Center</h4>
+          <div class="flex flex-col gap-4">
+            {[
+              { label: 'Location', value: 'Amsterdam, Netherlands' },
+              { label: 'Connectivity', value: 'AMS-IX connected' },
+              { label: 'Redundancy', value: 'Multi-AZ available' },
+              { label: 'Jurisdiction', value: 'EU / GDPR' },
+              { label: 'Certification', value: 'ISO 27001 · ISO 9001' },
+            ].map(row => (
+              <div class="flex justify-between items-center py-3 border-b border-border last:border-0 text-[15px]">
+                <span class="text-muted">{row.label}</span>
+                <span class="font-semibold text-purple">{row.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Red Hat Partnership -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div class="card p-10 order-2 lg:order-1">
+          <div class="inline-flex items-center gap-3 bg-[#EE0000] text-white px-5 py-3 rounded-xl mb-8">
+            <svg class="w-5 h-5 fill-white flex-shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            <span class="text-[15px] font-bold">Red Hat Premier Partner</span>
+          </div>
+          <div class="flex flex-col gap-4">
+            {[
+              { label: 'Partnership Level', value: 'Premier (highest tier)' },
+              { label: 'Specialisation', value: 'Container Management' },
+              { label: 'OpenShift expertise', value: 'Certified engineers' },
+              { label: 'Support escalation', value: 'Direct Red Hat access' },
+            ].map(row => (
+              <div class="flex justify-between items-center py-3 border-b border-border last:border-0 text-[15px]">
+                <span class="text-muted">{row.label}</span>
+                <span class="font-semibold text-purple">{row.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <SectionLabel>Red Hat Partnership</SectionLabel>
+          <h2 class="mb-6">The highest level of<br />OpenShift expertise.</h2>
+          <p class="text-[17px] text-muted mb-6">Stakater holds Red Hat's Premier Partner status — the highest tier available — and is a certified Container Management Specialist. This means our engineers are trained, certified and regularly assessed by Red Hat on OpenShift operations.</p>
+          <p class="text-[17px] text-muted">When you run OpenShift on Stakater Cloud, you get direct Red Hat support escalation paths that most organisations cannot access independently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site text-center">
+      <SectionLabel center>Compliance & Certification</SectionLabel>
+      <h2 class="mb-4">Certified. Compliant. Audited.</h2>
+      <p class="text-muted text-[17px] max-w-[560px] mx-auto mb-[72px]">Our operations are independently audited and certified. Your compliance team will have everything they need.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[900px] mx-auto">
+        {[
+          { icon: '🔒', title: 'ISO 27001:2022', desc: 'Information security management. Audited annually by independent third party.' },
+          { icon: '✅', title: 'ISO 9001:2015', desc: 'Quality management systems. Ensures consistent, auditable processes across all operations.' },
+          { icon: '🇪🇺', title: 'GDPR · DORA · NIS2', desc: 'Our infrastructure and processes are designed to support your regulatory obligations under all three frameworks.' },
+        ].map(c => (
+          <div class="card p-8 text-left animate-on-scroll">
+            <div class="text-[36px] mb-4">{c.icon}</div>
+            <h5 class="text-[17px] mb-2">{c.title}</h5>
+            <p class="text-[14px] text-muted leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PaaS positioning -->
+  <section class="section-pad bg-purple">
+    <div class="container-site">
+      <div class="text-center max-w-[700px] mx-auto mb-[72px]">
+        <SectionLabel center white>Our Positioning</SectionLabel>
+        <h2 class="text-white mb-4">We start where others stop.</h2>
+        <p class="text-white/60 text-[17px]">AWS, Azure and GCP are infrastructure companies. Their managed Kubernetes gets you a cluster. Everything above it — the platform — is your problem. Until now.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
+        {[
+          { layer: 'Infrastructure', owner: 'AWS / Azure / GCP', desc: 'VMs, networking, storage. The foundation. Everything else is on you.', highlight: false },
+          { layer: 'Managed Kubernetes', owner: 'EKS / AKS / GKE / ROSA', desc: 'A cluster on top of infrastructure. Still no GitOps, no CI/CD, no secrets, no monitoring. Still on you.', highlight: false },
+          { layer: 'Full Platform', owner: 'Stakater Cloud', desc: 'Cluster + GitOps + CI/CD + secrets + multi-tenancy + monitoring + backup + developer portal. All managed. Nothing on you.', highlight: true },
+        ].map(l => (
+          <div class={`p-10 ${l.highlight ? 'bg-orange/10 border-2 border-orange' : 'bg-white/[0.04]'}`}>
+            <div class={`text-[11px] font-bold uppercase tracking-widest mb-3 ${l.highlight ? 'text-orange' : 'text-white/40'}`}>Layer</div>
+            <h4 class={`text-[20px] mb-2 ${l.highlight ? 'text-white' : 'text-white/80'}`}>{l.layer}</h4>
+            <div class={`text-[13px] font-bold mb-4 ${l.highlight ? 'text-orange' : 'text-white/40'}`}>{l.owner}</div>
+            <p class={`text-[15px] leading-relaxed ${l.highlight ? 'text-white/80' : 'text-white/50'}`}>{l.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>

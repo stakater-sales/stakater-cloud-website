@@ -1,0 +1,44 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+---
+<BaseLayout title="Referral Program" description="Refer a customer to Stakater Cloud and earn a reward. Simple, straightforward referral program.">
+  <section class="section-pad bg-bg-main">
+    <div class="container-site max-w-[720px] mx-auto">
+      <SectionLabel>Referral Program</SectionLabel>
+      <h1 class="mb-6">Refer a customer.<br />Earn a reward.</h1>
+      <p class="text-[18px] text-muted mb-12">Know an organisation that would benefit from managed OpenShift in Europe? Refer them to Stakater Cloud. If they become a customer, we'll thank you with a reward.</p>
+      <div class="card p-10">
+        <h4 class="mb-8">Submit a Referral</h4>
+        <form class="flex flex-col gap-5" action="/api/referral" method="POST">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[13px] font-semibold text-purple" for="your-name">Your Name</label>
+            <input id="your-name" name="yourName" type="text" required class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[13px] font-semibold text-purple" for="your-email">Your Email</label>
+            <input id="your-email" name="yourEmail" type="email" required class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[13px] font-semibold text-purple" for="ref-company">Referral Company Name</label>
+            <input id="ref-company" name="referralCompany" type="text" required class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[13px] font-semibold text-purple" for="ref-contact">Referral Contact Name</label>
+            <input id="ref-contact" name="referralContact" type="text" class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[13px] font-semibold text-purple" for="ref-email">Referral Contact Email</label>
+            <input id="ref-email" name="referralEmail" type="email" class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[13px] font-semibold text-purple" for="notes">Notes</label>
+            <textarea id="notes" name="notes" rows="3" class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors resize-none"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full justify-center mt-2">Submit Referral →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

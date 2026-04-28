@@ -1,0 +1,40 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+const steps = [
+  {
+    num: '01',
+    title: 'Book a call',
+    desc: 'Tell us your use case, team size and compliance requirements. We scope the right cluster configuration for you — usually takes 30 minutes.',
+  },
+  {
+    num: '02',
+    title: 'We provision your cluster',
+    desc: 'Your dedicated OpenShift cluster is provisioned in our Netherlands data center. Stakater SRE handles everything end to end.',
+  },
+  {
+    num: '03',
+    title: 'Start shipping',
+    desc: 'Your cluster is ready in under 15 minutes. Deploy your first workload the same day. Stakater handles upgrades, operations and incidents — forever.',
+  },
+];
+---
+<section class="section-pad bg-purple" id="how-it-works">
+  <div class="container-site">
+    <SectionLabel center white>Getting Started</SectionLabel>
+    <h2 class="text-white text-center mb-4">From zero to production<br />in three steps</h2>
+    <p class="text-white/60 text-[18px] text-center mb-[72px]">No lengthy procurement. No platform team required. No infrastructure setup.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
+      {steps.map((step, i) => (
+        <div class="relative bg-white/[0.04] p-12">
+          <div class="text-[72px] font-bold text-orange/20 leading-none tracking-[-3px] mb-6">{step.num}</div>
+          <h4 class="text-white text-[22px] mb-3">{step.title}</h4>
+          <p class="text-white/55 text-[15px] leading-relaxed">{step.desc}</p>
+          {i < steps.length - 1 && (
+            <div class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 w-10 h-10 bg-orange rounded-full items-center justify-center text-white text-[16px] font-bold">→</div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

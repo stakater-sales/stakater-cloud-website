@@ -1,0 +1,41 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import CTA from '../../components/sections/CTA.astro';
+const studies = await getCollection('case-studies');
+---
+<BaseLayout title="Case Studies" description="Real customer stories from organisations running on Stakater Cloud.">
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="text-center max-w-[560px] mx-auto mb-[72px]">
+        <SectionLabel center>Case Studies</SectionLabel>
+        <h1 class="mb-4">Customer Stories</h1>
+        <p class="text-muted text-[18px]">Real organisations. Real results. Running on Stakater Cloud.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {studies.map(study => (
+          <a href={`/case-studies/${study.slug}`} class="card card-hover p-10 flex flex-col gap-6 no-underline group">
+            <div class="flex gap-2 flex-wrap">
+              <span class="text-[12px] font-bold px-3 py-1 rounded-full bg-orange/10 text-orange border border-orange/20">{study.data.industry}</span>
+            </div>
+            <div>
+              <h4 class="text-[22px] text-purple mb-2 group-hover:text-orange transition-colors duration-150">{study.data.company}</h4>
+              <p class="text-[15px] text-muted">{study.data.challenge}</p>
+            </div>
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-border">
+              {study.data.metrics.map(m => (
+                <div>
+                  <div class="text-[22px] font-bold text-purple tracking-tight">{m.value}</div>
+                  <div class="text-[12px] text-muted">{m.label}</div>
+                </div>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CTA />
+</BaseLayout>

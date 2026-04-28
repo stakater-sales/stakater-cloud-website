@@ -1,0 +1,89 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+---
+<BaseLayout
+  title="Book a Call"
+  description="Book a 30-minute call with our OpenShift experts. We'll scope the right Stakater Cloud solution for your team."
+>
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        <div>
+          <SectionLabel>Get in Touch</SectionLabel>
+          <h1 class="mb-6">Book a Call</h1>
+          <p class="text-[18px] text-muted mb-8">Book a 30-minute call with our OpenShift experts. We'll understand your use case, compliance requirements and team setup — and scope the right solution for you.</p>
+          <div class="flex flex-col gap-6">
+            {[
+              { icon: '⏱️', title: '30 minutes', desc: 'That is all it takes to scope your cluster and answer your questions.' },
+              { icon: '🎯', title: 'No sales pressure', desc: 'We will tell you honestly if Stakater Cloud is the right fit — or not.' },
+              { icon: '🚀', title: 'Ready in days', desc: 'If you want to proceed, your cluster can be provisioned within days of the call.' },
+            ].map(p => (
+              <div class="flex gap-4">
+                <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0">{p.icon}</div>
+                <div>
+                  <div class="text-[16px] font-bold text-purple mb-1">{p.title}</div>
+                  <div class="text-[15px] text-muted">{p.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="mt-10 pt-10 border-t border-border">
+            <div class="text-[14px] text-muted mb-1">Email us directly</div>
+            <a href="mailto:cloud@stakater.com" class="text-[18px] font-semibold text-orange no-underline hover:underline">cloud@stakater.com</a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="card p-10">
+          <h4 class="mb-8">Tell us about your project</h4>
+          <form class="flex flex-col gap-5" action="/api/contact" method="POST">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[13px] font-semibold text-purple" for="fname">First Name</label>
+                <input id="fname" name="firstName" type="text" required placeholder="Jan"
+                  class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[13px] font-semibold text-purple" for="lname">Last Name</label>
+                <input id="lname" name="lastName" type="text" required placeholder="Janssen"
+                  class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+              </div>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[13px] font-semibold text-purple" for="email">Work Email</label>
+              <input id="email" name="email" type="email" required placeholder="jan@company.com"
+                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[13px] font-semibold text-purple" for="company">Company</label>
+              <input id="company" name="company" type="text" required placeholder="Your company name"
+                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[13px] font-semibold text-purple" for="interest">I'm interested in</label>
+              <select id="interest" name="interest"
+                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors">
+                <option value="">Select a product…</option>
+                <option value="managed-openshift">Managed OpenShift</option>
+                <option value="saap">SAAP — Full Platform</option>
+                <option value="both">Both — Not sure yet</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-[13px] font-semibold text-purple" for="message">Tell us about your use case</label>
+              <textarea id="message" name="message" rows="4" placeholder="What are you building? Any compliance requirements? Current setup?"
+                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors resize-none"></textarea>
+            </div>
+            <button type="submit"
+              class="btn-primary w-full justify-center mt-2">
+              Book a Call →
+            </button>
+            <p class="text-[12px] text-muted text-center">We typically respond within 1 business day.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

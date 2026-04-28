@@ -1,0 +1,183 @@
+---
+export const prerender = true;
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import CheckItem from '../../components/ui/CheckItem.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import CTA from '../../components/sections/CTA.astro';
+
+const platformComponents = [
+  {
+    category: 'Foundation',
+    icon: '🏗️',
+    tools: [
+      { name: 'Managed OpenShift', desc: 'Dedicated cluster, fully managed by Stakater SRE' },
+      { name: 'Stakater MTO', desc: 'Multi-tenancy operator — namespace provisioning & isolation' },
+      { name: 'Forecastle', desc: 'Developer-facing app catalog and launch pad' },
+    ],
+  },
+  {
+    category: 'GitOps & CI/CD',
+    icon: '🔄',
+    tools: [
+      { name: 'ArgoCD', desc: 'Managed GitOps continuous delivery' },
+      { name: 'Tekton', desc: 'Cloud-native CI/CD with curated pipeline catalog' },
+      { name: 'Renovate', desc: 'Automated dependency update PRs' },
+    ],
+  },
+  {
+    category: 'Security',
+    icon: '🔒',
+    tools: [
+      { name: 'HashiCorp Vault', desc: 'Secrets management — synced to OpenShift secrets' },
+      { name: 'RHACS', desc: 'Container security & vulnerability scanning' },
+      { name: 'cert-manager', desc: 'Automated TLS certificate management' },
+    ],
+  },
+  {
+    category: 'Observability',
+    icon: '📊',
+    tools: [
+      { name: 'Prometheus + Alertmanager', desc: 'Metrics collection and alerting' },
+      { name: 'Grafana', desc: 'Dashboards and visualisation' },
+      { name: 'Loki + Promtail', desc: 'Log aggregation and search' },
+    ],
+  },
+  {
+    category: 'Developer Experience',
+    icon: '👩‍💻',
+    tools: [
+      { name: 'Backstage', desc: 'Developer portal — service catalog, templates, docs' },
+      { name: 'Nexus OSS', desc: 'Artifact repository for containers and packages' },
+      { name: 'SonarQube', desc: 'Code quality and security scanning' },
+    ],
+  },
+  {
+    category: 'Reliability',
+    icon: '🛡️',
+    tools: [
+      { name: 'Velero', desc: 'Backup and disaster recovery for cluster workloads' },
+      { name: 'Reloader', desc: 'Automatic pod restarts on config/secret changes' },
+      { name: 'IngressMonitorController', desc: 'Uptime monitoring for your ingress endpoints' },
+    ],
+  },
+];
+---
+<ProductLayout
+  title="SAAP — Stakater App Agility Platform"
+  description="Managed OpenShift plus a complete, pre-wired developer platform. GitOps, CI/CD, secrets, multi-tenancy, observability — all managed by Stakater experts."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px] relative overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,86,35,0.12)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container-site relative z-10">
+      <SectionLabel white>Product</SectionLabel>
+      <h1 class="text-white max-w-[800px] mb-4">SAAP</h1>
+      <p class="text-[22px] text-orange font-semibold mb-4">Stakater App Agility Platform</p>
+      <p class="text-[20px] text-white/70 max-w-[600px] mb-10">
+        Managed OpenShift plus a complete, pre-wired developer platform. GitOps, CI/CD, secrets, multi-tenancy, observability, backup — all managed by Stakater. Your developers ship from day one.
+      </p>
+      <div class="flex gap-4 flex-wrap mb-16">
+        <Button href="/contact" variant="primary">Book a Call →</Button>
+        <Button href="/pricing" variant="ghost-white">View Pricing</Button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 max-w-[680px] rounded-2xl overflow-hidden border border-white/10">
+        {[
+          { num: '15+', unit: '', label: 'Managed tools, pre-integrated' },
+          { num: '80', unit: '%', label: 'Faster time to market' },
+          { num: '60', unit: '%', label: 'Reduced TCO vs DIY' },
+        ].map((s, i) => (
+          <div class={`px-7 py-6 bg-white/[0.04] ${i < 2 ? 'border-b sm:border-b-0 sm:border-r border-white/10' : ''}`}>
+            <div class="text-[32px] font-bold text-white leading-none tracking-tight mb-1">{s.num}<span class="text-orange">{s.unit}</span></div>
+            <div class="text-[13px] text-white/50 font-medium">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Components -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="text-center max-w-[640px] mx-auto mb-[72px]">
+        <SectionLabel center>Platform Components</SectionLabel>
+        <h2 class="mb-4">Everything your team needs.<br />Pre-integrated. Pre-managed.</h2>
+        <p class="text-muted text-[17px]">Every component below is managed by Stakater SRE. You get the platform, not the operational burden.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {platformComponents.map(cat => (
+          <div class="card p-8 animate-on-scroll">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="text-[24px]">{cat.icon}</span>
+              <h5 class="text-[17px] text-purple">{cat.category}</h5>
+            </div>
+            <div class="flex flex-col gap-4">
+              {cat.tools.map(t => (
+                <div class="border-b border-border pb-4 last:border-0 last:pb-0">
+                  <div class="text-[14px] font-bold text-purple mb-0.5">{t.name}</div>
+                  <div class="text-[13px] text-muted leading-snug">{t.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How SAAP compares to DIY -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <SectionLabel>The SAAP Difference</SectionLabel>
+          <h2 class="mb-6">Stop building the platform.<br />Start using it.</h2>
+          <p class="text-[17px] text-muted mb-6">Building this platform yourself takes 12–18 months and a dedicated platform engineering team. SAAP gives you the same result — managed and operated by experts — from day one.</p>
+          <p class="text-[17px] text-muted mb-10">Every tool is pre-integrated, pre-configured and continuously updated by our SRE team. When something breaks at 3am, we fix it — not your developers.</p>
+          <Button href="/contact" variant="primary">Get a Demo →</Button>
+        </div>
+        <div class="flex flex-col gap-4">
+          {[
+            { label: 'Platform ready', diy: '12–18 months', saap: 'Day 1' },
+            { label: 'Platform engineers needed', diy: '3–5 FTE', saap: '0' },
+            { label: 'Tools integrated', diy: 'You configure', saap: '15+ pre-wired' },
+            { label: 'Operations & upgrades', diy: 'Your team', saap: 'Stakater SRE' },
+            { label: 'Incident response', diy: 'On-call rota', saap: '24/7 Stakater' },
+            { label: 'Compliance', diy: 'You implement', saap: 'Pre-configured' },
+          ].map(row => (
+            <div class="grid grid-cols-3 gap-4 py-4 border-b border-border last:border-0 text-[14px]">
+              <span class="font-medium text-muted">{row.label}</span>
+              <span class="text-center text-red-500 font-medium">{row.diy}</span>
+              <span class="text-center text-green-600 font-bold">{row.saap}</span>
+            </div>
+          ))}
+          <div class="grid grid-cols-3 gap-4 text-[12px] text-muted pt-1">
+            <span></span>
+            <span class="text-center font-semibold">DIY Platform</span>
+            <span class="text-center font-semibold text-purple">SAAP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site text-center">
+      <SectionLabel center>Pricing</SectionLabel>
+      <h2 class="mb-4">SAAP Pricing</h2>
+      <p class="text-muted text-[17px] max-w-[520px] mx-auto mb-[72px]">SAAP is priced on top of Managed OpenShift. The add-on fee covers all platform components and SRE operations.</p>
+      <div class="bg-white rounded-2xl border border-border p-10 max-w-[600px] mx-auto">
+        <div class="flex items-baseline gap-2 mb-2 justify-center">
+          <span class="text-[13px] text-muted">Starting from</span>
+          <span class="text-[48px] font-bold text-purple tracking-[-2px]">€1,500</span>
+          <span class="text-[16px] text-muted">/ month</span>
+        </div>
+        <p class="text-[15px] text-muted mb-8">Includes Managed OpenShift (3 × Standard nodes) + full SAAP platform + Standard support</p>
+        <Button href="/contact" variant="primary" class="w-full justify-center">Get a Custom Quote →</Button>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</ProductLayout>

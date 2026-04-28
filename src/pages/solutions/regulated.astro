@@ -1,0 +1,40 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import CheckItem from '../../components/ui/CheckItem.astro';
+import CTA from '../../components/sections/CTA.astro';
+---
+<BaseLayout
+  title="For Regulated Industries"
+  description="GDPR, DORA, NIS2 and ISO certified OpenShift infrastructure, hosted in Europe. Compliance from day one — no guesswork required."
+>
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site">
+      <SectionLabel white>Solution</SectionLabel>
+      <h1 class="text-white max-w-[800px] mb-6">EU compliance built into<br />the infrastructure.</h1>
+      <p class="text-[20px] text-white/70 max-w-[600px] mb-10">For financial services, healthcare and critical infrastructure — GDPR, DORA, NIS2 compliance from day one. Your data in Europe. Your auditor happy.</p>
+      <Button href="/contact" variant="primary">Talk to Us →</Button>
+    </div>
+  </section>
+
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { reg: 'GDPR', icon: '🔒', desc: 'Data stays in the Netherlands. No US-jurisdiction data transfer. Data processing agreements available.' },
+          { reg: 'DORA', icon: '🏦', desc: 'Designed for financial services resilience requirements. Multi-AZ, incident reporting, and business continuity built in.' },
+          { reg: 'NIS2', icon: '🛡️', desc: 'Critical infrastructure and essential services. Security hardening, audit logging, and incident management aligned to NIS2.' },
+        ].map(r => (
+          <div class="card p-8">
+            <div class="text-[40px] mb-4">{r.icon}</div>
+            <h4 class="mb-3">{r.reg}</h4>
+            <p class="text-[15px] text-muted leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CTA />
+</BaseLayout>

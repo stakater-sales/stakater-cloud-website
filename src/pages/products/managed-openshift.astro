@@ -1,0 +1,201 @@
+---
+export const prerender = true;
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import CheckItem from '../../components/ui/CheckItem.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import CTA from '../../components/sections/CTA.astro';
+
+const included = [
+  'Dedicated single-tenant OpenShift cluster',
+  'Hosted in our Netherlands data center',
+  'Full lifecycle management by Stakater SRE',
+  'Automated upgrades & patch management',
+  'Multi-AZ high availability option',
+  '100% EU data residency guaranteed',
+  'GDPR, DORA & NIS2 compliant infrastructure',
+  'ISO 27001 & ISO 9001 certified operations',
+  'Red Hat subscription included',
+  'Cluster monitoring & alerting',
+  'Network policy & security hardening',
+  '24/7 premium support option',
+];
+
+const nodeSizes = [
+  { spec: '4 vCPU · 16 GB RAM · 120 GB SSD', label: 'Standard' },
+  { spec: '8 vCPU · 32 GB RAM · 120 GB SSD', label: 'Performance' },
+];
+
+const supportPlans = [
+  {
+    name: 'Standard',
+    price: 'Included',
+    hours: '8/5',
+    modes: 'Ticket',
+    queue: 'Shared',
+    response: '< 12h',
+    highlights: [],
+  },
+  {
+    name: 'Premium',
+    price: '+€2,000/mo',
+    hours: '24/7',
+    modes: 'Ticket + Phone',
+    queue: 'Priority',
+    response: '< 1h',
+    highlights: ['Named Technical Contact', 'Quarterly Service Review', 'Proactive Architecture Guidance', 'Senior Engineer Escalation'],
+  },
+];
+---
+<ProductLayout
+  title="Managed OpenShift"
+  description="A dedicated OpenShift cluster hosted in Europe, fully managed by Stakater. Production-ready in under 15 minutes. You use it, we run it."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px] relative overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,86,35,0.12)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container-site relative z-10">
+      <SectionLabel white>Product</SectionLabel>
+      <h1 class="text-white max-w-[720px] mb-6">Managed OpenShift</h1>
+      <p class="text-[20px] text-white/70 max-w-[560px] mb-10">
+        Your dedicated OpenShift cluster, hosted on our European infrastructure. Stakater handles all upgrades, lifecycle management and operations. You just use it.
+      </p>
+      <div class="flex gap-4 flex-wrap mb-16">
+        <Button href="/contact" variant="primary">Book a Call →</Button>
+        <Button href="/pricing" variant="ghost-white">View Pricing</Button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 max-w-[600px] rounded-2xl overflow-hidden border border-white/10">
+        {[
+          { num: '< 15', unit: 'min', label: 'Cluster provisioning' },
+          { num: '99.9', unit: '%', label: 'Uptime SLA' },
+          { num: '100', unit: '%', label: 'EU data residency' },
+        ].map((s, i) => (
+          <div class={`px-7 py-6 bg-white/[0.04] ${i < 2 ? 'border-b sm:border-b-0 sm:border-r border-white/10' : ''}`}>
+            <div class="text-[32px] font-bold text-white leading-none tracking-tight mb-1">{s.num}<span class="text-orange">{s.unit}</span></div>
+            <div class="text-[13px] text-white/50 font-medium">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        <div>
+          <SectionLabel>What's Included</SectionLabel>
+          <h2 class="mb-6">Everything managed.<br />Nothing to assemble.</h2>
+          <p class="text-[17px] text-muted mb-10">
+            One subscription covers your cluster, the Red Hat subscription, all operations, lifecycle management and support. There are no hidden costs and nothing to set up yourself.
+          </p>
+          <ul class="list-none m-0 p-0 flex flex-col gap-4">
+            {included.map(f => <CheckItem>{f}</CheckItem>)}
+          </ul>
+        </div>
+        <div class="flex flex-col gap-6">
+          <!-- Node sizing -->
+          <div class="card p-8">
+            <h4 class="mb-6">Cluster Sizing</h4>
+            <div class="flex flex-col gap-4 mb-6">
+              {nodeSizes.map(n => (
+                <div class="flex items-center justify-between p-4 bg-bg-main rounded-xl border border-border">
+                  <div>
+                    <div class="text-[15px] font-semibold text-purple mb-0.5">{n.label} Node</div>
+                    <div class="text-[13px] text-muted font-mono">{n.spec}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p class="text-[13px] text-muted">Minimum 3 nodes per cluster. Custom node sizes available on request.</p>
+          </div>
+
+          <!-- Addons -->
+          <div class="card p-8">
+            <h4 class="mb-4">Optional Add-ons</h4>
+            <div class="flex flex-col gap-3">
+              {[
+                { name: 'Managed PostgreSQL (3 Node)', price: '€400/mo' },
+                { name: 'Managed RabbitMQ (3 Node)', price: '€600/mo' },
+                { name: 'Managed Redis (3 Node)', price: '€300/mo' },
+              ].map(a => (
+                <div class="flex items-center justify-between py-3 border-b border-border last:border-0">
+                  <span class="text-[14px] font-medium text-purple">{a.name}</span>
+                  <span class="text-[14px] font-semibold text-orange">{a.price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="text-center max-w-[600px] mx-auto mb-[72px]">
+        <SectionLabel center>Pricing</SectionLabel>
+        <h2 class="mb-4">Simple, transparent pricing</h2>
+        <p class="text-muted text-[17px]">Your cluster price depends on node size and count. Support tier is your choice. No egress fees. No surprises.</p>
+      </div>
+
+      <div class="bg-bg-main rounded-2xl border border-border p-10 max-w-[700px] mx-auto mb-10">
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-[13px] text-muted">Starting from</span>
+          <span class="text-[48px] font-bold text-purple tracking-[-2px]">€888</span>
+          <span class="text-[16px] text-muted">/ month</span>
+        </div>
+        <p class="text-[15px] text-muted mb-8">3 × Standard nodes (4 vCPU · 16 GB) + Standard support</p>
+        <div class="grid grid-cols-2 gap-4 mb-8">
+          {[
+            { label: 'Standard support', value: 'Included' },
+            { label: 'Premium support', value: '+€2,000/mo' },
+            { label: 'PostgreSQL add-on', value: '+€400/mo' },
+            { label: 'RabbitMQ add-on', value: '+€600/mo' },
+          ].map(item => (
+            <div class="flex justify-between items-center py-3 border-b border-border">
+              <span class="text-[14px] text-muted">{item.label}</span>
+              <span class="text-[14px] font-semibold text-purple">{item.value}</span>
+            </div>
+          ))}
+        </div>
+        <Button href="/contact" variant="primary" class="w-full justify-center">Get a Custom Quote →</Button>
+      </div>
+
+      <!-- Support plans -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[900px] mx-auto">
+        {supportPlans.map(plan => (
+          <div class={`card p-8 ${plan.name === 'Premium' ? 'border-orange border-2' : ''}`}>
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <h5 class="text-[18px] mb-1">Support — {plan.name}</h5>
+                <span class="text-[13px] text-muted">{plan.hours} support hours</span>
+              </div>
+              <span class={`text-[16px] font-bold ${plan.name === 'Premium' ? 'text-orange' : 'text-purple'}`}>{plan.price}</span>
+            </div>
+            <div class="flex flex-col gap-3 mb-6">
+              {[
+                { label: 'Modes', value: plan.modes },
+                { label: 'Queue', value: plan.queue },
+                { label: 'Critical response', value: plan.response },
+              ].map(row => (
+                <div class="flex justify-between py-2 border-b border-border text-[14px]">
+                  <span class="text-muted">{row.label}</span>
+                  <span class="font-semibold text-purple">{row.value}</span>
+                </div>
+              ))}
+            </div>
+            {plan.highlights.length > 0 && (
+              <ul class="list-none m-0 p-0 flex flex-col gap-2">
+                {plan.highlights.map(h => <CheckItem class="text-[14px]">{h}</CheckItem>)}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</ProductLayout>

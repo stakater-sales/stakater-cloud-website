@@ -1,0 +1,68 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import CheckItem from '../../components/ui/CheckItem.astro';
+import CTA from '../../components/sections/CTA.astro';
+---
+<BaseLayout
+  title="For MSPs & ISVs"
+  description="Deliver managed software services on top of fully managed OpenShift in Europe. You focus on your application. Stakater runs the platform."
+>
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site">
+      <SectionLabel white>Solution</SectionLabel>
+      <h1 class="text-white max-w-[800px] mb-6">Build your managed service<br />on a managed platform.</h1>
+      <p class="text-[20px] text-white/70 max-w-[580px] mb-10">
+        You deliver a managed software service to your customers. You should not also be in the business of running the platform underneath it. That is what Stakater Cloud is for.
+      </p>
+      <Button href="/contact" variant="primary">Talk to Us →</Button>
+    </div>
+  </section>
+
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        <div>
+          <SectionLabel>The MSP & ISV Problem</SectionLabel>
+          <h2 class="mb-6">Your customers pay for<br />your software. Not your ops.</h2>
+          <p class="text-[17px] text-muted mb-6">If you're an MSP or ISV delivering enterprise software on OpenShift — IBM Maximo, SAP, or any other platform — you face a choice: hire a platform team to run OpenShift, or find someone who already does.</p>
+          <p class="text-[17px] text-muted mb-10">Stakater Cloud gives you a dedicated, fully managed OpenShift platform your application runs on. Your customers get a managed service. You never have to manage Kubernetes.</p>
+          <ul class="list-none m-0 p-0 flex flex-col gap-3">
+            {[
+              'Launch your managed service in days, not months',
+              'Zero internal platform engineering headcount',
+              'EU data residency for your customers',
+              'White-label friendly infrastructure',
+              'Scale per customer on dedicated clusters',
+              'Red Hat Premier Partner — enterprise credibility',
+            ].map(f => <CheckItem>{f}</CheckItem>)}
+          </ul>
+        </div>
+        <div class="card p-10">
+          <h4 class="mb-6">Real-world example</h4>
+          <div class="bg-orange/5 border border-orange/20 rounded-xl p-6 mb-6">
+            <div class="text-[13px] font-bold uppercase tracking-wider text-orange mb-3">Customer Story</div>
+            <p class="text-[15px] text-purple font-semibold mb-2">European MSP · Managed IBM Maximo</p>
+            <p class="text-[14px] text-muted leading-relaxed">A European MSP delivering IBM Maximo as a managed service to industrial and utility customers. They needed dedicated OpenShift clusters in the EU for each customer — without running a platform team.</p>
+          </div>
+          <div class="flex flex-col gap-4">
+            {[
+              { label: 'Time to launch managed service', value: '30 days' },
+              { label: 'Internal platform engineers', value: '0' },
+              { label: 'Customer data residency', value: '100% EU' },
+              { label: 'Clusters managed by Stakater', value: 'All of them' },
+            ].map(row => (
+              <div class="flex justify-between py-3 border-b border-border last:border-0 text-[14px]">
+                <span class="text-muted">{row.label}</span>
+                <span class="font-bold text-purple">{row.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <CTA />
+</BaseLayout>

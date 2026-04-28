@@ -1,0 +1,16 @@
+---
+interface Props {
+  variant?: 'orange' | 'purple' | 'green' | 'gray';
+  class?: string;
+}
+const { variant = 'orange', class: className = '' } = Astro.props;
+const variantClass = {
+  orange: 'bg-orange/15 border border-orange/40 text-orange-light',
+  purple: 'bg-purple/10 border border-purple/20 text-purple',
+  green: 'bg-green-100 border border-green-300 text-green-800',
+  gray: 'bg-bg-alt border border-border text-muted',
+}[variant];
+---
+<span class={`inline-flex items-center gap-2 text-[13px] font-semibold px-3.5 py-1.5 rounded-full tracking-[0.3px] ${variantClass} ${className}`}>
+  <slot />
+</span>

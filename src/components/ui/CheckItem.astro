@@ -1,0 +1,12 @@
+---
+interface Props { class?: string; }
+const { class: className = '' } = Astro.props;
+---
+<li class={`check-item ${className}`}>
+  <span class="check-dot">
+    <svg class="w-2.5 h-2 text-orange" viewBox="0 0 10 8" fill="none">
+      <path d="M1 4l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+  <slot />
+</li>

@@ -1,0 +1,54 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+
+const reasons = [
+  {
+    icon: '🇪🇺',
+    title: '100% EU Data Residency',
+    desc: 'Your data never leaves Europe. Hosted in our Netherlands data center — fully compliant with GDPR, DORA and NIS2 out of the box.',
+  },
+  {
+    icon: '🚀',
+    title: 'Start at the PaaS Layer',
+    desc: 'Hyperscalers start at raw infrastructure. We start at the platform. No months of setup, no platform team needed, no assembly required.',
+  },
+  {
+    icon: '🔴',
+    title: 'Red Hat Premier Partner',
+    desc: "We are Red Hat's Premier Partner and Container Management Specialists — the highest level of OpenShift expertise available in Europe.",
+  },
+  {
+    icon: '💰',
+    title: 'Up to 40% Lower Cost',
+    desc: 'Predictable monthly pricing. No egress fees, no surprise bills. Up to 40% cheaper than running OpenShift on AWS, Azure or GCP.',
+  },
+  {
+    icon: '🔒',
+    title: 'Enterprise Security Built-In',
+    desc: 'Hardened defaults, RHACS, certificate management, Vault for secrets, audit logging, RBAC — all configured and managed from day one.',
+  },
+  {
+    icon: '🛠️',
+    title: 'Expert Day-2 Operations',
+    desc: 'Our SRE team handles upgrades, incident response, capacity planning and architecture guidance — forever. No internal platform team required.',
+  },
+];
+---
+<section class="section-pad bg-bg-main" id="why">
+  <div class="container-site">
+    <div class="mb-[72px]">
+      <SectionLabel>Why Stakater Cloud</SectionLabel>
+      <h2 class="max-w-[560px] mb-4">Not just a cloud.<br />A complete platform.</h2>
+      <p class="text-[17px] text-muted max-w-[520px]">AWS gives you building blocks. We give you a finished platform, managed by OpenShift experts.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {reasons.map(r => (
+        <div class="card p-9 hover:border-orange transition-colors duration-200 animate-on-scroll">
+          <div class="w-[52px] h-[52px] rounded-[14px] bg-bg-alt flex items-center justify-center text-[24px] mb-5">{r.icon}</div>
+          <h5 class="text-[18px] text-purple mb-2.5">{r.title}</h5>
+          <p class="text-[15px] text-muted leading-relaxed">{r.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

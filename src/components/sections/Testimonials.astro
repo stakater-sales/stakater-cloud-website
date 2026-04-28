@@ -1,0 +1,50 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+
+const testimonials = [
+  {
+    quote: 'The Kubernetes experts at Stakater have a deep and thorough understanding of modern container platforms, along with extensive experience in cloud-native and microservices-based applications.',
+    name: 'Håkan Fahlén',
+    role: 'IT Core Infrastructure Manager',
+    initials: 'HF',
+  },
+  {
+    quote: "We're using the App Agility Platform to convert applications to microservices. As a result, we're consistently getting to market 80% faster with 60% reduced total cost of ownership.",
+    name: 'Eero Arvonen',
+    role: 'Container Platform Owner',
+    initials: 'EA',
+  },
+  {
+    quote: 'I am writing to express our sincere appreciation for the outstanding services provided by Stakater during the establishment of our OpenShift cluster on bare metal.',
+    name: 'Haseeb Khalid',
+    role: 'Sr Manager Enterprise Solutions, PTCL',
+    initials: 'HK',
+  },
+];
+---
+<section class="section-pad bg-bg-main" id="testimonials">
+  <div class="container-site">
+    <div class="text-center max-w-[560px] mx-auto mb-[72px]">
+      <SectionLabel center>Customer Stories</SectionLabel>
+      <h2>What our customers say</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {testimonials.map(t => (
+        <div class="card p-9 flex flex-col gap-5 animate-on-scroll">
+          <p class="text-[15px] leading-[1.7] text-black flex-1">
+            <span class="text-[48px] text-orange leading-[0] align-[-20px] mr-1">"</span>{t.quote}
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-purple flex items-center justify-center text-white text-[14px] font-bold flex-shrink-0">
+              {t.initials}
+            </div>
+            <div>
+              <div class="text-[15px] font-bold text-purple">{t.name}</div>
+              <div class="text-[13px] text-muted">{t.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

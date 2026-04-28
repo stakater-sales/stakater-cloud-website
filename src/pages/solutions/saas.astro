@@ -1,0 +1,48 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import CheckItem from '../../components/ui/CheckItem.astro';
+import CTA from '../../components/sections/CTA.astro';
+---
+<BaseLayout
+  title="For SaaS Companies"
+  description="Ship product faster. Stop managing Kubernetes. Get a fully managed OpenShift platform your engineering team can use from day one."
+>
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site">
+      <SectionLabel white>Solution</SectionLabel>
+      <h1 class="text-white max-w-[800px] mb-6">Your developers should be<br />shipping features. Not managing Kubernetes.</h1>
+      <p class="text-[20px] text-white/70 max-w-[600px] mb-10">Stakater Cloud gives European SaaS companies a fully managed OpenShift platform with GitOps, CI/CD, monitoring and everything else pre-wired. You ship. We run the platform.</p>
+      <Button href="/contact" variant="primary">Talk to Us →</Button>
+    </div>
+  </section>
+
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="text-center max-w-[640px] mx-auto mb-[72px]">
+        <SectionLabel center>What You Get</SectionLabel>
+        <h2 class="mb-4">A platform your developers<br />actually want to use.</h2>
+        <p class="text-muted text-[17px]">No more YAML archaeology. No more on-call for cluster incidents. No more platform team hiring.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { icon: '🚀', title: 'Ship from day one', desc: 'Your cluster is provisioned in under 15 minutes. GitOps, CI/CD and monitoring come pre-configured. Deploy your first workload the same day.' },
+          { icon: '🇪🇺', title: 'EU compliance included', desc: 'GDPR, DORA and NIS2 compliance built into the infrastructure. Your data never leaves the Netherlands.' },
+          { icon: '💰', title: 'Predictable costs', desc: 'One monthly subscription. No egress fees. No surprise bills. Up to 40% lower than hyperscalers.' },
+          { icon: '🛠️', title: 'Zero platform overhead', desc: 'Stakater SRE handles all upgrades, incidents and operations. Your engineers focus on product.' },
+          { icon: '📊', title: 'Full observability included', desc: 'Prometheus, Grafana and Loki pre-configured and managed. Dashboards ready from day one.' },
+          { icon: '🔒', title: 'Security by default', desc: 'Hardened cluster defaults, RHACS scanning, Vault for secrets. Enterprise security without the enterprise setup work.' },
+        ].map(c => (
+          <div class="card p-8 animate-on-scroll">
+            <div class="text-[32px] mb-4">{c.icon}</div>
+            <h5 class="text-[17px] mb-2">{c.title}</h5>
+            <p class="text-[15px] text-muted leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CTA />
+</BaseLayout>

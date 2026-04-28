@@ -1,0 +1,40 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import SectionLabel from '../../components/ui/SectionLabel.astro';
+import { formatDate } from '../../lib/utils';
+import CTA from '../../components/sections/CTA.astro';
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+<BaseLayout title="Blog" description="OpenShift insights, platform engineering guides, and EU compliance resources.">
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="text-center max-w-[560px] mx-auto mb-[72px]">
+        <SectionLabel center>Blog</SectionLabel>
+        <h1 class="mb-4">Insights & Guides</h1>
+        <p class="text-muted text-[18px]">OpenShift, platform engineering, and EU compliance — from the team that runs it every day.</p>
+      </div>
+      {posts.length === 0 ? (
+        <p class="text-center text-muted text-[17px] py-20">Posts coming soon.</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map(post => (
+            <a href={`/blog/${post.slug}`} class="card card-hover p-8 flex flex-col gap-4 no-underline group">
+              <div class="flex gap-2 flex-wrap">
+                {post.data.tags.map(tag => (
+                  <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border border-border bg-bg-alt text-muted">{tag}</span>
+                ))}
+              </div>
+              <h5 class="text-[18px] text-purple group-hover:text-orange transition-colors duration-150 leading-snug">{post.data.title}</h5>
+              <p class="text-[14px] text-muted leading-relaxed flex-1">{post.data.description}</p>
+              <div class="text-[13px] text-muted pt-2 border-t border-border">{formatDate(post.data.publishedAt)}</div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+  <CTA />
+</BaseLayout>

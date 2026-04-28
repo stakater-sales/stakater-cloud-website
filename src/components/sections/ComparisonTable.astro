@@ -1,0 +1,63 @@
+---
+import SectionLabel from '../ui/SectionLabel.astro';
+
+const rows = [
+  { feature: 'Managed OpenShift cluster',       stakater: true,        competitor: true,          diy: false },
+  { feature: 'EU data residency',               stakater: true,        competitor: 'Partial',     diy: 'Partial' },
+  { feature: 'GitOps pre-configured (ArgoCD)',  stakater: true,        competitor: false,         diy: false },
+  { feature: 'CI/CD pre-configured (Tekton)',   stakater: true,        competitor: false,         diy: false },
+  { feature: 'Secrets management (Vault)',       stakater: true,        competitor: false,         diy: false },
+  { feature: 'Multi-tenancy (MTO)',              stakater: true,        competitor: false,         diy: false },
+  { feature: 'Full monitoring + logging',        stakater: true,        competitor: 'Basic',       diy: false },
+  { feature: 'No hyperscaler lock-in',           stakater: true,        competitor: false,         diy: false },
+  { feature: 'Predictable EU pricing',           stakater: true,        competitor: 'Partial',     diy: false },
+  { feature: 'Time to first workload',           stakater: '< 15 min',  competitor: 'Days–weeks',  diy: 'Months' },
+];
+
+interface Props {
+  competitorLabel?: string;
+}
+const { competitorLabel = 'Competitor' } = Astro.props;
+
+function cell(val: boolean | string) {
+  if (val === true) return { text: '✓', cls: 'text-green-600 text-[18px]' };
+  if (val === false) return { text: '✗', cls: 'text-red-500 text-[18px]' };
+  return { text: val, cls: 'text-amber-600 text-[13px] font-semibold' };
+}
+---
+<section class="section-pad bg-white" id="compare">
+  <div class="container-site">
+    <div class="text-center max-w-[680px] mx-auto mb-[72px]">
+      <SectionLabel center>Side by Side</SectionLabel>
+      <h2 class="mb-4">How we compare</h2>
+      <p class="text-muted text-[17px]">The real alternative isn't switching cloud providers — it's spending 12–18 months building this yourself with an internal platform team.</p>
+    </div>
+    <div class="rounded-2xl overflow-hidden border border-border bg-bg-main">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr>
+            <th class="text-left px-7 py-5 text-[14px] font-bold bg-white border-b border-border w-[35%]">Feature</th>
+            <th class="px-7 py-5 text-[14px] font-bold bg-purple text-white border-b border-purple/50 text-center">Stakater Cloud</th>
+            <th class="px-7 py-5 text-[14px] font-bold bg-white border-b border-border text-center text-muted">{competitorLabel}</th>
+            <th class="px-7 py-5 text-[14px] font-bold bg-white border-b border-border text-center text-muted">DIY on Hyperscaler</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => {
+            const sc = cell(row.stakater);
+            const co = cell(row.competitor);
+            const di = cell(row.diy);
+            return (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-bg-main/50'}>
+                <td class="px-7 py-[18px] text-[15px] font-medium text-black border-b border-border">{row.feature}</td>
+                <td class={`px-7 py-[18px] border-b border-purple/10 text-center bg-purple/[0.03] font-bold text-purple ${sc.cls}`}>{sc.text}</td>
+                <td class={`px-7 py-[18px] border-b border-border text-center ${co.cls}`}>{co.text}</td>
+                <td class={`px-7 py-[18px] border-b border-border text-center ${di.cls}`}>{di.text}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

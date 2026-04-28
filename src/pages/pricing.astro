@@ -1,0 +1,154 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import CheckItem from '../components/ui/CheckItem.astro';
+import CTA from '../components/sections/CTA.astro';
+---
+<BaseLayout
+  title="Pricing"
+  description="Simple, transparent pricing for Managed OpenShift and SAAP. Starting from €888/month. No egress fees, no surprises."
+>
+  <!-- Hero -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site text-center">
+      <SectionLabel center>Pricing</SectionLabel>
+      <h1 class="mb-4">Simple, transparent pricing</h1>
+      <p class="text-[20px] text-muted max-w-[560px] mx-auto mb-4">No egress fees. No surprise bills. No hidden charges. Just a predictable monthly subscription that covers everything.</p>
+      <p class="text-[16px] text-orange font-semibold">Save up to 40% compared to running OpenShift on AWS, Azure or GCP.</p>
+    </div>
+  </section>
+
+  <!-- Product cards -->
+  <section class="pb-[144px] bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Managed OpenShift -->
+        <div class="card overflow-hidden">
+          <div class="bg-gradient-to-br from-purple to-purple-dark p-10">
+            <h3 class="text-white mb-2">Managed OpenShift</h3>
+            <p class="text-white/60 text-[15px]">Dedicated cluster, EU hosted, fully managed by Stakater.</p>
+          </div>
+          <div class="p-10">
+            <div class="flex items-baseline gap-2 mb-6">
+              <span class="text-[13px] text-muted">From</span>
+              <span class="text-[48px] font-bold text-purple tracking-[-2px]">€888</span>
+              <span class="text-[16px] text-muted">/ month</span>
+            </div>
+            <ul class="list-none m-0 p-0 flex flex-col gap-3 mb-8">
+              {[
+                'Dedicated single-tenant cluster',
+                'Netherlands data center',
+                'Full lifecycle management',
+                'Standard support included',
+                'Red Hat subscription included',
+              ].map(f => <CheckItem>{f}</CheckItem>)}
+            </ul>
+            <Button href="/products/managed-openshift" variant="ghost" class="w-full justify-center">See Full Details →</Button>
+          </div>
+        </div>
+
+        <!-- SAAP -->
+        <div class="card border-orange border-2 overflow-hidden relative">
+          <div class="absolute top-6 right-6 bg-orange text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase">Recommended</div>
+          <div class="bg-gradient-to-br from-purple to-purple-dark p-10">
+            <h3 class="text-white mb-2">SAAP</h3>
+            <p class="text-white/60 text-[15px]">Full developer platform on managed OpenShift.</p>
+          </div>
+          <div class="p-10">
+            <div class="flex items-baseline gap-2 mb-6">
+              <span class="text-[13px] text-muted">From</span>
+              <span class="text-[48px] font-bold text-purple tracking-[-2px]">€1,500</span>
+              <span class="text-[16px] text-muted">/ month</span>
+            </div>
+            <ul class="list-none m-0 p-0 flex flex-col gap-3 mb-8">
+              {[
+                'Everything in Managed OpenShift',
+                'GitOps with ArgoCD',
+                'CI/CD with Tekton',
+                'Secrets with HashiCorp Vault',
+                'Monitoring, logging & backup',
+                'Developer portal with Backstage',
+              ].map(f => <CheckItem>{f}</CheckItem>)}
+            </ul>
+            <Button href="/products/saap" variant="primary" class="w-full justify-center">See Full Details →</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Node sizing -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="text-center mb-[72px]">
+        <SectionLabel center>Cluster Configuration</SectionLabel>
+        <h2>Choose your node size</h2>
+        <p class="text-muted text-[17px] mt-4">Minimum 3 nodes per cluster. Custom configurations available on request.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto mb-16">
+        {[
+          { label: 'Standard', spec: '4 vCPU · 16 GB RAM · 120 GB SSD', tag: 'Most popular' },
+          { label: 'Performance', spec: '8 vCPU · 32 GB RAM · 120 GB SSD', tag: '' },
+        ].map(n => (
+          <div class={`card p-8 ${n.tag ? 'border-orange border-2' : ''}`}>
+            <div class="flex justify-between items-start mb-4">
+              <h5 class="text-[18px]">{n.label} Node</h5>
+              {n.tag && <span class="bg-orange/10 text-orange text-[11px] font-bold px-2.5 py-1 rounded-full">{n.tag}</span>}
+            </div>
+            <p class="font-mono text-[14px] text-muted bg-bg-alt px-4 py-2 rounded-lg">{n.spec}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Add-ons -->
+      <div class="max-w-[800px] mx-auto">
+        <h4 class="mb-6 text-center">Optional Add-ons</h4>
+        <div class="card overflow-hidden">
+          {[
+            { name: 'Managed PostgreSQL (3 Node)', desc: 'Scalable relational database', price: '€400/mo' },
+            { name: 'Managed RabbitMQ (3 Node)', desc: 'Reliable message broker', price: '€600/mo' },
+            { name: 'Managed Redis (3 Node)', desc: 'In-memory caching and data store', price: '€300/mo' },
+            { name: 'Premium Support', desc: '24/7 · Phone · Priority queue · Named contact', price: '€2,000/mo' },
+          ].map((a, i) => (
+            <div class={`flex items-center justify-between p-6 ${i < 3 ? 'border-b border-border' : ''}`}>
+              <div>
+                <div class="text-[15px] font-semibold text-purple mb-0.5">{a.name}</div>
+                <div class="text-[13px] text-muted">{a.desc}</div>
+              </div>
+              <span class="text-[16px] font-bold text-orange whitespace-nowrap ml-6">{a.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site max-w-[760px] mx-auto">
+      <SectionLabel center>Pricing FAQ</SectionLabel>
+      <h2 class="text-center mb-[72px]">Common questions</h2>
+      <div class="flex flex-col gap-4">
+        {[
+          { q: 'Is the Red Hat subscription included?', a: 'Yes. The Red Hat OpenShift subscription is included in your Stakater Cloud pricing. There is no separate Red Hat bill.' },
+          { q: 'Are there egress fees?', a: 'No. We do not charge egress fees. Your monthly price is predictable.' },
+          { q: 'What is the minimum commitment?', a: 'We offer monthly and annual subscriptions. Annual subscriptions come with a discount. Contact us to discuss the right option for your team.' },
+          { q: 'Can I scale my cluster after provisioning?', a: 'Yes. You can add nodes or change node sizes at any time. Changes are applied by our SRE team with zero downtime.' },
+          { q: 'How is SAAP priced on top of Managed OpenShift?', a: 'SAAP is an add-on to Managed OpenShift. The pricing shown (€1,500/mo from) includes both the cluster and the full SAAP platform bundle.' },
+        ].map(faq => (
+          <details class="card p-6 group cursor-pointer">
+            <summary class="flex justify-between items-center text-[16px] font-semibold text-purple list-none gap-4">
+              {faq.q}
+              <span class="text-orange text-[20px] leading-none flex-shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+            </summary>
+            <p class="text-[15px] text-muted leading-relaxed mt-4 pt-4 border-t border-border">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>

@@ -1,0 +1,7 @@
+---
+interface Props { center?: boolean; white?: boolean; class?: string; }
+const { center = false, white = false, class: className = '' } = Astro.props;
+---
+<span class={`section-label ${center ? 'text-center' : ''} ${white ? 'text-orange-light' : ''} ${className}`}>
+  <slot />
+</span>
