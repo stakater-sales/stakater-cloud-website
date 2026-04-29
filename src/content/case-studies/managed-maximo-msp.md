@@ -7,7 +7,7 @@ metrics:
   - { value: "30 days", label: "Time to launch managed service" }
   - { value: "0", label: "Internal platform engineers needed" }
   - { value: "100%", label: "EU data residency maintained" }
-services: ["Managed OpenShift", "SAAP"]
+services: ["Managed OpenShift", "KubeStack+"]
 featured: true
 ---
 
@@ -25,7 +25,7 @@ The MSP evaluated several options including ROSA on AWS and a self-managed OKD c
 
 **Platform completeness.** IBM Maximo's deployment involves persistent storage, message queuing, and complex RBAC across multiple customer namespaces. They needed GitOps, multi-tenancy, and monitoring out of the box — not as a DIY project on top of bare Kubernetes.
 
-**No platform team required.** With Stakater Cloud's SAAP tier, the MSP got ArgoCD, Tekton, OpenBao, MTO (for tenant isolation), Prometheus, Grafana, and Loki — all pre-configured and managed by Stakater SRE. They could focus their engineers entirely on the Maximo application layer.
+**No platform team required.** With Stakater Cloud's KubeStack+ tier, the MSP got ArgoCD, Tekton, OpenBao, MTO (for tenant isolation), Prometheus, Grafana, and Loki — all pre-configured and managed by Stakater SRE. They could focus their engineers entirely on the Maximo application layer.
 
 ## The Implementation
 

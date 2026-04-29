@@ -3,7 +3,7 @@ export const nav = [
     label: 'Products',
     children: [
       { label: 'Managed OpenShift', href: '/products/managed-openshift', description: 'Dedicated cluster, fully managed by Stakater' },
-      { label: 'SAAP', href: '/products/saap', description: 'Full developer platform on managed OpenShift' },
+      { label: 'KubeStack+', href: '/products/kubestack-plus', description: 'Full developer platform on managed OpenShift' },
     ],
   },
   {
@@ -31,7 +31,7 @@ export const nav = [
 export const footerLinks = {
   Products: [
     { label: 'Managed OpenShift', href: '/products/managed-openshift' },
-    { label: 'SAAP', href: '/products/saap' },
+    { label: 'KubeStack+', href: '/products/kubestack-plus' },
     { label: 'Pricing', href: '/pricing' },
   ],
   Solutions: [

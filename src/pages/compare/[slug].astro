@@ -14,7 +14,7 @@ export function getStaticPaths() {
         competitor: 'ROSA',
         fullName: 'Red Hat OpenShift Service on AWS (ROSA)',
         description: 'Comparing Stakater Cloud vs ROSA — managed OpenShift in Europe vs managed OpenShift on AWS.',
-        diff: "ROSA ties you to AWS infrastructure and US-region defaults. Stakater Cloud hosts your dedicated cluster in the Netherlands, meets EU data residency requirements out of the box, and includes a complete developer platform with SAAP. No hyperscaler dependency.",
+        diff: "ROSA ties you to AWS infrastructure and US-region defaults. Stakater Cloud hosts your dedicated cluster in the Netherlands, meets EU data residency requirements out of the box, and includes a complete developer platform with KubeStack+. No hyperscaler dependency.",
         whatIs: "ROSA is Red Hat's managed OpenShift offering running on AWS infrastructure. It handles the OpenShift control plane — but data leaves the EU by default, the platform tooling above OpenShift is not included, and you are locked into AWS pricing and regions.",
       },
     },
@@ -81,7 +81,7 @@ const { competitor, fullName, description, diff, whatIs } = Astro.props;
       <div class="card p-8 border-2 border-orange animate-on-scroll" style="transition-delay: 80ms">
         <h4 class="text-purple mb-4">What is Stakater Cloud?</h4>
         <p class="text-muted text-[15px] leading-relaxed">
-          Stakater Cloud is a fully managed OpenShift platform hosted in the Netherlands. We start at the PaaS layer — your cluster arrives pre-configured, pre-integrated, and with optional full developer platform (SAAP) on top. EU data residency, GDPR/DORA/NIS2 compliant, managed by Red Hat Premier Partner engineers.
+          Stakater Cloud is a fully managed OpenShift platform hosted in the Netherlands. We start at the PaaS layer — your cluster arrives pre-configured, pre-integrated, and with optional full developer platform (KubeStack+) on top. EU data residency, GDPR/DORA/NIS2 compliant, managed by Red Hat Premier Partner engineers.
         </p>
       </div>
     </div>

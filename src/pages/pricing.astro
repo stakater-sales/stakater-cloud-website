@@ -8,7 +8,7 @@ import CTA from '../components/sections/CTA.astro';
 ---
 <BaseLayout
   title="Pricing"
-  description="Simple, transparent pricing for Managed OpenShift and SAAP. Starting from €888/month. No egress fees, no surprises."
+  description="Simple, transparent pricing for Managed OpenShift and KubeStack+. Starting from €888/month. No egress fees, no surprises."
 >
   <!-- Hero -->
   <section class="section-pad bg-bg-main">
@@ -49,11 +49,11 @@ import CTA from '../components/sections/CTA.astro';
           </div>
         </div>
 
-        <!-- SAAP -->
+        <!-- KubeStack+ -->
         <div class="card border-orange border-2 overflow-hidden relative">
           <div class="absolute top-6 right-6 bg-orange text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase">Recommended</div>
           <div class="bg-gradient-to-br from-purple to-purple-dark p-10">
-            <h3 class="text-white mb-2">SAAP</h3>
+            <h3 class="text-white mb-2">KubeStack+</h3>
             <p class="text-white/60 text-[15px]">Full developer platform on managed OpenShift.</p>
           </div>
           <div class="p-10">
@@ -72,7 +72,7 @@ import CTA from '../components/sections/CTA.astro';
                 'Developer portal with Backstage',
               ].map(f => <CheckItem>{f}</CheckItem>)}
             </ul>
-            <Button href="/products/saap" variant="primary" class="w-full justify-center">See Full Details →</Button>
+            <Button href="/products/kubestack-plus" variant="primary" class="w-full justify-center">See Full Details →</Button>
           </div>
         </div>
       </div>
@@ -136,7 +136,7 @@ import CTA from '../components/sections/CTA.astro';
           { q: 'Are there egress fees?', a: 'No. We do not charge egress fees. Your monthly price is predictable.' },
           { q: 'What is the minimum commitment?', a: 'We offer monthly and annual subscriptions. Annual subscriptions come with a discount. Contact us to discuss the right option for your team.' },
           { q: 'Can I scale my cluster after provisioning?', a: 'Yes. You can add nodes or change node sizes at any time. Changes are applied by our SRE team with zero downtime.' },
-          { q: 'How is SAAP priced on top of Managed OpenShift?', a: 'SAAP is an add-on to Managed OpenShift. The pricing shown (€1,500/mo from) includes both the cluster and the full SAAP platform bundle.' },
+          { q: 'How is KubeStack+ priced on top of Managed OpenShift?', a: 'KubeStack+ is an add-on to Managed OpenShift. The pricing shown (€1,500/mo from) includes both the cluster and the full KubeStack+ platform bundle.' },
         ].map(faq => (
           <details class="card p-6 group cursor-pointer">
             <summary class="flex justify-between items-center text-[16px] font-semibold text-purple list-none gap-4">
