@@ -25,7 +25,7 @@ The MSP evaluated several options including ROSA on AWS and a self-managed OKD c
 
 **Platform completeness.** IBM Maximo's deployment involves persistent storage, message queuing, and complex RBAC across multiple customer namespaces. They needed GitOps, multi-tenancy, and monitoring out of the box — not as a DIY project on top of bare Kubernetes.
 
-**No platform team required.** With Stakater Cloud's SAAP tier, the MSP got ArgoCD, Tekton, Vault, MTO (for tenant isolation), Prometheus, Grafana, and Loki — all pre-configured and managed by Stakater SRE. They could focus their engineers entirely on the Maximo application layer.
+**No platform team required.** With Stakater Cloud's SAAP tier, the MSP got ArgoCD, Tekton, OpenBao, MTO (for tenant isolation), Prometheus, Grafana, and Loki — all pre-configured and managed by Stakater SRE. They could focus their engineers entirely on the Maximo application layer.
 
 ## The Implementation
 
@@ -33,7 +33,7 @@ The MSP's first client deployment was running within 30 days of signing with Sta
 
 Stakater provisioned a dedicated OpenShift cluster in the Netherlands data center. MTO (Multi-Tenant OpenShift) handled namespace isolation between the MSP's clients — each client gets their own namespace with quota enforcement, network policies, and RBAC configured automatically.
 
-ArgoCD managed all Maximo deployments via GitOps. The MSP's team defined their Maximo Helm charts in a central Git repository; promotions to staging and production were automated through Tekton pipelines, with Vault handling all secrets securely.
+ArgoCD managed all Maximo deployments via GitOps. The MSP's team defined their Maximo Helm charts in a central Git repository; promotions to staging and production were automated through Tekton pipelines, with OpenBao handling all secrets securely.
 
 Observability was handled entirely by Stakater. Prometheus scraped Maximo application metrics, Grafana surfaced custom dashboards per client, and Loki aggregated logs — all without the MSP writing a single line of observability configuration.
 
