@@ -1,30 +1,129 @@
 ---
+import SectionLabel from '../ui/SectionLabel.astro';
 ---
-<section class="bg-white border-b border-border py-10">
+<section class="bg-white border-b border-border py-20">
   <div class="container-site">
-    <div class="flex items-center gap-12 flex-wrap">
-      <span class="text-[12px] font-bold uppercase tracking-[1.5px] text-muted whitespace-nowrap flex-shrink-0">
-        Trusted & Certified
-      </span>
-      <div class="w-px h-8 bg-border hidden md:block flex-shrink-0"></div>
-      <div class="flex items-center gap-8 flex-wrap">
-        <!-- Red Hat badge -->
-        <div class="flex items-center gap-2.5 bg-[#EE0000] text-white px-4 py-2 rounded-lg">
-          <svg class="w-4 h-4 fill-white flex-shrink-0" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-          <span class="text-[13px] font-bold whitespace-nowrap">Red Hat Premier Partner</span>
-        </div>
-        {[
-          { icon: '🏅', label: 'Container Management Specialist' },
-          { icon: '🔒', label: 'ISO 27001 Certified' },
-          { icon: '✅', label: 'ISO 9001 Certified' },
-          { icon: '🇪🇺', label: 'GDPR · DORA · NIS2' },
-        ].map(b => (
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-lg bg-bg-alt flex items-center justify-center text-[18px] flex-shrink-0">{b.icon}</div>
-            <span class="text-[14px] font-semibold text-purple whitespace-nowrap">{b.label}</span>
+
+    <div class="mb-12">
+      <SectionLabel>Trusted & Certified</SectionLabel>
+      <h3 class="text-[30px] font-bold text-purple max-w-[520px] leading-tight">
+        The deepest OpenShift expertise<br />available in Europe.
+      </h3>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-6 items-stretch">
+
+      <!-- ── Red Hat featured card ── -->
+      <div class="relative rounded-2xl border border-border bg-bg-main p-10 flex flex-col gap-8 overflow-hidden">
+        <!-- Red accent stripe -->
+        <div class="absolute top-0 left-0 right-0 h-[3px] bg-[#EE0000] rounded-t-2xl"></div>
+
+        <div class="flex items-start gap-5">
+          <!-- Fedora hat icon -->
+          <div class="w-14 h-14 rounded-xl bg-[#EE0000] flex items-center justify-center flex-shrink-0">
+            <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Crown -->
+              <path d="M8 17 C8 11 10 8 16 8 C22 8 24 11 24 17" fill="white" opacity="0.95"/>
+              <!-- Hatband -->
+              <path d="M8 17 C8 18.5 10 19.5 16 19.5 C22 19.5 24 18.5 24 17" fill="white" opacity="0.5"/>
+              <!-- Brim -->
+              <ellipse cx="16" cy="20" rx="12" ry="3" fill="white"/>
+              <!-- Indent line at top of crown -->
+              <path d="M13 8.5 C13 7 14 6 16 6 C18 6 19 7 19 8.5" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            </svg>
           </div>
-        ))}
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-[2px] text-[#EE0000] mb-1">Red Hat Partnership</p>
+            <h4 class="text-purple text-[24px] font-bold leading-tight">Premier Partner</h4>
+          </div>
+        </div>
+
+        <p class="text-[15px] text-muted leading-relaxed">
+          Red Hat's highest partnership tier — granted only to partners who demonstrate exceptional OpenShift expertise, verifiable customer success, and sustained technical depth. We have direct access to Red Hat engineering, roadmap briefings, and full certification tracks.
+        </p>
+
+        <!-- Container Management Specialist sub-badge -->
+        <div class="flex items-center gap-4 bg-white rounded-xl border border-border px-5 py-4">
+          <div class="w-10 h-10 rounded-lg bg-orange/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-orange" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="7" height="7" rx="1.5"/>
+              <rect x="11" y="2" width="7" height="7" rx="1.5"/>
+              <rect x="2" y="11" width="7" height="7" rx="1.5"/>
+              <rect x="11" y="11" width="7" height="7" rx="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[14px] font-bold text-purple leading-tight">Container Management Specialist</p>
+            <p class="text-[12px] text-muted mt-0.5">Red Hat certified specialization — one of the few in Europe</p>
+          </div>
+          <div class="ml-auto flex-shrink-0">
+            <span class="inline-block bg-orange/10 text-orange border border-orange/20 text-[11px] font-bold px-2.5 py-1 rounded-full tracking-wide uppercase">Certified</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Supporting credentials 2×2 ── -->
+      <div class="grid grid-cols-2 gap-4">
+
+        <!-- ISO 27001 -->
+        <div class="rounded-xl border border-border bg-bg-main p-7 flex flex-col gap-5">
+          <div class="w-11 h-11 rounded-lg bg-purple/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3L4 7v5c0 5.1 3.4 9.8 8 11 4.6-1.2 8-5.9 8-11V7l-8-4z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[15px] font-bold text-purple mb-1">ISO 27001:2022</p>
+            <p class="text-[13px] text-muted leading-snug">Information Security Management</p>
+          </div>
+        </div>
+
+        <!-- ISO 9001 -->
+        <div class="rounded-xl border border-border bg-bg-main p-7 flex flex-col gap-5">
+          <div class="w-11 h-11 rounded-lg bg-purple/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M8.5 12.5l2.5 2.5 4.5-5"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[15px] font-bold text-purple mb-1">ISO 9001:2015</p>
+            <p class="text-[13px] text-muted leading-snug">Quality Management System</p>
+          </div>
+        </div>
+
+        <!-- Netherlands DC -->
+        <div class="rounded-xl border border-border bg-bg-main p-7 flex flex-col gap-5">
+          <div class="w-11 h-11 rounded-lg bg-orange/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[15px] font-bold text-purple mb-1">Netherlands DC</p>
+            <p class="text-[13px] text-muted leading-snug">100% EU data residency guaranteed</p>
+          </div>
+        </div>
+
+        <!-- Compliance -->
+        <div class="rounded-xl border border-border bg-bg-main p-7 flex flex-col gap-5">
+          <div class="w-11 h-11 rounded-lg bg-orange/10 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M7 9h10M7 13h6"/>
+              <path d="M16 17l1.5-1.5L19 17"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[15px] font-bold text-purple mb-1">GDPR · DORA · NIS2</p>
+            <p class="text-[13px] text-muted leading-snug">EU regulatory compliance built in</p>
+          </div>
+        </div>
+
       </div>
     </div>
+
   </div>
 </section>
