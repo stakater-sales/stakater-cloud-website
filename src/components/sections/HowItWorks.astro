@@ -1,21 +1,35 @@
 ---
 import SectionLabel from '../ui/SectionLabel.astro';
+import Button from '../ui/Button.astro';
+
 const steps = [
   {
     num: '01',
     title: 'Book a call',
-    desc: 'Tell us your use case, team size and compliance requirements. We scope the right cluster configuration for you — usually takes 30 minutes.',
+    desc: 'Tell us your use case, team size and compliance requirements. We set up your account and scope the right cluster configuration — usually a 30-minute conversation.',
+    note: 'Self-signup is not yet available. Account creation is handled by the Stakater team.',
   },
   {
     num: '02',
-    title: 'We provision your cluster',
-    desc: 'Your dedicated OpenShift cluster is provisioned in our Netherlands data center. Stakater SRE handles everything end to end.',
+    title: 'Log in to the Orchestrator',
+    desc: 'Your account gives you access to Stakater Cloud Orchestrator — your self-service control plane. Provision clusters, manage add-ons and configure your environment without opening a support ticket.',
+    note: 'Everything after account creation is fully self-service.',
   },
   {
     num: '03',
     title: 'Start shipping',
-    desc: 'Your cluster is ready in under 15 minutes. Deploy your first workload the same day. Stakater handles upgrades, operations and incidents — forever.',
+    desc: 'Your cluster is live in under 15 minutes. Deploy your first workload the same day. Stakater SRE handles all upgrades, incidents and operations — forever.',
+    note: null,
   },
+];
+
+const orchestratorFeatures = [
+  { label: 'Cluster provisioning', icon: 'M5 12h14M12 5l7 7-7 7' },
+  { label: 'Add-on management', icon: 'M12 6v6m0 0v6m0-6h6m-6 0H6' },
+  { label: 'User & access control', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0' },
+  { label: 'Cluster lifecycle', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' },
+  { label: 'Monitoring & alerts', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
+  { label: 'Audit logging', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' },
 ];
 ---
 <section class="section-pad bg-purple" id="how-it-works">
@@ -24,17 +38,66 @@ const steps = [
     <h2 class="text-white text-center mb-4">From zero to production<br />in three steps</h2>
     <p class="text-white/60 text-[18px] text-center mb-[72px]">No lengthy procurement. No platform team required. No infrastructure setup.</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
+    <!-- Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden mb-10">
       {steps.map((step, i) => (
-        <div class="relative bg-white/[0.04] p-12">
-          <div class="text-[72px] font-bold text-orange/20 leading-none tracking-[-3px] mb-6">{step.num}</div>
-          <h4 class="text-white text-[22px] mb-3">{step.title}</h4>
-          <p class="text-white/55 text-[15px] leading-relaxed">{step.desc}</p>
+        <div class="relative bg-white/[0.04] p-12 flex flex-col gap-4">
+          <div class="text-[72px] font-bold text-orange/20 leading-none tracking-[-3px]">{step.num}</div>
+          <h4 class="text-white text-[22px]">{step.title}</h4>
+          <p class="text-white/55 text-[15px] leading-relaxed flex-1">{step.desc}</p>
+          {step.note && (
+            <p class="text-[13px] text-orange/70 font-medium border-t border-white/10 pt-4 mt-2 leading-snug">
+              {step.note}
+            </p>
+          )}
           {i < steps.length - 1 && (
             <div class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 w-10 h-10 bg-orange rounded-full items-center justify-center text-white text-[16px] font-bold">→</div>
           )}
         </div>
       ))}
     </div>
+
+    <!-- Orchestrator callout -->
+    <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-10">
+      <div class="flex flex-col lg:flex-row gap-10 items-start">
+
+        <!-- Left: Orchestrator description -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-orange/20 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-[2px] text-orange/80">Powered by</p>
+              <h5 class="text-white text-[18px] font-bold leading-tight">Stakater Cloud Orchestrator</h5>
+            </div>
+          </div>
+          <p class="text-white/60 text-[15px] leading-relaxed mb-6">
+            The Orchestrator is Stakater Cloud's self-service control plane. Once your account is set up, your team can provision clusters, manage add-ons, control access and monitor everything — directly from the portal, without raising a support ticket.
+          </p>
+          <div class="inline-flex items-center gap-2 bg-orange/10 border border-orange/30 rounded-full px-4 py-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
+            <span class="text-[13px] font-semibold text-orange">Self-signup coming soon</span>
+          </div>
+        </div>
+
+        <!-- Right: Feature grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 flex-shrink-0 lg:w-[400px]">
+          {orchestratorFeatures.map(f => (
+            <div class="flex items-center gap-2.5 bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-3">
+              <svg class="w-4 h-4 text-orange flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={f.icon} />
+              </svg>
+              <span class="text-[13px] font-medium text-white/70 leading-tight">{f.label}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
