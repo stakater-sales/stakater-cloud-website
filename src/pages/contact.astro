@@ -10,18 +10,36 @@ import SectionLabel from '../components/ui/SectionLabel.astro';
   <section class="section-pad bg-bg-main">
     <div class="container-site">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+        <!-- Left: info -->
         <div>
           <SectionLabel>Get in Touch</SectionLabel>
           <h1 class="mb-6">Book a Call</h1>
           <p class="text-[18px] text-muted mb-8">Book a 30-minute call with our OpenShift experts. We'll understand your use case, compliance requirements and team setup — and scope the right solution for you.</p>
           <div class="flex flex-col gap-6">
             {[
-              { icon: '⏱️', title: '30 minutes', desc: 'That is all it takes to scope your cluster and answer your questions.' },
-              { icon: '🎯', title: 'No sales pressure', desc: 'We will tell you honestly if Stakater Cloud is the right fit — or not.' },
-              { icon: '🚀', title: 'Ready in days', desc: 'If you want to proceed, your cluster can be provisioned within days of the call.' },
+              {
+                title: '30 minutes',
+                desc: 'That is all it takes to scope your cluster and answer your questions.',
+                icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+              },
+              {
+                title: 'No sales pressure',
+                desc: 'We will tell you honestly if Stakater Cloud is the right fit — or not.',
+                icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+              },
+              {
+                title: 'Ready in days',
+                desc: 'If you want to proceed, your cluster can be provisioned within days of the call.',
+                icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+              },
             ].map(p => (
               <div class="flex gap-4">
-                <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0">{p.icon}</div>
+                <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d={p.icon} />
+                  </svg>
+                </div>
                 <div>
                   <div class="text-[16px] font-bold text-purple mb-1">{p.title}</div>
                   <div class="text-[15px] text-muted">{p.desc}</div>
@@ -38,52 +56,209 @@ import SectionLabel from '../components/ui/SectionLabel.astro';
         <!-- Form -->
         <div class="card p-10">
           <h4 class="mb-8">Tell us about your project</h4>
-          <form class="flex flex-col gap-5" action="/api/contact" method="POST">
+
+          <!-- Success state (hidden by default) -->
+          <div id="form-success" class="hidden flex-col items-center text-center py-8 gap-5">
+            <div class="w-16 h-16 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center">
+              <svg class="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h5 class="text-purple mb-2">Message sent</h5>
+              <p class="text-[15px] text-muted">Thank you — we'll be in touch within 1 business day to schedule a call.</p>
+            </div>
+          </div>
+
+          <!-- Form fields -->
+          <form id="contact-form" class="flex flex-col gap-5" novalidate>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div class="flex flex-col gap-1.5">
-                <label class="text-[13px] font-semibold text-purple" for="fname">First Name</label>
+                <label class="text-[13px] font-semibold text-purple" for="fname">
+                  First Name <span class="text-orange">*</span>
+                </label>
                 <input id="fname" name="firstName" type="text" required placeholder="Jan"
-                  class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                  class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
               </div>
               <div class="flex flex-col gap-1.5">
-                <label class="text-[13px] font-semibold text-purple" for="lname">Last Name</label>
+                <label class="text-[13px] font-semibold text-purple" for="lname">
+                  Last Name <span class="text-orange">*</span>
+                </label>
                 <input id="lname" name="lastName" type="text" required placeholder="Janssen"
-                  class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                  class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
               </div>
             </div>
+
             <div class="flex flex-col gap-1.5">
-              <label class="text-[13px] font-semibold text-purple" for="email">Work Email</label>
+              <label class="text-[13px] font-semibold text-purple" for="email">
+                Work Email <span class="text-orange">*</span>
+              </label>
               <input id="email" name="email" type="email" required placeholder="jan@company.com"
-                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+              <p id="email-error" class="hidden text-[12px] text-red-500 font-medium">Please use your company email address. Personal email providers are not accepted.</p>
             </div>
+
             <div class="flex flex-col gap-1.5">
-              <label class="text-[13px] font-semibold text-purple" for="company">Company</label>
+              <label class="text-[13px] font-semibold text-purple" for="company">
+                Company <span class="text-orange">*</span>
+              </label>
               <input id="company" name="company" type="text" required placeholder="Your company name"
-                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
             </div>
+
             <div class="flex flex-col gap-1.5">
-              <label class="text-[13px] font-semibold text-purple" for="interest">I'm interested in</label>
-              <select id="interest" name="interest"
-                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors">
+              <label class="text-[13px] font-semibold text-purple" for="interest">
+                I'm interested in <span class="text-orange">*</span>
+              </label>
+              <select id="interest" name="interest" required
+                class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors">
                 <option value="">Select a product…</option>
-                <option value="managed-openshift">Managed OpenShift</option>
-                <option value="kubestack-plus">KubeStack+ — Full Platform</option>
-                <option value="both">Both — Not sure yet</option>
+                <option value="Managed OpenShift">Managed OpenShift</option>
+                <option value="KubeStack+">KubeStack+ — Full Platform</option>
+                <option value="Stakater Cloud Orchestrator (SCO)">Stakater Cloud Orchestrator (SCO)</option>
+                <option value="Not sure yet">Both / Not sure yet</option>
               </select>
             </div>
+
             <div class="flex flex-col gap-1.5">
-              <label class="text-[13px] font-semibold text-purple" for="message">Tell us about your use case</label>
-              <textarea id="message" name="message" rows="4" placeholder="What are you building? Any compliance requirements? Current setup?"
-                class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors resize-none"></textarea>
+              <label class="text-[13px] font-semibold text-purple" for="message">
+                Tell us about your use case <span class="text-orange">*</span>
+              </label>
+              <textarea id="message" name="message" rows="4" required
+                placeholder="What are you building? Any compliance requirements? Current setup?"
+                class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors resize-none"></textarea>
             </div>
-            <button type="submit"
-              class="btn-primary w-full justify-center mt-2">
+
+            <!-- Submit error -->
+            <p id="submit-error" class="hidden text-[13px] text-red-500 font-medium text-center">Something went wrong. Please try again or email us directly at cloud@stakater.com</p>
+
+            <button id="submit-btn" type="submit" class="btn-primary w-full justify-center mt-2">
               Book a Call →
             </button>
             <p class="text-[12px] text-muted text-center">We typically respond within 1 business day.</p>
           </form>
         </div>
+
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrejgkpw';
+
+  const PERSONAL_DOMAINS = new Set([
+    'gmail.com','googlemail.com',
+    'yahoo.com','yahoo.co.uk','yahoo.fr','yahoo.de','yahoo.es','yahoo.it','yahoo.co.jp',
+    'hotmail.com','hotmail.co.uk','hotmail.fr','hotmail.de','hotmail.es','hotmail.it',
+    'outlook.com','outlook.fr','outlook.de','outlook.es','outlook.it','outlook.co.uk',
+    'live.com','live.co.uk','live.fr','live.de','live.nl',
+    'icloud.com','me.com','mac.com',
+    'aol.com','aol.co.uk',
+    'protonmail.com','proton.me','pm.me',
+    'mail.com','gmx.com','gmx.de','gmx.net','gmx.at',
+    'zoho.com',
+    'yandex.com','yandex.ru',
+    'msn.com','inbox.com',
+    'fastmail.com','fastmail.fm',
+    'hey.com',
+    'tutanota.com','tutamail.com',
+    'mailfence.com',
+    'startmail.com',
+    'disroot.org',
+  ]);
+
+  function isPersonalEmail(email: string): boolean {
+    const domain = email.split('@')[1]?.toLowerCase();
+    return domain ? PERSONAL_DOMAINS.has(domain) : false;
+  }
+
+  function setFieldError(input: HTMLElement, hasError: boolean) {
+    if (hasError) {
+      input.classList.add('border-red-400', 'bg-red-50');
+      input.classList.remove('border-border', 'bg-bg-main');
+    } else {
+      input.classList.remove('border-red-400', 'bg-red-50');
+      input.classList.add('border-border', 'bg-bg-main');
+    }
+  }
+
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const emailInput = document.getElementById('email') as HTMLInputElement | null;
+  const emailError = document.getElementById('email-error');
+  const submitError = document.getElementById('submit-error');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+  const successEl = document.getElementById('form-success');
+
+  // Live email domain validation
+  emailInput?.addEventListener('blur', () => {
+    const val = emailInput.value.trim();
+    if (val && isPersonalEmail(val)) {
+      emailError?.classList.remove('hidden');
+      setFieldError(emailInput, true);
+    } else {
+      emailError?.classList.add('hidden');
+      setFieldError(emailInput, false);
+    }
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Clear previous errors
+    submitError?.classList.add('hidden');
+
+    // Validate all required fields
+    const inputs = form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
+      'input[required], select[required], textarea[required]'
+    );
+    let valid = true;
+
+    inputs.forEach(input => {
+      if (!input.value.trim()) {
+        setFieldError(input, true);
+        valid = false;
+      } else {
+        setFieldError(input, false);
+      }
+    });
+
+    // Check company email
+    const emailVal = emailInput?.value.trim() ?? '';
+    if (emailVal && isPersonalEmail(emailVal)) {
+      emailError?.classList.remove('hidden');
+      setFieldError(emailInput!, true);
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    // Submit
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+    }
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        form.classList.add('hidden');
+        successEl?.classList.remove('hidden');
+        successEl?.classList.add('flex');
+      } else {
+        throw new Error('Non-OK response');
+      }
+    } catch {
+      submitError?.classList.remove('hidden');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Book a Call →';
+      }
+    }
+  });
+</script>
