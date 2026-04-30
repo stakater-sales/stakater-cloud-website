@@ -1,0 +1,84 @@
+---
+---
+<div
+  id="cookie-banner"
+  role="dialog"
+  aria-label="Cookie consent"
+  aria-live="polite"
+  class="fixed bottom-0 left-0 right-0 z-[9999] translate-y-full transition-transform duration-300 ease-out"
+>
+  <div class="bg-purple-dark border-t border-white/10 shadow-[0_-8px_40px_rgba(0,0,0,0.4)]">
+    <div class="container-site py-5">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+
+        <!-- Icon + text -->
+        <div class="flex items-start gap-4 flex-1 min-w-0">
+          <div class="w-9 h-9 rounded-lg bg-orange/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-5 h-5 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+              <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[14px] font-semibold text-white mb-0.5">This site uses cookies</p>
+            <p class="text-[13px] text-white/55 leading-relaxed max-w-[640px]">
+              We use essential cookies to keep the site working. We may also use analytics cookies to understand how visitors use the site — all data stays within the EU.
+              <a href="/privacy" class="text-orange hover:underline ml-1">Privacy policy</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex items-center gap-3 flex-shrink-0 w-full sm:w-auto">
+          <button
+            id="cookie-decline"
+            class="flex-1 sm:flex-none px-5 py-2.5 rounded-lg border border-white/20 text-[13px] font-semibold text-white/70 hover:border-white/40 hover:text-white transition-all duration-150 whitespace-nowrap"
+          >
+            Necessary only
+          </button>
+          <button
+            id="cookie-accept"
+            class="flex-1 sm:flex-none px-5 py-2.5 rounded-lg bg-orange text-white text-[13px] font-semibold hover:bg-orange-dark transition-all duration-150 whitespace-nowrap"
+          >
+            Accept all
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const CONSENT_KEY = 'sc-cookie-consent';
+  const banner = document.getElementById('cookie-banner') as HTMLElement | null;
+
+  function showBanner() {
+    banner?.classList.remove('translate-y-full');
+  }
+
+  function hideBanner() {
+    banner?.classList.add('translate-y-full');
+  }
+
+  function setConsent(value: 'all' | 'necessary') {
+    try {
+      localStorage.setItem(CONSENT_KEY, value);
+    } catch {}
+    hideBanner();
+  }
+
+  // Show if no consent stored yet
+  try {
+    if (!localStorage.getItem(CONSENT_KEY)) {
+      // Small delay so the slide-up feels intentional, not a flash
+      setTimeout(showBanner, 800);
+    }
+  } catch {
+    // localStorage blocked — show banner so user can make a choice
+    setTimeout(showBanner, 800);
+  }
+
+  document.getElementById('cookie-accept')?.addEventListener('click', () => setConsent('all'));
+  document.getElementById('cookie-decline')?.addEventListener('click', () => setConsent('necessary'));
+</script>

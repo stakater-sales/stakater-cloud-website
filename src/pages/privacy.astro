@@ -1,0 +1,69 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+---
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy policy for Stakater Cloud — how we collect, use and protect your data."
+  noindex={false}
+>
+  <section class="section-pad bg-bg-main">
+    <div class="container-site max-w-[760px] mx-auto">
+      <SectionLabel>Legal</SectionLabel>
+      <h1 class="mb-4">Privacy Policy</h1>
+      <p class="text-muted text-[16px] mb-12">Last updated: April 2026</p>
+
+      <div class="prose prose-lg max-w-none
+        prose-headings:text-purple prose-headings:font-bold
+        prose-p:text-muted prose-p:leading-relaxed
+        prose-a:text-orange prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-purple
+        prose-li:text-muted">
+
+        <h2>Who we are</h2>
+        <p>Stakater Cloud is operated by Stakater AB, a Swedish company (Org. no. 559066-6870) registered at David Bagares gata 26A, 111 38 Stockholm, Sweden. We are the data controller for information collected through this website and through our services.</p>
+
+        <h2>What data we collect</h2>
+        <h3>Contact and enquiry data</h3>
+        <p>When you submit a contact form, request a demo or book a call, we collect the information you provide — typically your name, email address, company name and message content. We use this solely to respond to your enquiry and, where you have consented, to send you relevant product information.</p>
+
+        <h3>Usage data (analytics)</h3>
+        <p>With your consent, we may collect anonymised analytics data to understand how visitors use this website. This data does not identify you personally. Analytics data is processed and stored within the European Union.</p>
+
+        <h3>Essential cookies</h3>
+        <p>We use essential cookies and browser storage (localStorage) to remember your cookie consent preference. These are strictly necessary for the site to function correctly and do not require your consent under GDPR.</p>
+
+        <h3>Third-party resources</h3>
+        <p>This site loads fonts from Google Fonts, which may result in your browser making a request to Google's servers. No personal data beyond your IP address is sent as part of this request. We are evaluating self-hosting fonts to remove this dependency.</p>
+
+        <h2>Legal basis for processing</h2>
+        <p>We process your data on the following legal bases under GDPR Article 6:</p>
+        <ul>
+          <li><strong>Consent</strong> — for analytics cookies and optional marketing communications.</li>
+          <li><strong>Legitimate interests</strong> — for responding to direct enquiries and improving our services.</li>
+          <li><strong>Contract</strong> — where processing is necessary to fulfil a service agreement with you.</li>
+        </ul>
+
+        <h2>Data residency</h2>
+        <p>All Stakater Cloud service data is hosted in our Netherlands data center, within the European Union. We do not transfer your personal data to countries outside the EU/EEA without appropriate safeguards in place.</p>
+
+        <h2>Data retention</h2>
+        <p>We retain enquiry and contact data for up to 24 months after last contact. Analytics data is retained in anonymised form for up to 13 months. You may request deletion of your data at any time.</p>
+
+        <h2>Your rights</h2>
+        <p>Under GDPR you have the right to access, rectify, erase, restrict or object to the processing of your personal data, and the right to data portability. To exercise any of these rights, contact us at <a href="mailto:privacy@stakater.com">privacy@stakater.com</a>.</p>
+        <p>You also have the right to lodge a complaint with your national data protection authority. In Sweden, this is the <a href="https://www.imy.se" target="_blank" rel="noopener noreferrer">Integritetsskyddsmyndigheten (IMY)</a>.</p>
+
+        <h2>Cookies</h2>
+        <p>You can withdraw your cookie consent at any time by clearing your browser's local storage for this site. Withdrawing consent does not affect the lawfulness of processing based on consent before its withdrawal.</p>
+
+        <h2>Changes to this policy</h2>
+        <p>We may update this policy from time to time. Material changes will be communicated via a notice on this website. The date at the top of this page shows when the policy was last revised.</p>
+
+        <h2>Contact</h2>
+        <p>For privacy-related questions or data requests, contact us at <a href="mailto:privacy@stakater.com">privacy@stakater.com</a> or via our <a href="/contact">contact page</a>.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

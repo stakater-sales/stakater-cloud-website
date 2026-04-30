@@ -72,8 +72,10 @@ import { footerLinks, compareLinks } from '../../data/navigation';
 
     <!-- Bottom -->
     <div class="pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-      <div class="text-[12px] text-white/30">
-        © {new Date().getFullYear()} Stakater Cloud · Stakater AB Sweden · Org # 559066-6870 · David Bagares gata 26A, 111 38 Stockholm, Sweden
+      <div class="text-[12px] text-white/30 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span>© {new Date().getFullYear()} Stakater Cloud · Stakater AB Sweden · Org # 559066-6870</span>
+        <span class="hidden sm:inline text-white/15">·</span>
+        <a href="/privacy" class="text-white/40 hover:text-orange transition-colors no-underline">Privacy Policy</a>
       </div>
       <div class="flex gap-2 flex-wrap">
         {['ISO 27001', 'ISO 9001', 'RH Premier Partner', 'GDPR Ready'].map(cert => (
