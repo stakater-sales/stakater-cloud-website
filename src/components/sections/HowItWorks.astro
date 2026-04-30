@@ -11,8 +11,8 @@ const steps = [
   },
   {
     num: '02',
-    title: 'Log in to the Orchestrator',
-    desc: 'Your account gives you access to Stakater Cloud Orchestrator — your self-service control plane. Provision clusters, manage add-ons and configure your environment without opening a support ticket.',
+    title: 'Log in to the Stakater Cloud Portal',
+    desc: 'Your account gives you access to the Stakater Cloud Portal — your self-service control plane. Provision clusters, manage add-ons and configure your environment without opening a support ticket.',
     note: 'Everything after account creation is fully self-service.',
   },
   {
@@ -23,7 +23,7 @@ const steps = [
   },
 ];
 
-const orchestratorFeatures = [
+const portalFeatures = [
   { label: 'Cluster provisioning', icon: 'M5 12h14M12 5l7 7-7 7' },
   { label: 'Add-on management', icon: 'M12 6v6m0 0v6m0-6h6m-6 0H6' },
   { label: 'User & access control', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0' },
@@ -57,11 +57,9 @@ const orchestratorFeatures = [
       ))}
     </div>
 
-    <!-- Orchestrator callout -->
+    <!-- Portal callout -->
     <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-10">
       <div class="flex flex-col lg:flex-row gap-10 items-start">
-
-        <!-- Left: Orchestrator description -->
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-10 h-10 rounded-xl bg-orange/20 flex items-center justify-center flex-shrink-0">
@@ -76,7 +74,7 @@ const orchestratorFeatures = [
             </div>
           </div>
           <p class="text-white/60 text-[15px] leading-relaxed mb-6">
-            The Orchestrator is Stakater Cloud's self-service control plane. Once your account is set up, your team can provision clusters, manage add-ons, control access and monitor everything — directly from the portal, without raising a support ticket.
+            The Stakater Cloud Portal runs on Stakater Cloud Orchestrator (SCO) — a sovereign XaaS platform we build and operate ourselves. Every capability you use in the portal is powered by SCO.
           </p>
           <div class="inline-flex items-center gap-2 bg-orange/10 border border-orange/30 rounded-full px-4 py-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-orange"></span>
@@ -84,9 +82,8 @@ const orchestratorFeatures = [
           </div>
         </div>
 
-        <!-- Right: Feature grid -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 flex-shrink-0 lg:w-[400px]">
-          {orchestratorFeatures.map(f => (
+          {portalFeatures.map(f => (
             <div class="flex items-center gap-2.5 bg-white/[0.05] border border-white/[0.08] rounded-xl px-4 py-3">
               <svg class="w-4 h-4 text-orange flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d={f.icon} />
@@ -95,7 +92,6 @@ const orchestratorFeatures = [
             </div>
           ))}
         </div>
-
       </div>
     </div>
 
