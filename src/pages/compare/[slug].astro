@@ -6,6 +6,16 @@ import ComparisonTable from '../../components/sections/ComparisonTable.astro';
 import CTA from '../../components/sections/CTA.astro';
 import SectionLabel from '../../components/ui/SectionLabel.astro';
 
+interface Reason {
+  title: string;
+  body: string;
+  icon: string;
+}
+interface FAQ {
+  q: string;
+  a: string;
+}
+
 export function getStaticPaths() {
   return [
     {
@@ -13,9 +23,54 @@ export function getStaticPaths() {
       props: {
         competitor: 'ROSA',
         fullName: 'Red Hat OpenShift Service on AWS (ROSA)',
-        description: 'Comparing Stakater Cloud vs ROSA — managed OpenShift in Europe vs managed OpenShift on AWS.',
-        diff: "ROSA ties you to AWS infrastructure and US-region defaults. Stakater Cloud hosts your dedicated cluster in the Netherlands, meets EU data residency requirements out of the box, and includes a complete developer platform with KubeStack+. No hyperscaler dependency.",
-        whatIs: "ROSA is Red Hat's managed OpenShift offering running on AWS infrastructure. It handles the OpenShift control plane — but data leaves the EU by default, the platform tooling above OpenShift is not included, and you are locked into AWS pricing and regions.",
+        metaDescription: 'Stakater Cloud vs ROSA — managed OpenShift with EU data residency, full developer platform included, and no AWS lock-in. Compare features, pricing and compliance.',
+        heroHeadline: 'Same OpenShift. Full platform. EU-operated.',
+        heroSubline: 'ROSA manages your OpenShift cluster on AWS. Stakater Cloud adds GitOps, CI/CD, secrets, full observability and multi-tenancy — hosted in the Netherlands, operated by a Red Hat Premier Partner.',
+        clusterType: 'Managed OpenShift (AWS)',
+        whatIsCompetitor: "ROSA is Red Hat's managed OpenShift offering running on AWS infrastructure. It handles the OpenShift control plane well — but data defaults to AWS, the platform tooling above OpenShift is not included, and you inherit AWS pricing variability and US jurisdiction concerns.",
+        threeReasons: [
+          {
+            title: 'Unambiguous EU data residency',
+            body: 'ROSA runs on AWS — a US company subject to the US CLOUD Act. Stakater Cloud is operated by Stakater AB (Sweden) with all data hosted exclusively in our Netherlands data center. No US parent, no ambiguity for GDPR, DORA or NIS2 compliance.',
+            icon: 'M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9',
+          },
+          {
+            title: 'Full developer platform, not just the cluster',
+            body: 'ROSA gives you a managed OpenShift cluster. Stakater Cloud gives you a managed platform: ArgoCD, Tekton, OpenBao, Prometheus, Grafana, Loki, Jaeger, multi-tenancy (MTO), Velero — all pre-configured, all managed by us. No platform team required.',
+            icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
+          },
+          {
+            title: 'Predictable flat pricing, no AWS bill',
+            body: 'ROSA pricing combines EC2 instance costs, Red Hat OpenShift licensing, and every add-on your platform needs. Stakater Cloud is a flat monthly subscription from €888/month — no per-resource charges, no surprise data transfer fees, no AWS account to manage.',
+            icon: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z',
+          },
+        ] as Reason[],
+        faqs: [
+          {
+            q: 'Is ROSA GDPR compliant for regulated European workloads?',
+            a: "ROSA runs on AWS infrastructure — a US company subject to the US CLOUD Act. While AWS has EU regions, data sovereignty concerns persist under GDPR, DORA and NIS2. Stakater Cloud is operated by Stakater AB (Sweden) with all data hosted in the Netherlands. No US parent company, no CLOUD Act exposure.",
+          },
+          {
+            q: 'Does ROSA include GitOps, CI/CD or observability tooling?',
+            a: "No. ROSA manages the OpenShift control plane. Everything above it — ArgoCD, Tekton, Prometheus, Grafana, Loki, Jaeger, OpenBao, multi-tenancy — you must install, configure and maintain yourself. Stakater Cloud's KubeStack+ tier includes all of this pre-wired and managed from day one.",
+          },
+          {
+            q: 'How does ROSA pricing compare to Stakater Cloud?',
+            a: "ROSA pricing is EC2 node costs plus Red Hat OpenShift licensing plus any platform tooling you add on top. It scales unpredictably and often requires dedicated cloud cost management. Stakater Cloud is a flat monthly subscription from €888/month — one invoice, no per-resource surprises.",
+          },
+          {
+            q: 'What support do I get for platform tooling with ROSA?',
+            a: "ROSA support covers the OpenShift cluster itself. Issues with your GitOps setup, CI/CD pipelines, secrets management or observability stack fall outside ROSA's scope — you are on your own or rely on separate vendors. With Stakater Cloud, the entire platform is our responsibility under one SLA.",
+          },
+          {
+            q: 'How quickly can I get a production-ready cluster with Stakater Cloud?',
+            a: "ROSA cluster provisioning takes 30–45 minutes. Then you still need to configure your platform tooling, which typically takes weeks to months. Stakater Cloud is production-ready in under 15 minutes — cluster provisioned, GitOps wired, observability running, your team can deploy immediately.",
+          },
+          {
+            q: 'Can I migrate from ROSA to Stakater Cloud?',
+            a: "Yes. We help teams move from ROSA and other managed OpenShift platforms. Book a call and we will assess your workloads, data volumes and compliance requirements — and give you an honest estimate of what the migration involves for your specific setup.",
+          },
+        ] as FAQ[],
       },
     },
     {
@@ -23,9 +78,54 @@ export function getStaticPaths() {
       props: {
         competitor: 'EKS',
         fullName: 'Amazon Elastic Kubernetes Service (EKS)',
-        description: 'Comparing Stakater Cloud vs Amazon EKS for European organisations running OpenShift or Kubernetes.',
-        diff: "EKS gives you raw Kubernetes on AWS infrastructure — you still need to install, configure and operate everything above it. Stakater Cloud gives you a complete, managed OpenShift platform starting at the PaaS layer. No platform team needed.",
-        whatIs: "EKS is Amazon's managed Kubernetes service. It manages the control plane, but leaves everything else — GitOps, CI/CD, secrets, monitoring, multi-tenancy, upgrades, security hardening — entirely to you. EKS is infrastructure, not a platform.",
+        metaDescription: 'Stakater Cloud vs EKS — managed OpenShift with a complete developer platform in the EU vs raw Kubernetes on AWS. No platform team, no AWS lock-in, production-ready in 15 minutes.',
+        heroHeadline: 'EKS is infrastructure. Stakater Cloud is a platform.',
+        heroSubline: 'EKS gives you a Kubernetes control plane on AWS. Stakater Cloud gives you managed OpenShift plus the entire platform layer — GitOps, CI/CD, secrets, observability, multi-tenancy — pre-wired and hosted in the EU.',
+        clusterType: 'Managed Kubernetes (AWS)',
+        whatIsCompetitor: "EKS is Amazon's managed Kubernetes service. It provisions and patches your Kubernetes control plane on AWS — but GitOps, CI/CD, secrets management, observability, multi-tenancy, security hardening and every other piece of your platform is your team's responsibility to build and operate.",
+        threeReasons: [
+          {
+            title: 'Stop building the platform — use one that is already built',
+            body: 'EKS gives you raw Kubernetes. Getting from EKS to a production-grade platform takes 6–18 months of engineering effort. Stakater Cloud ships ArgoCD, Tekton, OpenBao, Prometheus, Grafana, Loki, Jaeger, multi-tenancy and more — pre-built and production-ready on day one.',
+            icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+          },
+          {
+            title: 'OpenShift, not just Kubernetes',
+            body: 'OpenShift ships with stronger security defaults than vanilla Kubernetes: built-in security hardening, developer console, integrated image registry, enterprise support from Red Hat. EKS gives you plain upstream Kubernetes — every enterprise feature is an add-on your team must wire and maintain.',
+            icon: 'M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18',
+          },
+          {
+            title: 'EU data residency, no AWS account needed',
+            body: 'EKS ties your data to AWS and your bill to AWS pricing. Stakater Cloud hosts your cluster in the Netherlands, operated by a Swedish company. GDPR, DORA and NIS2 compliance is built in — and you pay one flat monthly fee with no AWS account to manage.',
+            icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z',
+          },
+        ] as Reason[],
+        faqs: [
+          {
+            q: 'Is EKS the same as OpenShift?',
+            a: "No. EKS is managed Kubernetes on AWS. OpenShift is an enterprise application platform built on Kubernetes — it adds security hardening, a developer console, integrated image registry, stricter RBAC defaults, developer tooling, and enterprise support from Red Hat. Running OpenShift workloads on EKS requires significant additional configuration.",
+          },
+          {
+            q: 'What do I need to add to EKS to make it production-ready?',
+            a: "Quite a lot: a GitOps tool (ArgoCD), CI/CD (Tekton or Jenkins), secrets management (OpenBao or Vault), observability (Prometheus, Grafana, Loki, Jaeger), multi-tenancy enforcement, network policies, image scanning (RHACS), backup (Velero), certificate management. Stakater Cloud includes all of this pre-configured and managed.",
+          },
+          {
+            q: 'Is EKS suitable for GDPR and DORA compliance?',
+            a: "EKS runs on AWS — a US company subject to the US CLOUD Act. For European regulated industries under GDPR, DORA or NIS2, this creates data sovereignty concerns. Stakater Cloud provides unambiguous EU data residency: Netherlands data center, operated by Stakater AB (Sweden), ISO 27001:2022 certified.",
+          },
+          {
+            q: 'What does EKS actually cost vs Stakater Cloud?',
+            a: "EKS charges per cluster per hour, plus EC2 node costs, load balancers, storage and data transfer. Most teams spend significantly more than they expect once platform tooling is factored in. Stakater Cloud starts at €888/month all in — platform included, no hidden per-resource fees.",
+          },
+          {
+            q: 'How long does it take to go from EKS to production?',
+            a: "EKS cluster creation takes minutes. Building a production-grade platform on top — with GitOps, CI/CD, observability, multi-tenancy and security hardening — realistically takes 3–9 months. Stakater Cloud is production-ready in under 15 minutes.",
+          },
+          {
+            q: 'Do I need a dedicated platform engineering team for EKS?',
+            a: "In practice, yes. EKS gives you Kubernetes — everything above it requires specialists to build, maintain and evolve. Most teams end up hiring 2–4 platform engineers. Stakater Cloud is your platform team, included in your subscription. Your developers focus on shipping product.",
+          },
+        ] as FAQ[],
       },
     },
     {
@@ -33,9 +133,54 @@ export function getStaticPaths() {
       props: {
         competitor: 'AKS',
         fullName: 'Azure Kubernetes Service (AKS)',
-        description: 'Comparing Stakater Cloud vs Azure AKS for European organisations running OpenShift or Kubernetes.',
-        diff: "AKS gives you managed Kubernetes on Microsoft Azure — but OpenShift, GitOps, CI/CD, secrets management, multi-tenancy and observability are still entirely up to you. Stakater Cloud includes all of that, hosted in the EU, managed by OpenShift experts.",
-        whatIs: "AKS is Microsoft's managed Kubernetes offering. It handles cluster provisioning and patching on Azure, but the entire platform layer — developer tooling, GitOps, observability, security — is left for your team to build and operate.",
+        metaDescription: 'Stakater Cloud vs AKS — managed OpenShift with complete developer platform in the EU vs Azure Kubernetes. No platform team needed, GDPR/DORA ready, production in 15 minutes.',
+        heroHeadline: 'OpenShift over Kubernetes. Platform over infrastructure.',
+        heroSubline: 'AKS manages your Kubernetes cluster on Azure. Stakater Cloud delivers managed OpenShift with GitOps, CI/CD, full observability and more — pre-wired, EU-hosted, operated by Red Hat Premier Partner engineers.',
+        clusterType: 'Managed Kubernetes (Azure)',
+        whatIsCompetitor: "AKS is Microsoft's managed Kubernetes service on Azure. It provisions and patches your Kubernetes cluster — but the entire developer platform above Kubernetes, including GitOps, CI/CD, secrets, observability, multi-tenancy and compliance tooling, is left entirely to your team.",
+        threeReasons: [
+          {
+            title: 'Enterprise OpenShift over plain Kubernetes',
+            body: 'AKS gives you upstream Kubernetes. OpenShift adds enterprise security hardening, a developer-friendly console, integrated image registry, stricter security defaults and enterprise support — making it the preferred choice for European enterprises in finance, healthcare and critical infrastructure.',
+            icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+          },
+          {
+            title: 'Complete developer platform, no assembly required',
+            body: 'AKS provisions and patches the cluster — the platform above it is your responsibility. Stakater Cloud includes ArgoCD, Tekton, OpenBao, Prometheus, Grafana, Loki, Jaeger, MTO, Velero and more — all pre-configured, all managed by us. No platform team required.',
+            icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
+          },
+          {
+            title: 'Unambiguous EU data residency, no Azure dependency',
+            body: 'AKS ties your workloads to Microsoft Azure infrastructure. Stakater Cloud is operated by Stakater AB (Sweden) with your cluster in our Netherlands data center. No US hyperscaler dependency, clear GDPR and DORA compliance, and flat monthly pricing with no Azure bill to manage.',
+            icon: 'M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9',
+          },
+        ] as Reason[],
+        faqs: [
+          {
+            q: 'Is AKS the same as OpenShift?',
+            a: "No. AKS is managed Kubernetes on Azure. OpenShift is an enterprise application platform built on Kubernetes with additional security hardening, a developer console, integrated tooling and enterprise support from Red Hat. OpenShift is commonly preferred by regulated European enterprises for its stronger security posture and enterprise-grade capabilities.",
+          },
+          {
+            q: 'Does AKS include a developer platform?',
+            a: "No. AKS provisions and manages your Kubernetes cluster. GitOps, CI/CD, secrets management, observability, multi-tenancy enforcement and security tooling are entirely your responsibility to add and maintain. Stakater Cloud includes the full platform pre-configured and managed by our team.",
+          },
+          {
+            q: 'How does Stakater Cloud handle EU data residency vs AKS?',
+            a: "Stakater Cloud's data center is in the Netherlands and we are operated by Stakater AB — a Swedish company with no US parent. AKS runs on Microsoft Azure, a US company. For organisations navigating GDPR, DORA and NIS2, Stakater Cloud provides a cleaner, unambiguous EU data residency position.",
+          },
+          {
+            q: 'What is the real cost of AKS vs Stakater Cloud?',
+            a: "AKS cluster management is free, but you pay for Azure VMs, storage, bandwidth and every platform tool you add. More significantly, you pay in engineering time to build and operate the platform layer — typically 2–4 engineers dedicated to platform work. Stakater Cloud is a flat monthly subscription from €888/month with the full platform included.",
+          },
+          {
+            q: 'How quickly can I get to production on Stakater Cloud vs AKS?',
+            a: "AKS cluster provisioning is fast, but going from a bare cluster to a production-ready platform takes months of configuration. Stakater Cloud is production-ready in under 15 minutes — cluster provisioned, GitOps wired, observability running, your team can deploy on day one.",
+          },
+          {
+            q: 'Can I migrate from AKS to Stakater Cloud?',
+            a: "Yes. We help teams migrate containerised workloads from AKS and other platforms. Book a call and we will scope the migration effort for your specific workloads, compliance requirements and timeline — and tell you honestly what it takes.",
+          },
+        ] as FAQ[],
       },
     },
     {
@@ -43,54 +188,341 @@ export function getStaticPaths() {
       props: {
         competitor: 'GKE',
         fullName: 'Google Kubernetes Engine (GKE)',
-        description: 'Comparing Stakater Cloud vs Google GKE for European organisations running OpenShift or Kubernetes.',
-        diff: "GKE is Google's managed Kubernetes — it handles the control plane but everything above it is your responsibility. Stakater Cloud delivers a complete managed OpenShift platform in the EU with GitOps, CI/CD, observability and more — pre-wired and managed for you.",
-        whatIs: "GKE is Google Cloud's managed Kubernetes service. Autopilot mode removes some node management, but the application platform layer — secrets, GitOps, CI/CD, multi-tenancy, compliance tooling — is still your team's problem to solve.",
+        metaDescription: 'Stakater Cloud vs GKE — managed OpenShift with complete developer platform in the EU vs Google Kubernetes Engine. GDPR/DORA/NIS2 compliant, no platform team needed.',
+        heroHeadline: 'Enterprise OpenShift in Europe. Everything included.',
+        heroSubline: "GKE manages Kubernetes on Google Cloud — the platform layer is still yours to build. Stakater Cloud delivers managed OpenShift with GitOps, CI/CD, full observability and more, hosted in the EU, managed by Red Hat Premier Partners.",
+        clusterType: 'Managed Kubernetes (GCP)',
+        whatIsCompetitor: "GKE is Google Cloud's managed Kubernetes service. Standard GKE manages the control plane; Autopilot mode removes node management overhead. But the application platform layer — GitOps, CI/CD, secrets, observability, multi-tenancy, compliance tooling — remains your team's responsibility in both modes.",
+        threeReasons: [
+          {
+            title: 'OpenShift over Kubernetes — built for enterprise from the start',
+            body: 'GKE gives you managed Kubernetes. OpenShift adds enterprise-grade security hardening, a developer-friendly console, stricter RBAC defaults, integrated image management and enterprise support. For European enterprises running regulated workloads, OpenShift is the stronger starting point.',
+            icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 00-1-1h-4a1 1 0 00-1 1v5m6 0H9',
+          },
+          {
+            title: 'Complete developer platform — GKE Autopilot does not solve this',
+            body: "GKE Autopilot removes node provisioning overhead, which is useful. But your CI/CD, GitOps, secrets, observability and multi-tenancy are still entirely your problem. Stakater Cloud solves the full platform problem: ArgoCD, Tekton, OpenBao, Prometheus, Grafana, Loki, Jaeger — managed, updated, supported.",
+            icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
+          },
+          {
+            title: 'No Google Cloud dependency for EU-regulated workloads',
+            body: 'GKE runs on Google Cloud — a US company subject to the US CLOUD Act. For GDPR, DORA and NIS2, Stakater Cloud offers a cleaner position: Netherlands data center, operated by Stakater AB (Sweden), with no US hyperscaler in your supply chain. ISO 27001:2022 and ISO 9001:2015 certified.',
+            icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+          },
+        ] as Reason[],
+        faqs: [
+          {
+            q: 'Is GKE the same as OpenShift?',
+            a: "No. GKE is managed Kubernetes on Google Cloud. OpenShift is an enterprise application platform built on Kubernetes — it adds security hardening, a developer console, integrated image registry, stricter default RBAC, built-in developer tooling and enterprise support from Red Hat. OpenShift is not simply Kubernetes.",
+          },
+          {
+            q: 'Does GKE Autopilot solve the platform engineering problem?',
+            a: "GKE Autopilot removes node provisioning and management overhead, which is useful. But the application platform — GitOps, CI/CD, secrets management, observability, multi-tenancy enforcement, compliance tooling — is still your team's responsibility. Stakater Cloud solves the full platform problem, not just node management.",
+          },
+          {
+            q: 'Is GKE suitable for EU-regulated workloads?',
+            a: "GKE runs on Google Cloud, a US-headquartered company subject to the US CLOUD Act. For European organisations under GDPR, DORA or NIS2, Stakater Cloud provides a cleaner position: Netherlands data center, operated by Stakater AB (Sweden), ISO 27001:2022 certified, no US hyperscaler in the supply chain.",
+          },
+          {
+            q: 'What does Stakater Cloud include that GKE does not?',
+            a: "Stakater Cloud includes managed OpenShift plus a complete pre-configured platform: GitOps (ArgoCD), CI/CD (Tekton), secrets (OpenBao), full observability (Prometheus, Grafana, Loki, Jaeger, alerting), multi-tenancy (MTO), backup (Velero), image scanning (RHACS) and more. GKE gives you Kubernetes — the rest is yours to build.",
+          },
+          {
+            q: 'How long to go from zero to production on GKE vs Stakater Cloud?',
+            a: "GKE cluster creation takes minutes. Building a production-grade platform on top — with all the tooling your team actually needs — realistically takes 3–9 months of engineering effort. Stakater Cloud is production-ready in under 15 minutes: cluster provisioned, GitOps wired, observability running.",
+          },
+          {
+            q: 'Can I move workloads from GKE to Stakater Cloud?',
+            a: "Yes. We help teams migrate containerised workloads from GKE and other platforms. Book a call and we will assess your workloads, compliance requirements and timeline — and give you an honest picture of what the migration involves.",
+          },
+        ] as FAQ[],
       },
     },
   ];
 }
 
-const { competitor, fullName, description, diff, whatIs } = Astro.props;
+const { competitor, fullName, metaDescription, heroHeadline, heroSubline, clusterType, whatIsCompetitor, threeReasons, faqs } = Astro.props;
 ---
 
-<BaseLayout
-  title={`Stakater Cloud vs ${competitor}`}
-  description={description}
->
-  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
-    <div class="container-site max-w-[720px]">
-      <SectionLabel white>Comparison</SectionLabel>
-      <h1 class="text-white mb-6">
-        Stakater Cloud<br />vs {competitor}
-      </h1>
-      <p class="text-white/70 text-[20px] leading-relaxed">
-        {diff}
-      </p>
+<BaseLayout title={`Stakater Cloud vs ${competitor}`} description={metaDescription}>
+
+  <!-- HERO -->
+  <section class="bg-gradient-to-br from-[#1A0D32] to-[#0A0614] pt-[100px] pb-[88px]">
+    <div class="container-site">
+      <div class="max-w-[800px]">
+        <div class="inline-flex items-center gap-2 bg-white/[0.08] border border-white/10 rounded-full px-4 py-2 mb-8">
+          <span class="w-1.5 h-1.5 bg-orange rounded-full"></span>
+          <span class="text-[12px] font-bold uppercase tracking-widest text-white/50">Stakater Cloud vs {competitor}</span>
+        </div>
+        <h1 class="text-white mb-6">{heroHeadline}</h1>
+        <p class="text-white/70 text-[20px] leading-relaxed mb-10 max-w-[680px]">{heroSubline}</p>
+
+        <!-- Stat pills -->
+        <div class="flex flex-wrap gap-4 mb-10">
+          {[
+            { stat: '< 15 min', label: 'to production' },
+            { stat: '100% EU', label: 'data residency' },
+            { stat: 'Zero', label: 'platform team needed' },
+            { stat: '€888/mo', label: 'starting price' },
+          ].map(s => (
+            <div class="bg-white/[0.06] border border-white/[0.12] rounded-xl px-5 py-3">
+              <div class="text-orange text-[22px] font-bold leading-none">{s.stat}</div>
+              <div class="text-white/45 text-[12px] mt-1">{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="/contact" class="btn-primary">Book a Call →</a>
+          <a href="#compare" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 text-white/70 text-[15px] font-semibold hover:border-white/40 hover:text-white transition-all duration-150 no-underline">
+            See comparison
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section-pad bg-bg-main">
-    <div class="container-site max-w-[700px] mx-auto">
-      <div class="card p-8 mb-8 animate-on-scroll">
-        <h4 class="text-purple mb-4">What is {fullName}?</h4>
-        <p class="text-muted text-[15px] leading-relaxed">
-          {whatIs}
-        </p>
+  <!-- THREE REASONS TO SWITCH -->
+  <section class="section-pad bg-bg-alt">
+    <div class="container-site">
+      <div class="mb-[64px]">
+        <SectionLabel>Why teams switch</SectionLabel>
+        <h2 class="mt-3 max-w-[600px]">3 reasons teams move from {competitor} to Stakater Cloud</h2>
       </div>
-      <div class="card p-8 border-2 border-orange animate-on-scroll" style="transition-delay: 80ms">
-        <h4 class="text-purple mb-4">What is Stakater Cloud?</h4>
-        <p class="text-muted text-[15px] leading-relaxed">
-          Stakater Cloud is a fully managed OpenShift platform hosted in the Netherlands. We start at the PaaS layer — your cluster arrives pre-configured, pre-integrated, and with optional full developer platform (KubeStack+) on top. EU data residency, GDPR/DORA/NIS2 compliant, managed by Red Hat Premier Partner engineers.
-        </p>
+      <div class="flex flex-col gap-6">
+        {threeReasons.map((reason, i) => (
+          <div class="card border-l-4 border-orange p-8 flex gap-6 animate-on-scroll" style={`transition-delay: ${i * 80}ms`}>
+            <div class="w-12 h-12 flex-shrink-0 bg-orange/10 rounded-xl flex items-center justify-center mt-0.5">
+              <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={reason.icon} />
+              </svg>
+            </div>
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-widest text-orange mb-2">Reason {i + 1}</div>
+              <h4 class="text-purple mb-3">{reason.title}</h4>
+              <p class="text-muted text-[15px] leading-relaxed">{reason.body}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
+  <!-- WHAT IS + PLATFORM STACK VISUAL -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Left: Competitor explanation + stack visual -->
+        <div class="animate-on-scroll">
+          <SectionLabel>About {competitor}</SectionLabel>
+          <h3 class="mt-3 mb-5">What is {fullName}?</h3>
+          <p class="text-muted text-[16px] leading-relaxed mb-10">{whatIsCompetitor}</p>
+
+          <!-- Platform stack visual -->
+          <div>
+            <p class="text-[13px] font-bold text-muted uppercase tracking-wider mb-4">Where each product starts and stops</p>
+            <div class="grid grid-cols-2 gap-4">
+
+              <!-- Competitor stack -->
+              <div>
+                <div class="text-center text-[13px] font-bold text-muted mb-3">{competitor}</div>
+                <div class="rounded-xl overflow-hidden border border-border">
+                  <div class="bg-red-50 border-b border-red-100 p-4">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-[12px] font-bold text-red-600">Platform Layer</span>
+                      <span class="bg-red-100 text-red-500 text-[10px] font-bold px-2 py-0.5 rounded-full">Your team</span>
+                    </div>
+                    <div class="text-[11px] text-red-400 leading-relaxed">GitOps · CI/CD · Secrets<br/>Observability · Multi-tenancy</div>
+                  </div>
+                  <div class="bg-white border-b border-border px-4 py-3">
+                    <div class="flex items-center gap-2">
+                      <span class="text-green-500 text-[13px] font-bold">✓</span>
+                      <span class="text-[12px] font-semibold text-purple">{clusterType}</span>
+                    </div>
+                  </div>
+                  <div class="bg-bg-main px-4 py-3">
+                    <div class="flex items-center gap-2">
+                      <span class="text-green-500 text-[13px] font-bold">✓</span>
+                      <span class="text-[12px] font-semibold text-purple">Cloud Infrastructure</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stakater stack -->
+              <div>
+                <div class="text-center text-[13px] font-bold text-orange mb-3">Stakater Cloud</div>
+                <div class="rounded-xl overflow-hidden border-2 border-orange">
+                  <div class="bg-orange/[0.06] border-b border-orange/20 p-4">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-[12px] font-bold text-purple">Platform Layer</span>
+                      <span class="bg-orange/10 text-orange text-[10px] font-bold px-2 py-0.5 rounded-full">Included</span>
+                    </div>
+                    <div class="text-[11px] text-muted leading-relaxed">GitOps · CI/CD · Secrets<br/>Observability · Multi-tenancy</div>
+                  </div>
+                  <div class="bg-white border-b border-border px-4 py-3">
+                    <div class="flex items-center gap-2">
+                      <span class="text-orange text-[13px] font-bold">✓</span>
+                      <span class="text-[12px] font-semibold text-purple">Managed OpenShift</span>
+                    </div>
+                  </div>
+                  <div class="bg-bg-main px-4 py-3">
+                    <div class="flex items-center gap-2">
+                      <span class="text-orange text-[13px] font-bold">✓</span>
+                      <span class="text-[12px] font-semibold text-purple">EU Infrastructure (NL)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="text-[13px] text-muted mt-4 text-center">{competitor} hands you the cluster. We hand you the platform.</p>
+          </div>
+        </div>
+
+        <!-- Right: What is Stakater + USP checklist -->
+        <div class="animate-on-scroll" style="transition-delay: 100ms">
+          <SectionLabel>Stakater Cloud</SectionLabel>
+          <h3 class="mt-3 mb-5">What is Stakater Cloud?</h3>
+          <p class="text-muted text-[16px] leading-relaxed mb-8">
+            Stakater Cloud is a fully managed OpenShift platform hosted in the Netherlands. We start at the PaaS layer — your cluster arrives pre-configured with a complete developer toolchain. EU data residency, GDPR/DORA/NIS2 compliant, operated by Red Hat Premier Partner engineers. Your team deploys on day one.
+          </p>
+
+          <div class="flex flex-col gap-5">
+            {[
+              {
+                title: 'Production-ready in under 15 minutes',
+                desc: 'Cluster provisioned, GitOps wired, observability running. Your team can deploy immediately.',
+                icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+              },
+              {
+                title: 'No platform team required',
+                desc: 'We are your platform engineers. Included in your subscription — we handle upgrades, SRE and all platform operations.',
+                icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
+              },
+              {
+                title: 'Flat monthly pricing from €888/month',
+                desc: 'No per-resource charges. No surprise bills. One invoice, everything included.',
+                icon: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z',
+              },
+              {
+                title: 'Red Hat Premier Partner — Container Management Specialist',
+                desc: 'ISO 27001:2022 and ISO 9001:2015 certified. GDPR, DORA and NIS2 compliant by design.',
+                icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+              },
+            ].map(u => (
+              <div class="flex gap-4">
+                <div class="w-10 h-10 flex-shrink-0 bg-orange/10 rounded-lg flex items-center justify-center mt-0.5">
+                  <svg class="w-5 h-5 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d={u.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-[15px] font-semibold text-purple mb-1">{u.title}</div>
+                  <div class="text-[14px] text-muted leading-relaxed">{u.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
   <ComparisonTable competitorLabel={competitor} />
 
+  <!-- COMPLIANCE CALLOUT -->
+  <section class="bg-purple-dark py-[72px]">
+    <div class="container-site">
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <div class="flex-1 max-w-[520px]">
+          <SectionLabel white>Compliance-ready</SectionLabel>
+          <h3 class="text-white mt-3 mb-4">Built for regulated European industries</h3>
+          <p class="text-white/60 text-[15px] leading-relaxed">
+            Stakater Cloud is ISO 27001:2022 and ISO 9001:2015 certified, hosted in the Netherlands, and operated by a Swedish company with no US ownership. GDPR, DORA and NIS2 compliance is built in — not bolted on. Your security team will thank you.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3 flex-shrink-0">
+          {['ISO 27001:2022', 'ISO 9001:2015', 'RH Premier Partner', 'Netherlands DC', 'GDPR Ready', 'DORA · NIS2'].map(cert => (
+            <div class="bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-[13px] font-semibold text-white/60">
+              {cert}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM COMPONENTS -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="text-center max-w-[640px] mx-auto mb-[64px]">
+        <SectionLabel center>What you get</SectionLabel>
+        <h2 class="mt-3 mb-4">The platform layer, fully managed</h2>
+        <p class="text-muted text-[17px]">Every tool below is pre-installed, pre-configured and managed by our team. You use it on day one — no setup, no maintenance burden.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {[
+          { name: 'ArgoCD', cat: 'GitOps', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' },
+          { name: 'Tekton', cat: 'CI/CD', icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
+          { name: 'OpenBao', cat: 'Secrets', icon: 'M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z' },
+          { name: 'Prometheus', cat: 'Monitoring', icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z' },
+          { name: 'Grafana', cat: 'Dashboards', icon: 'M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z' },
+          { name: 'Loki', cat: 'Logging', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+          { name: 'Jaeger', cat: 'Tracing', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
+          { name: 'MTO', cat: 'Multi-tenancy', icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10' },
+          { name: 'Velero', cat: 'Backup', icon: 'M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10' },
+          { name: 'RHACS', cat: 'Security', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+          { name: 'cert-manager', cat: 'TLS', icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z' },
+          { name: 'Backstage', cat: 'Dev Portal', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+        ].map(tool => (
+          <div class="card p-5 flex gap-4 items-center animate-on-scroll">
+            <div class="w-9 h-9 flex-shrink-0 bg-orange/10 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={tool.icon} />
+              </svg>
+            </div>
+            <div>
+              <div class="text-[14px] font-semibold text-purple">{tool.name}</div>
+              <div class="text-[12px] text-muted">{tool.cat}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQS -->
+  <section class="section-pad bg-white" id="faq">
+    <div class="container-site max-w-[760px] mx-auto">
+      <div class="text-center mb-[64px]">
+        <SectionLabel center>Common questions</SectionLabel>
+        <h2 class="mt-3">Stakater Cloud vs {competitor} — FAQ</h2>
+        <p class="text-muted text-[17px] mt-4">Honest answers to the questions teams ask when evaluating us against {competitor}.</p>
+      </div>
+      <div class="flex flex-col">
+        {faqs.map((faq, i) => (
+          <details class={`border-b border-border py-6 group${i === 0 ? ' border-t' : ''}`}>
+            <summary class="text-[16px] font-semibold text-purple cursor-pointer hover:text-orange transition-colors duration-150 list-none flex items-start justify-between gap-6">
+              <span>{faq.q}</span>
+              <svg class="w-5 h-5 text-muted flex-shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <p class="text-muted text-[15px] leading-relaxed mt-4 pr-10">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <CTA
-    heading={`Ready to move away from ${competitor}?`}
-    subheading={`Book a call and let's talk about your workloads. We'll show you how Stakater Cloud compares to ${competitor} for your specific situation.`}
+    heading={`See how we compare to ${competitor} for your workloads`}
+    subheading={`Book a 30-minute call with our OpenShift experts. We will show you exactly how Stakater Cloud stacks up against ${competitor} for your specific requirements — no sales pressure, just an honest conversation.`}
   />
+
 </BaseLayout>
