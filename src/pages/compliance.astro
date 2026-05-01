@@ -94,7 +94,7 @@ const principles = [
         {certifications.map(cert => (
           <div class="card p-8 flex flex-col gap-5">
             {'logo' in cert ? (
-              <img src={cert.logo} alt={cert.name} class="h-7 w-auto object-contain object-left" />
+              <img src={cert.logo} alt={cert.name} class="h-7 w-auto max-w-[160px] self-start object-contain object-left" />
             ) : (
               <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
                 <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
