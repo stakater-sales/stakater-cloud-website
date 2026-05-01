@@ -18,14 +18,24 @@ export const nav = [
   { label: 'Pricing', href: '/pricing' },
   {
     label: 'Resources',
-    children: [
-      { label: 'Documentation', href: 'https://docs.stakater.com', external: true },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Case Studies', href: '/case-studies' },
-      { label: 'Compliance', href: '/compliance' },
-      { label: 'Data Center Locations', href: '/data-center-locations' },
-      { label: 'FAQ', href: '/faq' },
-      { label: 'Referral Program', href: '/referral' },
+    groups: [
+      {
+        label: 'Learn',
+        items: [
+          { label: 'Blog', href: '/blog', description: 'Insights on managed OpenShift and platform engineering' },
+          { label: 'Case Studies', href: '/case-studies', description: 'How customers run on Stakater Cloud' },
+          { label: 'Documentation', href: 'https://docs.stakater.com', external: true, description: 'Guides, API references and tutorials' },
+          { label: 'FAQ', href: '/faq', description: 'Common questions answered' },
+        ],
+      },
+      {
+        label: 'Trust',
+        items: [
+          { label: 'Compliance', href: '/compliance', description: 'ISO 27001, GDPR, DORA and NIS2' },
+          { label: 'Data Center Locations', href: '/data-center-locations', description: 'EU-only infrastructure in Amsterdam' },
+          { label: 'Referral Program', href: '/referral', description: 'Earn 10% for every customer you refer' },
+        ],
+      },
     ],
   },
 ];
