@@ -1,6 +1,6 @@
 ---
 company: "Epical"
-industry: "Nordic Data Consultancy / IBM Maximo Managed Services"
+industry: "IBM Maximo Managed Services"
 challenge: "IBM mandated that Maximo Application Suite move to OpenShift. Epical had zero OpenShift expertise, a September 2025 hard deadline, and needed to launch a production Maximo-as-a-Service offering — without building an internal platform team."
 outcome: "Epical launched production Maximo-as-a-Service in time, beat ten competing vendors including IBM itself, came in 35% cheaper, and now runs multiple enterprise Maximo clients in production — all on Stakater Cloud in the EU."
 metrics:
