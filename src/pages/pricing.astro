@@ -1,149 +1,384 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/ui/Button.astro';
 import SectionLabel from '../components/ui/SectionLabel.astro';
-import CheckItem from '../components/ui/CheckItem.astro';
 import CTA from '../components/sections/CTA.astro';
 ---
 <BaseLayout
   title="Pricing"
-  description="Simple, transparent pricing for Managed OpenShift and KubeStack+. Starting from €888/month. No egress fees, no surprises."
+  description="Configure your Stakater Cloud cluster and get an instant price estimate. Managed OpenShift from €888/month. No egress fees, no surprises."
 >
-  <!-- Hero -->
-  <section class="section-pad bg-bg-main">
+
+  <!-- HERO -->
+  <section class="bg-gradient-to-br from-[#1A0D32] to-[#0A0614] pt-[80px] pb-[120px]">
     <div class="container-site text-center">
-      <SectionLabel center>Pricing</SectionLabel>
-      <h1 class="mb-4">Simple, transparent pricing</h1>
-      <p class="text-[20px] text-muted max-w-[560px] mx-auto mb-4">No egress fees. No surprise bills. No hidden charges. Just a predictable monthly subscription that covers everything.</p>
-      <p class="text-[16px] text-orange font-semibold">Save up to 40% compared to running OpenShift on AWS, Azure or GCP.</p>
+      <SectionLabel center white>Pricing Calculator</SectionLabel>
+      <h1 class="text-white mt-3 mb-4">Configure your cluster</h1>
+      <p class="text-white/65 text-[20px] max-w-[560px] mx-auto mb-10">
+        Pick your node size, count and add-ons — see your monthly price instantly. No hidden fees. No egress charges. Everything included.
+      </p>
+      <!-- Billing toggle -->
+      <div class="inline-flex bg-white/[0.08] border border-white/10 rounded-xl p-1 gap-1">
+        <button id="billing-monthly" class="px-6 py-2.5 rounded-[10px] text-[14px] font-semibold transition-all duration-150 bg-white text-purple">
+          Monthly
+        </button>
+        <button id="billing-annual" class="px-6 py-2.5 rounded-[10px] text-[14px] font-semibold transition-all duration-150 text-white/60 hover:text-white">
+          Annual
+          <span class="ml-1.5 bg-orange text-white text-[11px] font-bold px-2 py-0.5 rounded-full">Save 10%</span>
+        </button>
+      </div>
     </div>
   </section>
 
-  <!-- Product cards -->
-  <section class="pb-[144px] bg-bg-main">
+  <!-- CALCULATOR -->
+  <section class="pb-[120px] bg-bg-main">
     <div class="container-site">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="-mt-[64px] grid grid-cols-1 xl:grid-cols-[1fr_360px] gap-8 items-start">
+
+        <!-- LEFT: Configuration panel -->
+        <div class="bg-white rounded-[24px] border border-border overflow-hidden">
+
+          <!-- Panel header -->
+          <div class="px-10 py-7 border-b border-border bg-bg-main/50">
+            <h4 class="text-purple mb-1">Cluster configuration</h4>
+            <p class="text-[14px] text-muted">Choose your product, compute and optional add-ons.</p>
+          </div>
+
+          <div class="p-10 flex flex-col gap-10">
+
+            <!-- 1. Product -->
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-[2px] text-muted mb-4">Product</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button data-product="managed" class="product-btn text-left p-6 rounded-xl border-2 border-orange bg-orange/[0.03] transition-all duration-150 hover:border-orange/70">
+                  <div class="text-[15px] font-bold text-purple mb-1">Managed OpenShift</div>
+                  <div class="text-[13px] text-muted mb-4">Dedicated cluster, EU hosted, fully managed.</div>
+                  <div class="text-[22px] font-bold text-orange leading-none">€888<span class="text-[14px] font-normal text-muted ml-1">/mo from</span></div>
+                </button>
+                <button data-product="kubestack" class="product-btn text-left p-6 rounded-xl border-2 border-border transition-all duration-150 hover:border-orange/50">
+                  <div class="flex items-start justify-between mb-1">
+                    <div class="text-[15px] font-bold text-purple">KubeStack+</div>
+                    <span class="bg-orange/10 text-orange text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap ml-2">Recommended</span>
+                  </div>
+                  <div class="text-[13px] text-muted mb-4">Full developer platform on OpenShift.</div>
+                  <div class="text-[22px] font-bold text-orange leading-none">€1,500<span class="text-[14px] font-normal text-muted ml-1">/mo from</span></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Node Size -->
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-[2px] text-muted mb-4">Node Size</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button data-nodesize="standard" class="nodesize-btn text-left p-5 rounded-xl border-2 border-orange bg-orange/[0.03] transition-all duration-150 hover:border-orange/70">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[15px] font-bold text-purple">Standard</span>
+                    <span class="bg-orange/10 text-orange text-[10px] font-bold px-2 py-0.5 rounded-full">Most popular</span>
+                  </div>
+                  <div class="font-mono text-[13px] text-muted leading-relaxed">
+                    4 vCPU · 16 GB RAM<br/>120 GB SSD
+                  </div>
+                </button>
+                <button data-nodesize="performance" class="nodesize-btn text-left p-5 rounded-xl border-2 border-border transition-all duration-150 hover:border-orange/50">
+                  <div class="mb-3">
+                    <span class="text-[15px] font-bold text-purple">Performance</span>
+                  </div>
+                  <div class="font-mono text-[13px] text-muted leading-relaxed">
+                    8 vCPU · 32 GB RAM<br/>120 GB SSD
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. Node Count -->
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-[2px] text-muted mb-4">Node Count</div>
+              <div class="flex items-center gap-0">
+                <button id="node-minus" class="w-12 h-12 rounded-l-xl border-2 border-border flex items-center justify-center text-[22px] font-semibold text-muted hover:border-orange hover:text-orange transition-all duration-150 opacity-40 cursor-not-allowed" aria-label="Decrease node count">−</button>
+                <div id="node-display" class="w-20 h-12 border-y-2 border-border flex items-center justify-center text-[22px] font-bold text-purple bg-bg-main select-none">3</div>
+                <button id="node-plus" class="w-12 h-12 rounded-r-xl border-2 border-border flex items-center justify-center text-[22px] font-semibold text-muted hover:border-orange hover:text-orange transition-all duration-150" aria-label="Increase node count">+</button>
+                <div class="ml-5">
+                  <div class="text-[14px] text-purple font-medium">nodes</div>
+                  <div class="text-[12px] text-muted">Min 3 · Max 20</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Support Tier -->
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-[2px] text-muted mb-4">Support Tier</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button data-support="standard" class="support-btn text-left p-5 rounded-xl border-2 border-orange bg-orange/[0.03] transition-all duration-150 hover:border-orange/70">
+                  <div class="text-[15px] font-bold text-purple mb-1">Standard</div>
+                  <ul class="text-[12px] text-muted space-y-1 mb-3">
+                    <li>· 8/5 · Ticket only</li>
+                    <li>· &lt;12h critical response</li>
+                    <li>· Shared support queue</li>
+                  </ul>
+                  <div class="text-[14px] font-bold text-green-600">Included</div>
+                </button>
+                <button data-support="premium" class="support-btn text-left p-5 rounded-xl border-2 border-border transition-all duration-150 hover:border-orange/50">
+                  <div class="text-[15px] font-bold text-purple mb-1">Premium</div>
+                  <ul class="text-[12px] text-muted space-y-1 mb-3">
+                    <li>· 24/7 · Phone + ticket</li>
+                    <li>· &lt;1h critical response</li>
+                    <li>· Named technical contact</li>
+                  </ul>
+                  <div class="text-[14px] font-bold text-orange">+€2,000/mo</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 5. Add-ons -->
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-[2px] text-muted mb-4">Optional Add-ons</div>
+              <div class="flex flex-col gap-3">
+                {[
+                  { id: 'postgres', label: 'Managed PostgreSQL', desc: '3-node cluster · Scalable relational database', price: '+€400/mo' },
+                  { id: 'rabbitmq', label: 'Managed RabbitMQ', desc: '3-node cluster · Reliable message broker', price: '+€600/mo' },
+                  { id: 'redis',    label: 'Managed Redis',      desc: '3-node cluster · In-memory cache & data store', price: '+€300/mo' },
+                ].map(addon => (
+                  <label class={`addon-row-${addon.id} flex items-center justify-between p-5 rounded-xl border-2 border-border cursor-pointer hover:border-orange/50 transition-all duration-150`}>
+                    <div>
+                      <div class="text-[15px] font-semibold text-purple">{addon.label}</div>
+                      <div class="text-[12px] text-muted mt-0.5">{addon.desc}</div>
+                    </div>
+                    <div class="flex items-center gap-4 flex-shrink-0 ml-4">
+                      <span class="text-[14px] font-bold text-orange">{addon.price}</span>
+                      <!-- Toggle switch -->
+                      <div class="relative w-11 h-6">
+                        <input type="checkbox" class="addon-check peer absolute opacity-0 w-full h-full cursor-pointer z-10 m-0" data-addon={addon.id} />
+                        <span class="absolute inset-0 bg-border peer-checked:bg-orange rounded-full transition-colors duration-150 pointer-events-none"></span>
+                        <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-150 peer-checked:translate-x-5 pointer-events-none"></span>
+                      </div>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT: Price summary (sticky) -->
+        <div class="xl:sticky xl:top-8">
+          <div class="bg-purple rounded-[24px] p-8">
+            <div class="text-[11px] font-bold uppercase tracking-[2px] text-white/40 mb-6">Your estimate</div>
+
+            <!-- Line items -->
+            <div id="summary-rows" class="mb-6">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Annual savings badge -->
+            <div id="annual-badge" class="hidden mb-6">
+              <div class="bg-orange/20 border border-orange/30 rounded-xl px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-orange flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span id="annual-savings-text" class="text-[13px] font-semibold text-orange"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total -->
+            <div class="border-t border-white/10 pt-6 mb-7">
+              <div class="flex justify-between items-end gap-4">
+                <div>
+                  <div class="text-[12px] text-white/40 mb-1">Estimated total</div>
+                  <div id="billing-note" class="text-[12px] text-white/40">per month</div>
+                </div>
+                <div class="text-right">
+                  <div id="calc-total" class="text-[40px] font-bold text-white leading-none tracking-[-1px]">€888</div>
+                  <div class="text-[13px] text-white/40 mt-1">excl. VAT</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <a href="/contact" class="flex items-center justify-center gap-2 bg-orange hover:bg-orange-dark text-white font-semibold text-[16px] px-6 py-4 rounded-xl no-underline transition-all duration-150 w-full mb-6">
+              Book a Call →
+            </a>
+
+            <!-- Included -->
+            <div class="flex flex-col gap-2.5">
+              {[
+                'Red Hat subscription included',
+                'No egress fees',
+                '100% EU data residency',
+                'SRE managed — no ops burden',
+                'ISO 27001:2022 certified',
+              ].map(item => (
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-4 h-4 text-orange flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-[13px] text-white/60">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- "Need a custom quote?" card -->
+          <div class="mt-4 bg-white/[0.04] border border-white/[0.08] rounded-[20px] p-6 text-center" style="background: #f5f5f5;">
+            <div class="text-[14px] font-semibold text-purple mb-1">Need a custom configuration?</div>
+            <div class="text-[13px] text-muted mb-4">More than 20 nodes, multi-cluster, or specific compliance requirements? Let's talk.</div>
+            <a href="/contact" class="text-[13px] font-semibold text-orange hover:underline no-underline">Contact us →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="text-center max-w-[600px] mx-auto mb-[72px]">
+        <SectionLabel center>What's included</SectionLabel>
+        <h2 class="mt-3">Every tier, fully managed by us</h2>
+        <p class="text-muted text-[17px] mt-4">You choose the product. We handle everything below it — provisioning, upgrades, SRE, patching, and compliance.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-[960px] mx-auto">
         <!-- Managed OpenShift -->
         <div class="card overflow-hidden">
-          <div class="bg-gradient-to-br from-purple to-purple-dark p-10">
-            <h3 class="text-white mb-2">Managed OpenShift</h3>
-            <p class="text-white/60 text-[15px]">Dedicated cluster, EU hosted, fully managed by Stakater.</p>
+          <div class="bg-gradient-to-br from-purple to-purple-dark px-8 py-7">
+            <h4 class="text-white mb-1">Managed OpenShift</h4>
+            <p class="text-white/55 text-[14px]">Dedicated cluster, EU hosted, fully managed.</p>
           </div>
-          <div class="p-10">
+          <div class="p-8">
             <div class="flex items-baseline gap-2 mb-6">
               <span class="text-[13px] text-muted">From</span>
-              <span class="text-[48px] font-bold text-purple tracking-[-2px]">€888</span>
-              <span class="text-[16px] text-muted">/ month</span>
+              <span class="text-[44px] font-bold text-purple tracking-[-2px]">€888</span>
+              <span class="text-[15px] text-muted">/ month</span>
             </div>
-            <ul class="list-none m-0 p-0 flex flex-col gap-3 mb-8">
+            <div class="flex flex-col gap-3">
               {[
-                'Dedicated single-tenant cluster',
-                'Netherlands data center',
-                'Full lifecycle management',
+                'Dedicated single-tenant OpenShift cluster',
+                'Netherlands data center (EU jurisdiction)',
+                'Full lifecycle management & upgrades',
                 'Standard support included',
                 'Red Hat subscription included',
-              ].map(f => <CheckItem>{f}</CheckItem>)}
-            </ul>
-            <Button href="/products/managed-openshift" variant="ghost" class="w-full justify-center">See Full Details →</Button>
+                'SRE on-call — no ops burden',
+              ].map(f => (
+                <div class="flex items-start gap-3">
+                  <div class="w-5 h-5 rounded-full bg-orange/10 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                    <svg class="w-3 h-3 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span class="text-[14px] text-purple font-medium">{f}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         <!-- KubeStack+ -->
         <div class="card border-orange border-2 overflow-hidden relative">
-          <div class="absolute top-6 right-6 bg-orange text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase">Recommended</div>
-          <div class="bg-gradient-to-br from-purple to-purple-dark p-10">
-            <h3 class="text-white mb-2">KubeStack+</h3>
-            <p class="text-white/60 text-[15px]">Full developer platform on managed OpenShift.</p>
+          <div class="absolute top-6 right-6 bg-orange text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">Recommended</div>
+          <div class="bg-gradient-to-br from-purple to-purple-dark px-8 py-7">
+            <h4 class="text-white mb-1">KubeStack+</h4>
+            <p class="text-white/55 text-[14px]">Everything in Managed OpenShift, plus the full platform.</p>
           </div>
-          <div class="p-10">
+          <div class="p-8">
             <div class="flex items-baseline gap-2 mb-6">
               <span class="text-[13px] text-muted">From</span>
-              <span class="text-[48px] font-bold text-purple tracking-[-2px]">€1,500</span>
-              <span class="text-[16px] text-muted">/ month</span>
+              <span class="text-[44px] font-bold text-purple tracking-[-2px]">€1,500</span>
+              <span class="text-[15px] text-muted">/ month</span>
             </div>
-            <ul class="list-none m-0 p-0 flex flex-col gap-3 mb-8">
+            <div class="flex flex-col gap-3">
               {[
                 'Everything in Managed OpenShift',
-                'GitOps with ArgoCD',
-                'CI/CD with Tekton',
-                'Secrets with OpenBao',
-                'Monitoring, logging & backup',
+                'GitOps with ArgoCD (pre-wired)',
+                'CI/CD pipelines with Tekton',
+                'Secrets management with OpenBao',
+                'Full observability (Prometheus · Grafana · Loki · Jaeger)',
+                'Multi-tenancy (MTO) · Backup (Velero) · RHACS',
                 'Developer portal with Backstage',
-              ].map(f => <CheckItem>{f}</CheckItem>)}
-            </ul>
-            <Button href="/products/kubestack-plus" variant="primary" class="w-full justify-center">See Full Details →</Button>
+              ].map(f => (
+                <div class="flex items-start gap-3">
+                  <div class="w-5 h-5 rounded-full bg-orange/10 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                    <svg class="w-3 h-3 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span class="text-[14px] text-purple font-medium">{f}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Node sizing -->
-  <section class="section-pad bg-white">
+  <!-- SUPPORT TIERS -->
+  <section class="section-pad bg-bg-main">
     <div class="container-site">
-      <div class="text-center mb-[72px]">
-        <SectionLabel center>Cluster Configuration</SectionLabel>
-        <h2>Choose your node size</h2>
-        <p class="text-muted text-[17px] mt-4">Minimum 3 nodes per cluster. Custom configurations available on request.</p>
+      <div class="text-center max-w-[560px] mx-auto mb-[64px]">
+        <SectionLabel center>Support</SectionLabel>
+        <h2 class="mt-3">Pick the support tier you need</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto mb-16">
-        {[
-          { label: 'Standard', spec: '4 vCPU · 16 GB RAM · 120 GB SSD', tag: 'Most popular' },
-          { label: 'Performance', spec: '8 vCPU · 32 GB RAM · 120 GB SSD', tag: '' },
-        ].map(n => (
-          <div class={`card p-8 ${n.tag ? 'border-orange border-2' : ''}`}>
-            <div class="flex justify-between items-start mb-4">
-              <h5 class="text-[18px]">{n.label} Node</h5>
-              {n.tag && <span class="bg-orange/10 text-orange text-[11px] font-bold px-2.5 py-1 rounded-full">{n.tag}</span>}
-            </div>
-            <p class="font-mono text-[14px] text-muted bg-bg-alt px-4 py-2 rounded-lg">{n.spec}</p>
-          </div>
-        ))}
-      </div>
-
-      <!-- Add-ons -->
-      <div class="max-w-[800px] mx-auto">
-        <h4 class="mb-6 text-center">Optional Add-ons</h4>
-        <div class="card overflow-hidden">
-          {[
-            { name: 'Managed PostgreSQL (3 Node)', desc: 'Scalable relational database', price: '€400/mo' },
-            { name: 'Managed RabbitMQ (3 Node)', desc: 'Reliable message broker', price: '€600/mo' },
-            { name: 'Managed Redis (3 Node)', desc: 'In-memory caching and data store', price: '€300/mo' },
-            { name: 'Premium Support', desc: '24/7 · Phone · Priority queue · Named contact', price: '€2,000/mo' },
-          ].map((a, i) => (
-            <div class={`flex items-center justify-between p-6 ${i < 3 ? 'border-b border-border' : ''}`}>
-              <div>
-                <div class="text-[15px] font-semibold text-purple mb-0.5">{a.name}</div>
-                <div class="text-[13px] text-muted">{a.desc}</div>
-              </div>
-              <span class="text-[16px] font-bold text-orange whitespace-nowrap ml-6">{a.price}</span>
-            </div>
-          ))}
-        </div>
+      <div class="max-w-[860px] mx-auto rounded-2xl overflow-hidden border border-border bg-white">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="text-left px-8 py-5 text-[13px] font-bold text-muted bg-bg-main border-b border-border w-[40%]"></th>
+              <th class="px-8 py-5 text-center border-b border-border bg-white">
+                <div class="text-[15px] font-bold text-purple">Standard</div>
+                <div class="text-[13px] text-green-600 font-semibold mt-1">Included</div>
+              </th>
+              <th class="px-8 py-5 text-center border-b border-purple/20 bg-purple/[0.03]">
+                <div class="text-[15px] font-bold text-purple">Premium</div>
+                <div class="text-[13px] text-orange font-semibold mt-1">+€2,000/mo</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              { label: 'Support hours',               standard: '8/5',          premium: '24/7' },
+              { label: 'Contact method',              standard: 'Ticket',        premium: 'Ticket + Phone' },
+              { label: 'Critical response time',      standard: '<12 hours',     premium: '<1 hour' },
+              { label: 'Support queue',               standard: 'Shared',        premium: 'Priority' },
+              { label: 'Named technical contact',     standard: '—',             premium: '✓' },
+              { label: 'Quarterly service review',    standard: '✓',             premium: '✓' },
+              { label: 'Architecture guidance',       standard: 'On request',    premium: 'Proactive' },
+              { label: 'Management escalation path',  standard: 'On request',    premium: '✓' },
+            ].map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-bg-main/40'}>
+                <td class="px-8 py-4 text-[14px] font-medium text-purple border-b border-border">{row.label}</td>
+                <td class="px-8 py-4 text-[14px] text-center text-muted border-b border-border">{row.standard}</td>
+                <td class={`px-8 py-4 text-[14px] text-center font-semibold border-b border-purple/10 bg-purple/[0.02] ${row.premium === '✓' ? 'text-orange' : 'text-purple'}`}>{row.premium}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section-pad bg-bg-main">
+  <section class="section-pad bg-white">
     <div class="container-site max-w-[760px] mx-auto">
-      <SectionLabel center>Pricing FAQ</SectionLabel>
-      <h2 class="text-center mb-[72px]">Common questions</h2>
-      <div class="flex flex-col gap-4">
+      <div class="text-center mb-[64px]">
+        <SectionLabel center>FAQ</SectionLabel>
+        <h2 class="mt-3">Pricing questions answered</h2>
+      </div>
+      <div class="flex flex-col">
         {[
-          { q: 'Is the Red Hat subscription included?', a: 'Yes. The Red Hat OpenShift subscription is included in your Stakater Cloud pricing. There is no separate Red Hat bill.' },
-          { q: 'Are there egress fees?', a: 'No. We do not charge egress fees. Your monthly price is predictable.' },
-          { q: 'What is the minimum commitment?', a: 'We offer monthly and annual subscriptions. Annual subscriptions come with a discount. Contact us to discuss the right option for your team.' },
-          { q: 'Can I scale my cluster after provisioning?', a: 'Yes. You can add nodes or change node sizes at any time. Changes are applied by our SRE team with zero downtime.' },
-          { q: 'How is KubeStack+ priced on top of Managed OpenShift?', a: 'KubeStack+ is an add-on to Managed OpenShift. The pricing shown (€1,500/mo from) includes both the cluster and the full KubeStack+ platform bundle.' },
-        ].map(faq => (
-          <details class="card p-6 group cursor-pointer">
-            <summary class="flex justify-between items-center text-[16px] font-semibold text-purple list-none gap-4">
-              {faq.q}
-              <span class="text-orange text-[20px] leading-none flex-shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+          { q: 'Is the Red Hat subscription included?', a: 'Yes. The Red Hat OpenShift subscription is included in your Stakater Cloud pricing. There is no separate Red Hat bill to manage.' },
+          { q: 'Are there egress or data transfer fees?', a: 'No. We do not charge egress fees. Your monthly price is fully predictable — no per-GB bandwidth charges.' },
+          { q: 'What is the minimum commitment?', a: 'We offer monthly and annual subscriptions. Annual subscriptions come with a 10% discount. Contact us to discuss the right option for your team.' },
+          { q: 'Can I scale my cluster after provisioning?', a: 'Yes. You can add nodes, change node sizes or add add-ons at any time. Changes are applied by our SRE team, typically with zero downtime.' },
+          { q: 'How is KubeStack+ priced relative to Managed OpenShift?', a: 'KubeStack+ is a superset of Managed OpenShift. The price shown (from €1,500/mo) includes the cluster and the complete KubeStack+ platform bundle — there is no separate cluster invoice.' },
+          { q: 'What if I need more than 20 nodes or a multi-cluster setup?', a: 'Custom configurations are available. Contact us and we will put together a proposal specific to your scale and requirements.' },
+          { q: 'Are prices shown inclusive or exclusive of VAT?', a: 'All prices shown are exclusive of VAT. Swedish VAT (or your local applicable rate) is added to invoices where required by law.' },
+        ].map((faq, i) => (
+          <details class={`border-b border-border py-6 group${i === 0 ? ' border-t' : ''}`}>
+            <summary class="text-[16px] font-semibold text-purple cursor-pointer hover:text-orange transition-colors duration-150 list-none flex items-start justify-between gap-6">
+              <span>{faq.q}</span>
+              <svg class="w-5 h-5 text-muted flex-shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
             </summary>
-            <p class="text-[15px] text-muted leading-relaxed mt-4 pt-4 border-t border-border">{faq.a}</p>
+            <p class="text-muted text-[15px] leading-relaxed mt-4 pr-10">{faq.a}</p>
           </details>
         ))}
       </div>
@@ -151,4 +386,236 @@ import CTA from '../components/sections/CTA.astro';
   </section>
 
   <CTA />
+
 </BaseLayout>
+
+<script>
+(function () {
+  const PRICES = {
+    nodeStandard: 296,
+    nodePerformance: 592,
+    kubestackPremium: 612,
+    premiumSupport: 2000,
+    postgres: 400,
+    rabbitmq: 600,
+    redis: 300,
+  };
+  const ANNUAL_DISCOUNT = 0.10;
+
+  const state = {
+    product: 'managed' as 'managed' | 'kubestack',
+    nodeSize: 'standard' as 'standard' | 'performance',
+    nodeCount: 3,
+    support: 'standard' as 'standard' | 'premium',
+    addons: { postgres: false, rabbitmq: false, redis: false } as Record<string, boolean>,
+    billing: 'monthly' as 'monthly' | 'annual',
+  };
+
+  function fmt(n: number): string {
+    return '€' + Math.round(n).toLocaleString('en');
+  }
+
+  function disc(n: number): number {
+    return state.billing === 'annual' ? n * (1 - ANNUAL_DISCOUNT) : n;
+  }
+
+  function rawTotal(): number {
+    const nodeRate = state.nodeSize === 'standard' ? PRICES.nodeStandard : PRICES.nodePerformance;
+    let t = state.nodeCount * nodeRate;
+    if (state.product === 'kubestack') t += PRICES.kubestackPremium;
+    if (state.support === 'premium') t += PRICES.premiumSupport;
+    if (state.addons.postgres) t += PRICES.postgres;
+    if (state.addons.rabbitmq) t += PRICES.rabbitmq;
+    if (state.addons.redis) t += PRICES.redis;
+    return t;
+  }
+
+  function render() {
+    const nodeRate = state.nodeSize === 'standard' ? PRICES.nodeStandard : PRICES.nodePerformance;
+    const sizeName = state.nodeSize === 'standard' ? 'Standard' : 'Performance';
+    const basePrice = state.nodeCount * nodeRate;
+
+    // Build line items
+    const rows: { label: string; sub: string; price: string; dim?: boolean }[] = [];
+
+    rows.push({
+      label: state.product === 'managed' ? 'Managed OpenShift' : 'KubeStack+',
+      sub: `${state.nodeCount} × ${sizeName} node${state.nodeCount !== 1 ? 's' : ''}`,
+      price: fmt(disc(basePrice)),
+    });
+
+    if (state.product === 'kubestack') {
+      rows.push({
+        label: 'KubeStack+ Platform',
+        sub: 'Full developer toolchain',
+        price: '+' + fmt(disc(PRICES.kubestackPremium)),
+      });
+    }
+
+    rows.push({ label: 'Standard Support', sub: '8/5 · Ticket · <12h response', price: 'Included', dim: true });
+
+    if (state.support === 'premium') {
+      rows.push({
+        label: 'Premium Support',
+        sub: '24/7 · Phone · <1h response',
+        price: '+' + fmt(disc(PRICES.premiumSupport)),
+      });
+    }
+
+    const addonMeta: Record<string, { label: string; price: number }> = {
+      postgres: { label: 'Managed PostgreSQL', price: PRICES.postgres },
+      rabbitmq: { label: 'Managed RabbitMQ',  price: PRICES.rabbitmq },
+      redis:    { label: 'Managed Redis',       price: PRICES.redis },
+    };
+
+    for (const [key, meta] of Object.entries(addonMeta)) {
+      if (state.addons[key]) {
+        rows.push({ label: meta.label, sub: '3-node cluster', price: '+' + fmt(disc(meta.price)) });
+      }
+    }
+
+    const container = document.getElementById('summary-rows');
+    if (container) {
+      container.innerHTML = rows.map(r => `
+        <div class="flex justify-between items-start gap-4 py-4 border-b border-white/[0.08] last:border-0">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:${r.dim ? 'rgba(255,255,255,0.45)' : 'white'}">${r.label}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px">${r.sub}</div>
+          </div>
+          <div style="font-size:14px;font-weight:700;color:${r.dim ? 'rgba(255,255,255,0.35)' : 'white'};white-space:nowrap">${r.price}</div>
+        </div>
+      `).join('');
+    }
+
+    // Total
+    const totalEl = document.getElementById('calc-total');
+    if (totalEl) totalEl.textContent = fmt(disc(rawTotal()));
+
+    // Billing note
+    const noteEl = document.getElementById('billing-note');
+    if (noteEl) noteEl.textContent = state.billing === 'annual' ? 'per month · billed annually' : 'per month · billed monthly';
+
+    // Annual badge
+    const badge = document.getElementById('annual-badge');
+    const savingsText = document.getElementById('annual-savings-text');
+    if (badge && savingsText) {
+      if (state.billing === 'annual') {
+        badge.style.display = 'block';
+        savingsText.textContent = 'Saving ' + fmt(rawTotal() * ANNUAL_DISCOUNT * 12) + ' per year';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    // Node display + minus button state
+    const nodeDisp = document.getElementById('node-display');
+    if (nodeDisp) nodeDisp.textContent = String(state.nodeCount);
+    const minusBtn = document.getElementById('node-minus') as HTMLButtonElement | null;
+    if (minusBtn) {
+      if (state.nodeCount <= 3) {
+        minusBtn.setAttribute('disabled', '');
+        minusBtn.classList.add('opacity-40', 'cursor-not-allowed');
+        minusBtn.classList.remove('hover:border-orange', 'hover:text-orange');
+      } else {
+        minusBtn.removeAttribute('disabled');
+        minusBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+        minusBtn.classList.add('hover:border-orange', 'hover:text-orange');
+      }
+    }
+
+    // Button selected states
+    toggleSelected('.product-btn', 'data-product', state.product);
+    toggleSelected('.nodesize-btn', 'data-nodesize', state.nodeSize);
+    toggleSelected('.support-btn', 'data-support', state.support);
+
+    // Add-on row borders
+    for (const key of ['postgres', 'rabbitmq', 'redis']) {
+      const row = document.querySelector(`.addon-row-${key}`) as HTMLElement | null;
+      if (row) {
+        if (state.addons[key]) {
+          row.style.borderColor = '#FF5623';
+          row.style.backgroundColor = 'rgba(255,86,35,0.03)';
+        } else {
+          row.style.borderColor = '#D9D9D9';
+          row.style.backgroundColor = '';
+        }
+      }
+    }
+
+    // Billing toggle
+    const mBtn = document.getElementById('billing-monthly');
+    const aBtn = document.getElementById('billing-annual');
+    if (mBtn && aBtn) {
+      if (state.billing === 'monthly') {
+        mBtn.classList.add('bg-white', 'text-purple');
+        mBtn.classList.remove('text-white/60');
+        aBtn.classList.remove('bg-white', 'text-purple');
+        aBtn.classList.add('text-white/60');
+      } else {
+        aBtn.classList.add('bg-white', 'text-purple');
+        aBtn.classList.remove('text-white/60');
+        mBtn.classList.remove('bg-white', 'text-purple');
+        mBtn.classList.add('text-white/60');
+      }
+    }
+  }
+
+  function toggleSelected(selector: string, attr: string, value: string) {
+    document.querySelectorAll(selector).forEach(btn => {
+      const el = btn as HTMLElement;
+      const isSelected = el.getAttribute(attr) === value;
+      if (isSelected) {
+        el.style.borderColor = '#FF5623';
+        el.style.backgroundColor = 'rgba(255,86,35,0.03)';
+      } else {
+        el.style.borderColor = '#D9D9D9';
+        el.style.backgroundColor = '';
+      }
+    });
+  }
+
+  // Wire up events
+  document.querySelectorAll('.product-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.product = (btn as HTMLElement).getAttribute('data-product') as 'managed' | 'kubestack';
+      render();
+    });
+  });
+
+  document.querySelectorAll('.nodesize-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.nodeSize = (btn as HTMLElement).getAttribute('data-nodesize') as 'standard' | 'performance';
+      render();
+    });
+  });
+
+  document.getElementById('node-minus')?.addEventListener('click', () => {
+    if (state.nodeCount > 3) { state.nodeCount--; render(); }
+  });
+
+  document.getElementById('node-plus')?.addEventListener('click', () => {
+    if (state.nodeCount < 20) { state.nodeCount++; render(); }
+  });
+
+  document.querySelectorAll('.support-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.support = (btn as HTMLElement).getAttribute('data-support') as 'standard' | 'premium';
+      render();
+    });
+  });
+
+  document.querySelectorAll('.addon-check').forEach(chk => {
+    chk.addEventListener('change', () => {
+      const el = chk as HTMLInputElement;
+      const addon = el.getAttribute('data-addon')!;
+      state.addons[addon] = el.checked;
+      render();
+    });
+  });
+
+  document.getElementById('billing-monthly')?.addEventListener('click', () => { state.billing = 'monthly'; render(); });
+  document.getElementById('billing-annual')?.addEventListener('click', () => { state.billing = 'annual'; render(); });
+
+  render();
+})();
+</script>
