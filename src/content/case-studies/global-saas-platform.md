@@ -6,12 +6,16 @@ outcome: "Deployed two production OpenShift clusters with the full KubeStack+ de
 metrics:
   - value: "2"
     label: "Production OpenShift clusters deployed"
+    icon: "server"
   - value: "Days"
     label: "From contract to production-ready platform"
+    icon: "speed"
   - value: "Zero"
     label: "Cluster incidents requiring customer intervention"
+    icon: "shield"
   - value: "100%"
     label: "Developer team satisfaction with inner loop"
+    icon: "star"
 services:
   - "Managed OpenShift"
   - "KubeStack+"

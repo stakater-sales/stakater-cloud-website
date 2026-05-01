@@ -21,7 +21,7 @@ const caseStudies = defineCollection({
     industry: z.string(),
     challenge: z.string(),
     outcome: z.string(),
-    metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+    metrics: z.array(z.object({ value: z.string(), label: z.string(), icon: z.string().optional() })).default([]),
     services: z.array(z.string()).default([]),
     logo: z.string().optional(),
     featured: z.boolean().default(false),

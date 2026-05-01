@@ -6,12 +6,16 @@ outcome: "Exelient shipped to production on a single multi-environment OpenShift
 metrics:
   - value: "1"
     label: "Cluster running dev, staging and production"
+    icon: "server"
   - value: "Zero"
     label: "Platform or ops engineers needed"
+    icon: "users"
   - value: "100% EU"
     label: "Data residency — critical for Swedish financial data"
+    icon: "globe"
   - value: "Full stack"
     label: "Managed platform from day one"
+    icon: "layers"
 services:
   - "Managed OpenShift"
   - "KubeStack+"

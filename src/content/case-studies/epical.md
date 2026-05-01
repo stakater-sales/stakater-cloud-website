@@ -6,12 +6,16 @@ outcome: "Epical launched production Maximo-as-a-Service in time, beat ten compe
 metrics:
   - value: "35%"
     label: "Cost saving vs competing vendors"
+    icon: "savings"
   - value: "10"
     label: "Vendors evaluated — Stakater won"
+    icon: "award"
   - value: "< 5 days"
     label: "Time to production infrastructure"
+    icon: "speed"
   - value: "Multiple"
     label: "Enterprise Maximo clients in production"
+    icon: "users"
 services:
   - "Managed OpenShift"
 featured: true
