@@ -55,6 +55,7 @@ export const footerLinks = {
 
 export const compareLinks = [
   { label: 'vs ROSA', href: '/compare/rosa-alternative' },
+  { label: 'vs ARO', href: '/compare/aro-alternative' },
   { label: 'vs EKS', href: '/compare/eks-alternative' },
   { label: 'vs AKS', href: '/compare/aks-alternative' },
   { label: 'vs GKE', href: '/compare/gke-alternative' },
