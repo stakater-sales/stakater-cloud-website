@@ -1,0 +1,162 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import CTA from '../components/sections/CTA.astro';
+
+const specs = [
+  { label: 'Location', value: 'Amsterdam, Netherlands' },
+  { label: 'Jurisdiction', value: 'European Union' },
+  { label: 'Operator', value: 'Stakater AB, Sweden' },
+  { label: 'Data residency', value: '100% EU — no exceptions' },
+  { label: 'Connectivity', value: 'Redundant uplinks, low-latency EU backbone' },
+  { label: 'Physical security', value: 'Tier III equivalent, 24/7 monitored' },
+  { label: 'Power', value: 'Redundant feeds with UPS and generator backup' },
+  { label: 'Cooling', value: 'N+1 precision cooling' },
+];
+
+const whyAmsterdam = [
+  {
+    title: 'Heart of European connectivity',
+    body: 'Amsterdam is one of the most connected cities in the world. AMS-IX, one of the largest internet exchanges globally, means low-latency access for customers across Northern and Western Europe.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    title: 'Strong EU regulatory standing',
+    body: 'The Netherlands has one of the most mature data protection enforcement regimes in the EU. Hosting here signals to your customers and regulators that you take data residency seriously.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Zero US jurisdiction exposure',
+    body: 'Stakater AB is a Swedish company. We have no US parent, no US infrastructure, and no exposure to foreign intelligence access frameworks like CLOUD Act or FISA. Your data stays in EU law.',
+    icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+  },
+  {
+    title: 'Practical for Nordic and DACH markets',
+    body: 'Amsterdam sits at a comfortable distance from Stockholm, Oslo, Copenhagen, Hamburg, Frankfurt, and London — low latency across the regions where most of our customers operate.',
+    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+];
+---
+
+<BaseLayout
+  title="Data Center Locations"
+  description="Stakater Cloud runs in Amsterdam, Netherlands — 100% EU data residency, operated by a Swedish company under EU jurisdiction. Expand to any region on demand."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site">
+      <SectionLabel white>Infrastructure</SectionLabel>
+      <h1 class="text-white max-w-[760px] mb-6">Europe-first.<br/>Your data stays in the EU.</h1>
+      <p class="text-[20px] text-white/70 max-w-[600px] mb-10">
+        Every Stakater Cloud cluster runs in Amsterdam, Netherlands. Operated by Stakater AB, a Swedish company under full EU jurisdiction. No exceptions, no opt-ins required.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        {[
+          { icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z', text: 'Amsterdam, Netherlands' },
+          { icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z', text: '100% EU Jurisdiction' },
+          { icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4', text: 'Operated by Stakater AB, Sweden' },
+        ].map(pill => (
+          <div class="inline-flex items-center gap-2 bg-white/[0.08] border border-white/[0.15] rounded-full px-4 py-2">
+            <svg class="w-4 h-4 text-orange flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d={pill.icon} />
+            </svg>
+            <span class="text-[13px] font-semibold text-white/80">{pill.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Primary location -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <SectionLabel>Primary Location</SectionLabel>
+          <h2 class="mb-6">Amsterdam, Netherlands</h2>
+          <p class="text-[18px] text-muted mb-8">
+            Our primary data center is located in Amsterdam — one of Europe's most connected cities and a natural hub for organisations with customers across Northern and Western Europe.
+          </p>
+          <p class="text-[18px] text-muted mb-10">
+            All customer data — cluster workloads, persistent volumes, managed databases, object storage, logs, metrics — is stored and processed exclusively within this facility. Nothing is replicated to infrastructure outside the EU.
+          </p>
+          <a href="/contact" class="btn-primary inline-flex">Ask about infrastructure →</a>
+        </div>
+
+        <!-- Spec table -->
+        <div class="card p-8">
+          <div class="text-[13px] font-bold text-muted uppercase tracking-widest mb-6">Facility Specifications</div>
+          <div class="flex flex-col divide-y divide-border">
+            {specs.map(s => (
+              <div class="flex justify-between items-start gap-6 py-3.5">
+                <span class="text-[14px] text-muted flex-shrink-0">{s.label}</span>
+                <span class="text-[14px] font-semibold text-purple text-right">{s.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Amsterdam -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="text-center max-w-[560px] mx-auto mb-[72px]">
+        <SectionLabel center>Why Amsterdam</SectionLabel>
+        <h2 class="mb-4">The right location for European businesses</h2>
+        <p class="text-muted text-[18px]">Not just EU by geography — EU by design, jurisdiction, and intent.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {whyAmsterdam.map(item => (
+          <div class="card p-8 flex gap-5">
+            <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={item.icon} />
+              </svg>
+            </div>
+            <div>
+              <h5 class="mb-2">{item.title}</h5>
+              <p class="text-[15px] text-muted leading-relaxed">{item.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Expand on demand -->
+  <section class="section-pad bg-purple">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <SectionLabel white>Geographic Expansion</SectionLabel>
+          <h2 class="text-white mb-6">Need a different region?</h2>
+          <p class="text-[18px] text-white/70 mb-6">
+            Amsterdam is our standard deployment location. If your compliance requirements or customer base call for a different EU region — or a specific country within the EU — we can provision clusters there on request.
+          </p>
+          <p class="text-[18px] text-white/70 mb-10">
+            We have experience deploying in multiple European regions and can advise on the right location for your regulatory and latency requirements. The platform stack remains identical regardless of region.
+          </p>
+          <a href="/contact" class="btn-primary inline-flex">Discuss your requirements →</a>
+        </div>
+        <div class="flex flex-col gap-4">
+          {[
+            { region: 'Netherlands (Amsterdam)', status: 'Primary — available now', active: true },
+            { region: 'Germany (Frankfurt / Berlin)', status: 'Available on request', active: false },
+            { region: 'Sweden (Stockholm)', status: 'Available on request', active: false },
+            { region: 'Other EU regions', status: 'Contact us to discuss', active: false },
+          ].map(r => (
+            <div class={`flex items-center justify-between px-5 py-4 rounded-xl border ${r.active ? 'bg-orange/10 border-orange/30' : 'bg-white/[0.05] border-white/[0.10]'}`}>
+              <span class={`text-[15px] font-semibold ${r.active ? 'text-orange' : 'text-white/70'}`}>{r.region}</span>
+              <span class={`text-[12px] font-semibold px-3 py-1 rounded-full ${r.active ? 'bg-orange/20 text-orange' : 'bg-white/[0.08] text-white/40'}`}>{r.status}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>

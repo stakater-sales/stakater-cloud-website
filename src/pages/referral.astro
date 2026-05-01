@@ -3,42 +3,213 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionLabel from '../components/ui/SectionLabel.astro';
 ---
-<BaseLayout title="Referral Program" description="Refer a customer to Stakater Cloud and earn a reward. Simple, straightforward referral program.">
+
+<BaseLayout
+  title="Referral Program"
+  description="Refer an organisation to Stakater Cloud and earn a 10% discount when they become a customer."
+>
   <section class="section-pad bg-bg-main">
-    <div class="container-site max-w-[720px] mx-auto">
-      <SectionLabel>Referral Program</SectionLabel>
-      <h1 class="mb-6">Refer a customer.<br />Earn a reward.</h1>
-      <p class="text-[18px] text-muted mb-12">Know an organisation that would benefit from managed OpenShift in Europe? Refer them to Stakater Cloud. If they become a customer, we'll thank you with a reward.</p>
-      <div class="card p-10">
-        <h4 class="mb-8">Submit a Referral</h4>
-        <form class="flex flex-col gap-5" action="/api/referral" method="POST">
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[13px] font-semibold text-purple" for="your-name">Your Name</label>
-            <input id="your-name" name="yourName" type="text" required class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+        <!-- Left: info -->
+        <div>
+          <SectionLabel>Referral Program</SectionLabel>
+          <h1 class="mb-6">Refer a customer.<br/>Earn a reward.</h1>
+          <p class="text-[18px] text-muted mb-10">
+            Know an organisation that needs managed OpenShift in Europe? Refer them to Stakater Cloud. When they become a paying customer, you earn a <strong class="text-purple">10% discount</strong> on your own subscription.
+          </p>
+
+          <div class="flex flex-col gap-6 mb-10">
+            {[
+              {
+                step: '01',
+                title: 'Submit their details',
+                desc: 'Fill in the referral form with the contact details of the organisation you have in mind.',
+                icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2',
+              },
+              {
+                step: '02',
+                title: 'We reach out',
+                desc: "Our team will contact the referred organisation and explore whether Stakater Cloud is the right fit for them.",
+                icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+              },
+              {
+                step: '03',
+                title: 'You earn 10% off',
+                desc: 'When they sign up as a paying customer, we apply a 10% discount to your next invoice automatically. No chasing required.',
+                icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+              },
+            ].map(p => (
+              <div class="flex gap-4">
+                <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d={p.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-[12px] font-bold text-muted uppercase tracking-widest mb-1">Step {p.step}</div>
+                  <div class="text-[16px] font-bold text-purple mb-1">{p.title}</div>
+                  <div class="text-[15px] text-muted">{p.desc}</div>
+                </div>
+              </div>
+            ))}
           </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[13px] font-semibold text-purple" for="your-email">Your Email</label>
-            <input id="your-email" name="yourEmail" type="email" required class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+
+          <div class="bg-orange/[0.06] border border-orange/20 rounded-xl p-6">
+            <div class="text-[13px] font-bold text-orange uppercase tracking-wide mb-2">Eligibility</div>
+            <p class="text-[14px] text-muted leading-relaxed">This program is open to existing Stakater Cloud paying customers. One discount per successful referral. The referred organisation must not have previously engaged with Stakater Cloud.</p>
           </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[13px] font-semibold text-purple" for="ref-company">Referral Company Name</label>
-            <input id="ref-company" name="referralCompany" type="text" required class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
+        </div>
+
+        <!-- Form -->
+        <div class="card p-10">
+          <h4 class="mb-2">Submit a Referral</h4>
+          <p class="text-[15px] text-muted mb-8">Tell us who to contact and we'll take it from there.</p>
+
+          <!-- Success state -->
+          <div id="form-success" class="hidden flex-col items-center text-center py-8 gap-5">
+            <div class="w-16 h-16 rounded-full bg-green-50 border-2 border-green-200 flex items-center justify-center">
+              <svg class="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h5 class="text-purple mb-2">Referral submitted</h5>
+              <p class="text-[15px] text-muted">Thanks — we'll reach out to your contact within 2 business days.</p>
+            </div>
           </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[13px] font-semibold text-purple" for="ref-contact">Referral Contact Name</label>
-            <input id="ref-contact" name="referralContact" type="text" class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
-          </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[13px] font-semibold text-purple" for="ref-email">Referral Contact Email</label>
-            <input id="ref-email" name="referralEmail" type="email" class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors" />
-          </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[13px] font-semibold text-purple" for="notes">Notes</label>
-            <textarea id="notes" name="notes" rows="3" class="px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] focus:outline-none focus:border-orange transition-colors resize-none"></textarea>
-          </div>
-          <button type="submit" class="btn-primary w-full justify-center mt-2">Submit Referral →</button>
-        </form>
+
+          <form id="referral-form" class="flex flex-col gap-5" novalidate>
+            <input type="hidden" name="_subject" value="New referral submission" />
+
+            <div class="pb-4 mb-1 border-b border-border">
+              <div class="text-[11px] font-bold uppercase tracking-widest text-muted mb-4">Your details</div>
+              <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[13px] font-semibold text-purple" for="your-name">
+                    Your Name <span class="text-orange">*</span>
+                  </label>
+                  <input id="your-name" name="yourName" type="text" required placeholder="Jan Janssen"
+                    class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[13px] font-semibold text-purple" for="your-email">
+                    Your Work Email <span class="text-orange">*</span>
+                  </label>
+                  <input id="your-email" name="yourEmail" type="email" required placeholder="jan@yourcompany.com"
+                    class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-[11px] font-bold uppercase tracking-widest text-muted mb-4">Who you're referring</div>
+              <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[13px] font-semibold text-purple" for="ref-company">
+                    Company Name <span class="text-orange">*</span>
+                  </label>
+                  <input id="ref-company" name="referralCompany" type="text" required placeholder="Their company name"
+                    class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[13px] font-semibold text-purple" for="ref-contact">
+                    Contact Name <span class="text-orange">*</span>
+                  </label>
+                  <input id="ref-contact" name="referralContact" type="text" required placeholder="Their name"
+                    class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[13px] font-semibold text-purple" for="ref-email">
+                    Contact Email <span class="text-orange">*</span>
+                  </label>
+                  <input id="ref-email" name="referralEmail" type="email" required placeholder="contact@theircompany.com"
+                    class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[13px] font-semibold text-purple" for="notes">Additional context</label>
+                  <textarea id="notes" name="notes" rows="3"
+                    placeholder="What are they building? Any context that helps us start the conversation well."
+                    class="form-input px-4 py-3 rounded-lg border border-border bg-bg-main text-[15px] text-purple focus:outline-none focus:border-orange transition-colors resize-none"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <p id="submit-error" class="hidden text-[13px] text-red-500 font-medium text-center">Something went wrong. Please try again or email us at cloud@stakater.com</p>
+
+            <button id="submit-btn" type="submit" class="btn-primary w-full justify-center mt-2">
+              Submit Referral →
+            </button>
+            <p class="text-[12px] text-muted text-center">We'll confirm receipt and update you when they become a customer.</p>
+          </form>
+        </div>
+
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrejgkpw';
+
+  function setFieldError(input: HTMLElement, hasError: boolean) {
+    if (hasError) {
+      input.classList.add('border-red-400', 'bg-red-50');
+      input.classList.remove('border-border', 'bg-bg-main');
+    } else {
+      input.classList.remove('border-red-400', 'bg-red-50');
+      input.classList.add('border-border', 'bg-bg-main');
+    }
+  }
+
+  const form = document.getElementById('referral-form') as HTMLFormElement | null;
+  const submitError = document.getElementById('submit-error');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+  const successEl = document.getElementById('form-success');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitError?.classList.add('hidden');
+
+    const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]');
+    let valid = true;
+    inputs.forEach(input => {
+      if (!input.value.trim()) {
+        setFieldError(input, true);
+        valid = false;
+      } else {
+        setFieldError(input, false);
+      }
+    });
+
+    if (!valid) return;
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+    }
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        form.classList.add('hidden');
+        successEl?.classList.remove('hidden');
+        successEl?.classList.add('flex');
+      } else {
+        throw new Error('Non-OK response');
+      }
+    } catch {
+      submitError?.classList.remove('hidden');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Referral →';
+      }
+    }
+  });
+</script>

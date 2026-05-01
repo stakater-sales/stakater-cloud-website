@@ -1,0 +1,202 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import CTA from '../components/sections/CTA.astro';
+
+const certifications = [
+  {
+    name: 'ISO 27001:2022',
+    desc: 'Information security management. We operate under a certified ISMS covering risk management, access control, incident response and continuous improvement.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    name: 'ISO 9001:2015',
+    desc: 'Quality management systems. Our service delivery, operational processes and customer support are governed by a certified quality management framework.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+  },
+  {
+    name: 'GDPR',
+    desc: 'All data is processed and stored within the EU. Stakater AB is a Swedish company under EU jurisdiction — no US data transfer clauses, no jurisdictional risk.',
+    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    name: 'DORA',
+    desc: 'Digital Operational Resilience Act. Our infrastructure and operational procedures are aligned with DORA requirements for ICT risk management and resilience testing.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    name: 'NIS2',
+    desc: 'Network and Information Systems Directive 2. We implement the security measures and incident reporting obligations required under NIS2 for critical infrastructure providers.',
+    icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+  },
+  {
+    name: 'Red Hat Premier Partner',
+    desc: 'The highest tier of the Red Hat Partner Program. We are also a certified Container Management Specialist — one of a small number of partners globally with this designation.',
+    icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z',
+  },
+];
+
+const principles = [
+  {
+    title: 'EU data residency by default',
+    body: 'Every customer cluster runs in our Amsterdam data center. Data never leaves the EU. There are no opt-in settings required — EU residency is the only mode we operate in.',
+    icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'European operator, European jurisdiction',
+    body: 'Stakater AB is incorporated in Sweden. We are subject to EU law and GDPR as a data processor. There is no US parent company, no US jurisdiction risk, and no foreign intelligence access concern.',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+  },
+  {
+    title: 'Certified operational security',
+    body: 'Our ISO 27001:2022 certification is not a self-assessment — it is audited annually by an independent third party. Policies, controls, and evidence are maintained continuously, not just at audit time.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Shared responsibility, clearly defined',
+    body: 'Stakater secures the platform: the cluster, nodes, networking, storage, and managed services. You secure what runs on it: your application code, your data access policies, your user accounts. The boundary is explicit and documented.',
+    icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  },
+];
+---
+
+<BaseLayout
+  title="Compliance"
+  description="Stakater Cloud is ISO 27001:2022 and ISO 9001:2015 certified, GDPR-compliant, and aligned with DORA and NIS2. EU data residency by default."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple to-purple-dark pt-[100px] pb-[80px]">
+    <div class="container-site">
+      <SectionLabel white>Compliance</SectionLabel>
+      <h1 class="text-white max-w-[760px] mb-6">Built for regulated European industries</h1>
+      <p class="text-[20px] text-white/70 max-w-[600px] mb-10">
+        ISO certified. GDPR-compliant. Aligned with DORA and NIS2. EU data residency is not an option — it is the only mode we operate in.
+      </p>
+      <!-- Cert pills -->
+      <div class="flex flex-wrap gap-2">
+        {['ISO 27001:2022', 'ISO 9001:2015', 'GDPR Ready', 'DORA Aligned', 'NIS2 Aligned', 'RH Premier Partner'].map(c => (
+          <span class="bg-white/[0.08] border border-white/[0.15] rounded-full px-4 py-1.5 text-[13px] font-semibold text-white/70">{c}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications grid -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site">
+      <div class="text-center max-w-[560px] mx-auto mb-[72px]">
+        <SectionLabel center>Certifications & Frameworks</SectionLabel>
+        <h2 class="mb-4">What we're certified for</h2>
+        <p class="text-muted text-[18px]">Third-party audited certifications and regulatory alignment — not self-assessed checkboxes.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {certifications.map(cert => (
+          <div class="card p-8 flex flex-col gap-5">
+            <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={cert.icon} />
+              </svg>
+            </div>
+            <div>
+              <h5 class="mb-2">{cert.name}</h5>
+              <p class="text-[15px] text-muted leading-relaxed">{cert.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How we operate -->
+  <section class="section-pad bg-white">
+    <div class="container-site">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div>
+          <SectionLabel>How We Operate</SectionLabel>
+          <h2 class="mb-6">Compliance is operational, not a document</h2>
+          <p class="text-[18px] text-muted mb-8">
+            Certifications tell you what we've committed to. Here is how that translates into the way we run your infrastructure day to day.
+          </p>
+          <div class="flex flex-col gap-6">
+            {principles.map(p => (
+              <div class="flex gap-4">
+                <div class="w-10 h-10 bg-orange/10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-5 h-5 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d={p.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-[16px] font-bold text-purple mb-1">{p.title}</div>
+                  <div class="text-[15px] text-muted leading-relaxed">{p.body}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Shared responsibility diagram -->
+        <div class="bg-bg-main rounded-2xl p-8 border border-border">
+          <div class="text-[13px] font-bold text-muted uppercase tracking-widest mb-6">Shared Responsibility Model</div>
+          <div class="flex flex-col gap-3">
+            {[
+              { label: 'Your application code', owner: 'You', you: true },
+              { label: 'Your data & access policies', owner: 'You', you: true },
+              { label: 'Your user accounts & IAM', owner: 'You', you: true },
+              { label: 'Platform tools (ArgoCD, Vault, etc.)', owner: 'Stakater', you: false },
+              { label: 'OpenShift cluster & upgrades', owner: 'Stakater', you: false },
+              { label: 'Node health & capacity', owner: 'Stakater', you: false },
+              { label: 'Networking & TLS certificates', owner: 'Stakater', you: false },
+              { label: 'Storage & managed databases', owner: 'Stakater', you: false },
+              { label: 'Physical infrastructure & DC', owner: 'Stakater', you: false },
+            ].map(row => (
+              <div class="flex items-center justify-between gap-4 py-2.5 border-b border-border last:border-0">
+                <span class="text-[14px] text-purple">{row.label}</span>
+                <span class={`text-[12px] font-bold px-2.5 py-1 rounded-full flex-shrink-0 ${row.you ? 'bg-purple/10 text-purple' : 'bg-orange/10 text-orange'}`}>
+                  {row.owner}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regulated industries callout -->
+  <section class="section-pad bg-purple">
+    <div class="container-site text-center max-w-[640px] mx-auto">
+      <SectionLabel white center>Regulated Industries</SectionLabel>
+      <h2 class="text-white mb-6">Finance, healthcare, critical infrastructure</h2>
+      <p class="text-[18px] text-white/70 mb-10">
+        Our compliance posture is designed for the industries where getting it wrong is not an option. GDPR, DORA, and NIS2 alignment means your legal and security teams can approve the infrastructure without a custom audit.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+        {[
+          { industry: 'Financial Services', note: 'DORA-aligned ICT risk management and resilience obligations' },
+          { industry: 'Healthcare', note: 'EU data residency and GDPR-compliant data processing by default' },
+          { industry: 'Critical Infrastructure', note: 'NIS2-aligned security measures and incident reporting' },
+        ].map(item => (
+          <div class="bg-white/[0.06] border border-white/[0.10] rounded-xl p-5">
+            <div class="text-[14px] font-bold text-white mb-2">{item.industry}</div>
+            <div class="text-[13px] text-white/55 leading-relaxed">{item.note}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions / contact -->
+  <section class="section-pad bg-bg-main">
+    <div class="container-site max-w-[640px] mx-auto text-center">
+      <SectionLabel center>Questions</SectionLabel>
+      <h2 class="mb-6">Need compliance documentation?</h2>
+      <p class="text-[18px] text-muted mb-8">
+        We can provide certification documents, data processing agreements, and security questionnaire responses on request. Book a call and we'll send you what your legal or security team needs.
+      </p>
+      <a href="/contact" class="btn-primary inline-flex">Book a Call →</a>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>
