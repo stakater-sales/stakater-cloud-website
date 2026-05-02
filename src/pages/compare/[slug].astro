@@ -238,6 +238,61 @@ export function getStaticPaths() {
         ] as FAQ[],
       },
     },
+    {
+      params: { slug: 'aro-alternative' },
+      props: {
+        competitor: 'ARO',
+        fullName: 'Azure Red Hat OpenShift (ARO)',
+        metaDescription: 'Stakater Cloud vs ARO — managed OpenShift with EU data residency and full developer platform vs Azure Red Hat OpenShift. Compare features, compliance and pricing.',
+        heroHeadline: 'Same OpenShift. Full platform. No Azure dependency.',
+        heroSubline: 'ARO manages your OpenShift cluster on Azure. Stakater Cloud gives you OpenShift plus the entire platform layer — GitOps, CI/CD, secrets, observability, multi-tenancy — hosted in the Netherlands, operated by a Red Hat Premier Partner.',
+        clusterType: 'Managed OpenShift (Azure)',
+        whatIsCompetitor: "ARO is Microsoft's managed OpenShift service running on Azure infrastructure. It provisions and upgrades your OpenShift control plane — but the developer platform above OpenShift, including GitOps, CI/CD, secrets management, observability and multi-tenancy, remains your team's responsibility. And as an Azure-hosted service, your data sits under US jurisdiction.",
+        threeReasons: [
+          {
+            title: 'Unambiguous EU data residency, no Microsoft dependency',
+            body: 'ARO runs on Microsoft Azure — a US company subject to the US CLOUD Act. Stakater Cloud is operated by Stakater AB (Sweden) with all data hosted exclusively in our Netherlands data center. No US parent, no CLOUD Act exposure, no Azure account required for GDPR, DORA or NIS2 compliance.',
+            icon: 'M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9',
+          },
+          {
+            title: 'Full developer platform included, not just the cluster',
+            body: 'ARO gives you a managed OpenShift cluster. Stakater Cloud gives you a managed platform: ArgoCD, Tekton, OpenBao, Prometheus, Grafana, Loki, Jaeger, multi-tenancy (MTO), Velero and more — all pre-configured, all managed by us. No platform team required.',
+            icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
+          },
+          {
+            title: 'Predictable flat pricing, no Azure bill',
+            body: 'ARO pricing combines Azure VM instance costs, Red Hat OpenShift licensing and any platform tooling your team adds. Stakater Cloud is a flat monthly subscription from €888/month — no per-resource charges, no surprise Azure egress fees, no separate cloud account to manage.',
+            icon: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z',
+          },
+        ] as Reason[],
+        faqs: [
+          {
+            q: 'Is ARO GDPR compliant for regulated European workloads?',
+            a: "ARO runs on Microsoft Azure — a US company subject to the US CLOUD Act. While Azure has EU regions, data sovereignty concerns persist for regulated European organisations under GDPR, DORA and NIS2. Stakater Cloud is operated by Stakater AB (Sweden) with all data hosted in the Netherlands. No US parent company, no CLOUD Act exposure.",
+          },
+          {
+            q: 'Does ARO include GitOps, CI/CD or observability tooling?',
+            a: "No. ARO manages the OpenShift control plane. Everything above it — ArgoCD, Tekton, Prometheus, Grafana, Loki, Jaeger, OpenBao, multi-tenancy — you must install, configure and maintain yourself. Stakater Cloud's KubeStack+ tier includes all of this pre-wired and managed from day one.",
+          },
+          {
+            q: 'How does ARO differ from AKS?',
+            a: "ARO provides managed OpenShift on Azure (the full enterprise platform), while AKS provides plain managed Kubernetes on Azure. Both are Azure-hosted services operated by Microsoft, with similar data sovereignty implications. ARO is closer to Stakater Cloud in what it offers at the cluster layer — but still leaves the platform layer entirely to you.",
+          },
+          {
+            q: 'How does ARO pricing compare to Stakater Cloud?',
+            a: "ARO pricing is Azure VM instance costs plus Red Hat OpenShift licensing — variable, difficult to predict at scale, and on top of whatever platform tooling you add yourself. Stakater Cloud is a flat monthly subscription from €888/month with the full platform included. One invoice, no hidden fees.",
+          },
+          {
+            q: 'What support covers my platform tooling with ARO?',
+            a: "ARO support covers the OpenShift cluster. Issues with your GitOps setup, CI/CD pipelines, secrets management or observability stack fall outside ARO's support scope — you are responsible or must engage separate vendors. With Stakater Cloud, the entire platform is our responsibility under one SLA.",
+          },
+          {
+            q: 'Can I migrate from ARO to Stakater Cloud?',
+            a: "Yes. We help teams migrate from ARO and other managed OpenShift platforms. Book a call and we will assess your workloads, compliance requirements and migration timeline — and tell you honestly what it involves for your specific setup.",
+          },
+        ] as FAQ[],
+      },
+    },
   ];
 }
 

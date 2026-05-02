@@ -1,0 +1,18 @@
+# Redirects for Stakater Cloud
+# Format: /old-path  /new-path  status-code
+# Use 301 for permanent redirects (old pages that no longer exist)
+# Use 302 for temporary redirects
+# Cloudflare Pages processes this file automatically — no config needed.
+
+# ── Legacy pages from old website ──────────────────────────────────────────
+/validate-openshift                 /   301
+/development-testing-cluster        /   301
+/application-deployment             /   301
+/stakater-cloud-orchestrator        /   301
+
+# ── Compare pages moved under /compare/ ────────────────────────────────────
+/rosa-alternative                   /compare/rosa-alternative   301
+/aro-alternative                    /compare/aro-alternative    301
+/eks-alternative                    /compare/eks-alternative    301
+/aks-alternative                    /compare/aks-alternative    301
+/gke-alternative                    /compare/gke-alternative    301
